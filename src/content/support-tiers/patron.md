@@ -23,9 +23,9 @@ stripeButtons:
 
 **Visionary support for the future of our music.**
 
-The **Alma Patrons** represents the highest level of commitment to Alma Consort. Members of this circle are more than just supporters; they are the bedrock of our artistic ambition.
+The **Alma Patrons** represent the highest level of commitment to Alma Consort. Members of this circle are more than just supporters; they are the bedrock of our artistic ambition.
 
-At this level, your contribution is transformative. It allows us to hire world-class orchestras, commission new works, produce high-quality studio recordings, and, most importantly, fund the **Alma Scholars** programme. Your donation covers entire bursaries and mentorship for one of young singers, ensuring that financial barriers never stop a talented young singer from receiving the mentoring they deserve.
+At this level, your contribution is transformative. It allows us to hire world-class orchestras, commission new works, produce high-quality studio recordings, and, most importantly, fund the **Alma Scholars** programme. Your donation covers entire bursaries and mentorship for one of our young singers, ensuring that financial barriers never stop a talented young singer from receiving the mentoring they deserve.
 
 We recognize this extraordinary generosity by offering you a personal relationship with the choir's artistic leadership and unique musical experiences tailored just for you.
 
@@ -59,7 +59,7 @@ This is our most prestigious level of support. For those who make this exception
 
 As a Principal Patron you will have all the benefits of the other Patron tiers as well as also being a member of the Director's Circle and have a voice in the future direction of the choir.
 
-You will receive a **bespoke private performance** by the choir at an event of your choosing. You will also entitled to receive four one-hour music lessons per year with one of our Directors either in London or online.
+You will receive a **bespoke private performance** by the choir at an event of your choosing. You will also be entitled to receive four one-hour music lessons per year with one of our Directors either in London or online.
 
 Whether it is a dinner party, a birthday celebration, or a corporate event, we will come to you to perform a curated 20-minute set. It is our way of bringing the magic of Alma Consort into your personal life, as a heartfelt thank you for sustaining ours.
 
@@ -67,4 +67,4 @@ Whether it is a dinner party, a birthday celebration, or a corporate event, we w
 
 ## Become A Patron Today
 
-Your generosity shapes our future. If you would like to discuss how your donation can be directed toward a specific part of the Scholars programme, please get in touch with us directly. Similarly, please don't hesitate if to let us know if you are able to make a more substantial donation, for example to sponsor an entire recording or concert. You can get in touch with us via the contact form [here](/almaconsort/contact/).
+Your generosity shapes our future. If you would like to discuss how your donation can be directed toward a specific part of the Scholars programme, please get in touch with us directly. Similarly, please don't hesitate to let us know if you are able to make a more substantial donation, for example to sponsor an entire recording or concert. You can get in touch with us via the contact form [here](/almaconsort/contact/).

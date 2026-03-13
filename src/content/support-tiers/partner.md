@@ -32,9 +32,9 @@ As an Alma Partner, you receive **all the benefits of a Friend** (priority booki
 
 - **See How the Magic Happens (Open Rehearsals):** Twice a year, we invite our Partners to sit in on a final rehearsal. Watch our conductor work with the choir and the scholars, and see how we polish the pieces before performance night. It's a fascinating glimpse behind the curtain that few get to see.
 - **Your Name in Print:** We want to publicly acknowledge your generosity. Unless you prefer to remain anonymous, your name will be listed in our concert programmes.
-- **Early Access to Programmes:** You'll receive our full programmes before each performance, giving you an early insight into the all of the music and its performers.
+- **Early Access to Programmes:** You'll receive our full programmes before each performance, giving you an early insight into all of the music and its performers.
 - **Reserved Seating:** On top of priority booking, we'll also reserve the best seats at each performance just for you.
-- **Bring a Friend for Free:** You'll a discount code that grants you one complimentary ticket per year to bring a friend or family member along.
+- **Bring a Friend for Free:** You'll receive a discount code that grants you one complimentary ticket per year to bring a friend or family member along.
 
 ---
 

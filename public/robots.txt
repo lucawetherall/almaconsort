@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://almaconsort.com/sitemap-index.xml
+Sitemap: https://lucawetherall.github.io/almaconsort/sitemap-index.xml

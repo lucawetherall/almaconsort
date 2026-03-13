@@ -71,6 +71,20 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
     </script>
     -->
 
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "PerformingGroup",
+      "name": "Alma Consort",
+      "description": description,
+      "url": canonicalUrl.href,
+      "genre": "Choral Music",
+      "location": {
+        "@type": "City",
+        "name": "London"
+      }
+    })} />
+
     <slot name="head" />
   </head>
   <body>

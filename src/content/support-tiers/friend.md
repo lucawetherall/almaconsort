@@ -37,7 +37,7 @@ To show our appreciation for your support, we want to make sure you have the bes
 As a Friend, you'll receive:
 
 - **The Best Seats in the House:** You get exclusive access to ticket sales **before the general public**. No rushing, no stress—just the seats you want.
-- **A Little Appreciation Discount:** We offer Friends a **discount codes** on tickets for all our concerts. Bring a friend, or come to every show in the season!
+- **A Little Appreciation Discount:** We offer Friends **discount codes** on tickets for all our concerts. Bring a friend, or come to every show in the season!
 - **Inside Access:** Missed a concert or just want to relive the moment? You'll get **exclusive early access** to concert recordings before we release them online.
 
 ---

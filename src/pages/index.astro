@@ -2,6 +2,8 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 <BaseLayout title="Home" description="The Alma Consort is a professional choir based in London, specialising in recording, function work, and commercial projects.">
+  <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
+  <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
   <div class="container">
     <div class="video-wrapper">
       <lite-youtube videoid="GjNdZVs7g68" playlabel="Play: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)">
@@ -37,7 +39,3 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     line-height: 1.8;
   }
 </style>
-
-<!-- Lite YouTube Embed -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
-<script is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
