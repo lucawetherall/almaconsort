@@ -1,11 +1,13 @@
 ---
 const year = new Date().getFullYear();
 
+const base = import.meta.env.BASE_URL;
+
 const navLinks = [
-  { href: '/about/', label: 'About' },
-  { href: '/support/', label: 'Support' },
-  { href: '/events/', label: 'Events' },
-  { href: '/contact/', label: 'Contact' },
+  { href: `${base}about/`, label: 'About' },
+  { href: `${base}support/`, label: 'Support' },
+  { href: `${base}events/`, label: 'Events' },
+  { href: `${base}contact/`, label: 'Contact' },
 ];
 ---
 <footer class="site-footer">
