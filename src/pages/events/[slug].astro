@@ -23,8 +23,29 @@ const dateStr = event.data.date.toLocaleDateString('en-GB', {
 const timeRange = event.data.startTime && event.data.endTime
   ? `${event.data.startTime} – ${event.data.endTime}`
   : event.data.startTime || '';
+
+const isoDate = event.data.date.toISOString().split('T')[0];
+const eventJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "MusicEvent",
+  "name": event.data.title,
+  "description": event.data.description,
+  "startDate": event.data.startTime ? `${isoDate}T${event.data.startTime}:00` : isoDate,
+  ...(event.data.endTime && { "endDate": `${isoDate}T${event.data.endTime}:00` }),
+  "location": {
+    "@type": "Place",
+    "name": event.data.venue.name,
+    ...(event.data.venue.address && { "address": event.data.venue.address }),
+  },
+  "organizer": {
+    "@type": "PerformingGroup",
+    "name": "Alma Consort",
+  },
+  ...(event.data.ticketUrl && { "offers": { "@type": "Offer", "url": event.data.ticketUrl } }),
+};
 ---
 <BaseLayout title={event.data.title} description={event.data.description}>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(eventJsonLd)} />
   <div class="container">
     <h1>{event.data.title}</h1>
 
