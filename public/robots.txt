@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://almaconsort.com/sitemap-index.xml

@@ -1,0 +1,111 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const events = await getCollection('events');
+  return events.map((event) => ({
+    params: { slug: event.id },
+    props: { event },
+  }));
+}
+
+const { event } = Astro.props;
+const { Content } = await render(event);
+
+const dateStr = event.data.date.toLocaleDateString('en-GB', {
+  weekday: 'long',
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const timeRange = event.data.startTime && event.data.endTime
+  ? `${event.data.startTime} – ${event.data.endTime}`
+  : event.data.startTime || '';
+---
+<BaseLayout title={event.data.title} description={event.data.description}>
+  <div class="container">
+    <h1>{event.data.title}</h1>
+
+    <div class="event-meta">
+      <p class="event-date">{dateStr}</p>
+      {timeRange && <p class="event-time">{timeRange}</p>}
+      <p class="event-venue">
+        {event.data.venue.name}
+        {event.data.venue.address && <span> &mdash; {event.data.venue.address}</span>}
+      </p>
+    </div>
+
+    {event.data.ticketUrl && (
+      <p>
+        <a href={event.data.ticketUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
+          Get Tickets
+        </a>
+      </p>
+    )}
+
+    <div class="event-body">
+      <Content />
+    </div>
+
+    {event.data.performers && event.data.performers.length > 0 && (
+      <div class="performers">
+        <h2>Performers</h2>
+        <ul>
+          {event.data.performers.map((p) => <li>{p}</li>)}
+        </ul>
+      </div>
+    )}
+
+    <p class="back-link">
+      <a href="/events/">&larr; Back to Events</a>
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .event-meta {
+    margin-bottom: 2rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(60, 60, 60, 0.15);
+  }
+
+  .event-date {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .event-time {
+    color: var(--color-text-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .event-venue {
+    color: var(--color-text-muted);
+  }
+
+  .event-body {
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .performers {
+    margin-bottom: 2rem;
+  }
+
+  .performers ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .performers li {
+    padding: 0.25rem 0;
+  }
+
+  .back-link {
+    margin-top: 2rem;
+  }
+</style>

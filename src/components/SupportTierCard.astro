@@ -1,0 +1,78 @@
+---
+interface Props {
+  title: string;
+  slug: string;
+  tagline: string;
+  cardImage?: string;
+}
+
+const { title, slug, tagline, cardImage } = Astro.props;
+---
+<a href={`/support/${slug}/`} class="tier-card">
+  {cardImage ? (
+    <img src={cardImage} alt="" class="tier-card-bg" loading="lazy" />
+  ) : (
+    <div class="tier-card-bg tier-card-placeholder"></div>
+  )}
+  <div class="tier-card-overlay">
+    <h3>Become a {title}</h3>
+    <p>Find out more here</p>
+  </div>
+</a>
+
+<style>
+  .tier-card {
+    position: relative;
+    display: block;
+    overflow: hidden;
+    border-radius: 4px;
+    aspect-ratio: 4 / 3;
+    text-decoration: none;
+    color: white;
+  }
+
+  .tier-card-bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .tier-card-placeholder {
+    background: linear-gradient(135deg, #5a6e8a 0%, #3c4f6e 100%);
+  }
+
+  .tier-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.45);
+    text-align: center;
+    padding: 1.5rem;
+    transition: background 0.3s;
+  }
+
+  .tier-card:hover .tier-card-overlay {
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  .tier-card-overlay h3 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    color: white;
+    margin-bottom: 0.5rem;
+  }
+
+  .tier-card-overlay p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    text-decoration: underline;
+    margin: 0;
+  }
+</style>
