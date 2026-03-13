@@ -26,16 +26,18 @@ const { Content } = await render(tier);
       <Content />
     </div>
 
-    <div class="stripe-buttons">
-      <h2>Choose your level of support</h2>
-      <div class="button-grid">
-        {tier.data.stripeButtons.map((btn) => (
-          <div class="button-item">
-            <p class="button-label">{btn.label}</p>
-            <StripeButton buyButtonId={btn.id} />
+    <div class="pricing-grid">
+      {tier.data.stripeButtons.map((btn) => (
+        <div class="pricing-card">
+          <p class="pricing-tier-name">{btn.tierName}</p>
+          <div class="pricing-amount">
+            <span class="pricing-price">{btn.price}</span>
+            <span class="pricing-period">per<br />month</span>
           </div>
-        ))}
-      </div>
+          {btn.billingNote && <p class="pricing-billing-note">{btn.billingNote}</p>}
+          <StripeButton buyButtonId={btn.id} />
+        </div>
+      ))}
     </div>
 
     <p class="back-link">
@@ -51,33 +53,67 @@ const { Content } = await render(tier);
     line-height: 1.8;
   }
 
-  .stripe-buttons {
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
     margin-bottom: 2.5rem;
   }
 
-  .stripe-buttons h2 {
-    font-variant: small-caps;
-    letter-spacing: 0.03em;
-    margin-bottom: 1.5rem;
-  }
-
-  .button-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .button-item {
+  .pricing-card {
+    border: 1px solid #d4d0c8;
+    border-radius: 6px;
+    padding: 1.5rem 1rem;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
   }
 
-  .button-label {
+  .pricing-tier-name {
+    font-size: 1rem;
     font-weight: 600;
-    margin-bottom: 0.75rem;
-    font-size: 1.1rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .pricing-amount {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 0.2rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .pricing-price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .pricing-period {
+    font-size: 0.8rem;
+    line-height: 1.2;
+    color: var(--color-text-muted);
+    padding-top: 0.2rem;
+  }
+
+  .pricing-billing-note {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
   }
 
   .back-link {
     margin-top: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      max-width: 350px;
+      margin-left: auto;
+      margin-right: auto;
+    }
   }
 </style>
