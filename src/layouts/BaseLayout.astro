@@ -29,7 +29,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
     <title>{title} | Alma Consort</title>
 
     <link rel="canonical" href={canonicalUrl.href} />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href={`${import.meta.env.BASE_URL}favicon.ico`} />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

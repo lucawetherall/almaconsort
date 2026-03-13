@@ -1,16 +1,18 @@
 ---
 const currentPath = Astro.url.pathname;
 
+const base = import.meta.env.BASE_URL;
+
 const navLinks = [
-  { href: '/about/', label: 'About' },
-  { href: '/support/', label: 'Support' },
-  { href: '/events/', label: 'Events' },
-  { href: '/contact/', label: 'Contact' },
+  { href: `${base}about/`, label: 'About' },
+  { href: `${base}support/`, label: 'Support' },
+  { href: `${base}events/`, label: 'Events' },
+  { href: `${base}contact/`, label: 'Contact' },
 ];
 ---
 <header class="site-header">
   <div class="site-container header-inner">
-    <a href="/" class="header-brand" aria-label="Alma Consort home">
+    <a href={base} class="header-brand" aria-label="Alma Consort home">
       <!-- TODO: Replace with actual logo image once added to src/assets/ -->
       <span class="brand-logo" aria-hidden="true">AC</span>
       <span class="brand-name">Alma Consort</span>
