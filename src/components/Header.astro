@@ -13,8 +13,7 @@ const navLinks = [
 <header class="site-header">
   <div class="site-container header-inner">
     <a href={base} class="header-brand" aria-label="Alma Consort home">
-      <!-- TODO: Replace with actual logo image once added to src/assets/ -->
-      <span class="brand-logo" aria-hidden="true">AC</span>
+      <img src={`${base}logo.png`} alt="" class="brand-logo" aria-hidden="true" />
       <span class="brand-name">Alma Consort</span>
     </a>
 
@@ -63,18 +62,9 @@ const navLinks = [
   }
 
   .brand-logo {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
     width: 48px;
     height: 48px;
-    border: 2px solid #c4a24e;
     border-radius: 50%;
-    font-family: var(--font-serif);
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: #c4a24e;
-    letter-spacing: 0.05em;
   }
 
   .brand-name {
