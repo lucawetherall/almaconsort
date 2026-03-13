@@ -1,0 +1,83 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StripeButton from '../../components/StripeButton.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const tiers = await getCollection('supportTiers');
+  return tiers.map((tier) => ({
+    params: { slug: tier.data.slug },
+    props: { tier },
+  }));
+}
+
+const { tier } = Astro.props;
+const { Content } = await render(tier);
+---
+<BaseLayout
+  title={`Become a ${tier.data.title}`}
+  description={tier.data.tagline}
+  includeStripe={true}
+>
+  <div class="container">
+    <h1>Become a {tier.data.title}</h1>
+
+    <div class="tier-content">
+      <Content />
+    </div>
+
+    <div class="stripe-buttons">
+      <h2>Choose your level of support</h2>
+      <div class="button-grid">
+        {tier.data.stripeButtons.map((btn) => (
+          <div class="button-item">
+            <p class="button-label">{btn.label}</p>
+            <StripeButton buyButtonId={btn.id} />
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <p class="back-link">
+      <a href="/support/">&larr; Back to Support</a>
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .tier-content {
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+
+  .stripe-buttons {
+    margin-bottom: 2.5rem;
+  }
+
+  .stripe-buttons h2 {
+    font-variant: small-caps;
+    letter-spacing: 0.03em;
+    margin-bottom: 1.5rem;
+  }
+
+  .button-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .button-item {
+    text-align: center;
+  }
+
+  .button-label {
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+  }
+
+  .back-link {
+    margin-top: 2rem;
+  }
+</style>

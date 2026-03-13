@@ -1,0 +1,75 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import StripeButton from '../../components/StripeButton.astro';
+import SupportTierCard from '../../components/SupportTierCard.astro';
+import { getCollection } from 'astro:content';
+
+const tiers = (await getCollection('supportTiers')).sort((a, b) => a.data.order - b.data.order);
+---
+<BaseLayout
+  title="Support"
+  description="Support the Alma Consort by becoming a Friend, Partner, or Patron. Your donations help fund our Alma Scholars mentoring scheme."
+  includeStripe={true}
+>
+  <div class="container">
+    <h1>Support</h1>
+
+    <div class="support-layout">
+      <div class="support-text">
+        <h2>Become a Friend, Partner, or Patron of Alma Consort</h2>
+        <p>
+          The Alma Consort is an independent organisation and relies on the generosity of its supporters. We are currently fundraising for our Alma Scholars scheme, which provides mentoring opportunities for young singers.
+        </p>
+        <p>
+          You can support us with a one-off gift below, or choose to make a recurring donation by becoming a Friend, Partner, or Patron.
+        </p>
+      </div>
+
+      <div class="support-donate">
+        <StripeButton buyButtonId="buy_btn_1SVCHuFZ0c2qbCCWyUgXt6Oa" />
+      </div>
+    </div>
+
+    <div class="tier-cards">
+      {tiers.map((tier) => (
+        <SupportTierCard
+          title={tier.data.title}
+          slug={tier.data.slug}
+          tagline={tier.data.tagline}
+          cardImage={tier.data.cardImage}
+        />
+      ))}
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .support-layout {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2.5rem;
+    align-items: start;
+    margin-bottom: 3rem;
+  }
+
+  .support-text h2 {
+    font-variant: small-caps;
+    letter-spacing: 0.03em;
+  }
+
+  .tier-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (max-width: 768px) {
+    .support-layout {
+      grid-template-columns: 1fr;
+    }
+
+    .tier-cards {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

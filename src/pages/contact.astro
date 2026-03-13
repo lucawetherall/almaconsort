@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const success = Astro.url.searchParams.get('success') === 'true';
+---
+<BaseLayout title="Contact" description="Get in touch with the Alma Consort for bookings, enquiries, and collaborations.">
+  <div class="container">
+    <h1>Contact</h1>
+
+    {success ? (
+      <div class="success-message">
+        <p><strong>Thank you!</strong> Your message has been sent. We will get back to you as soon as possible.</p>
+        <p><a href="/contact/">Send another message</a></p>
+      </div>
+    ) : (
+      <ContactForm />
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .success-message {
+    padding: 2rem;
+    background: var(--color-bg-white);
+    border: 1px solid rgba(60, 60, 60, 0.1);
+    border-radius: 4px;
+    text-align: center;
+  }
+</style>

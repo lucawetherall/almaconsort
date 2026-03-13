@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Home" description="The Alma Consort is a professional choir based in London, specialising in recording, function work, and commercial projects.">
+  <div class="container">
+    <div class="video-wrapper">
+      <!-- TODO: Replace VIDEO_ID with the actual YouTube video ID for "O Magnum Mysterium - Victoria" -->
+      <lite-youtube videoid="VIDEO_ID" playlabel="Play: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)">
+        <a href="https://youtube.com/watch?v=VIDEO_ID" class="lty-playbtn" title="Play Video">
+          <span class="lyt-visually-hidden">Play Video: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)</span>
+        </a>
+      </lite-youtube>
+    </div>
+
+    <div class="home-text">
+      <p>
+        The <strong>Alma Consort</strong> is a professional choir based in London. We specialise in recording, function work, and commercial projects. Our singers are highly experienced ensemble singers, working across a wide range of genres. We are available for both remote and on-site recording sessions where audio and video can be provided in-house.
+      </p>
+      <p>
+        The Alma Consort is directed by <a href="/about/">Luca Wetherall</a> and <a href="/about/">Izzy Mohan</a>.
+      </p>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .video-wrapper {
+    margin-bottom: 2rem;
+  }
+
+  lite-youtube {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .home-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+  }
+</style>
+
+<!-- Lite YouTube Embed -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
+<script is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
