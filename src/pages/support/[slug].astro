@@ -53,6 +53,12 @@ const { Content } = await render(tier);
     line-height: 1.8;
   }
 
+  .tier-content :global(hr) {
+    border: none;
+    border-top: 1px solid rgba(60, 60, 60, 0.15);
+    margin: 2.5rem 0;
+  }
+
   .pricing-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
