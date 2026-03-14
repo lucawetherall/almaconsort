@@ -1,0 +1,95 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Recording" description="Professional choral recording in London — studio sessions, in-house audio and video production, and the Alma Consort's own releases.">
+  <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
+  <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
+
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Alma Consort — Choral Recording",
+    "description": "Professional choral recording services in London, including studio sessions and in-house audio and video production.",
+    "provider": {
+      "@type": "PerformingGroup",
+      "name": "Alma Consort"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "London"
+    },
+    "serviceType": "Choral Recording"
+  })} />
+
+  <div class="container">
+    <h1>Recording</h1>
+
+    <p>
+      The Alma Consort brings the precision and musicality of the concert hall into the recording studio. Our singers are experienced session musicians, at ease with sight-reading demanding material across every genre — from Renaissance sacred music to film scores, from jazz arrangements to contemporary commissions.
+    </p>
+
+    <h2>Sessions</h2>
+
+    <p>
+      We work with composers, producers, record labels, and creative agencies on projects of every scale. Whether the brief calls for a small vocal ensemble or a full choral sound, we assemble the right forces and deliver polished, expressive recordings with the professionalism that studio work demands.
+    </p>
+
+    <p>
+      The ensemble is available for on-site and remote sessions. Our own production team can provide high-quality audio and video recording in-house, from initial capture through to final delivery — an integrated approach that ensures artistic consistency throughout the process.
+    </p>
+
+    <h2>Our recordings</h2>
+
+    <p>
+      Alongside session work, the Alma Consort produces its own recordings. Below is a selection of our recent work.
+    </p>
+
+    <div class="recordings-grid">
+      <div class="recording-item">
+        <lite-youtube videoid="GjNdZVs7g68" playlabel="Play: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)">
+          <a href="https://youtube.com/watch?v=GjNdZVs7g68" class="lty-playbtn" title="Play Video">
+            <span class="lyt-visually-hidden">Play Video: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)</span>
+          </a>
+        </lite-youtube>
+        <p class="recording-caption"><strong>O Magnum Mysterium</strong> — Tomás Luis de Victoria</p>
+      </div>
+    </div>
+
+    <hr class="section-divider" />
+
+    <p>
+      If you would like to discuss a recording project, please <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a>.
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  h2 {
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .recordings-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 1.5rem;
+  }
+
+  .recording-item lite-youtube {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .recording-caption {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid rgba(60, 60, 60, 0.15);
+    margin: 2.5rem 0 1.5rem;
+  }
+</style>

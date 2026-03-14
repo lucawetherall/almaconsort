@@ -12,7 +12,7 @@ interface Props {
 
 const {
   title,
-  description = 'The Alma Consort is a professional choir based in London, specialising in recording, function work, and commercial projects.',
+  description = 'The Alma Consort is a professional chamber choir in London, dedicated to concerts and recordings of the highest calibre.',
   ogImage,
   includeStripe = false,
 } = Astro.props;
@@ -78,11 +78,28 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site).href : undefined;
       "name": "Alma Consort",
       "description": description,
       "url": canonicalUrl.href,
-      "genre": "Choral Music",
+      "genre": ["Choral Music", "Classical", "Contemporary"],
       "location": {
         "@type": "City",
         "name": "London"
-      }
+      },
+      "foundingLocation": {
+        "@type": "City",
+        "name": "London"
+      },
+      "member": [
+        {
+          "@type": "Person",
+          "name": "Luca Wetherall",
+          "jobTitle": "Director"
+        },
+        {
+          "@type": "Person",
+          "name": "Izzy Mohan",
+          "jobTitle": "Director"
+        }
+      ],
+      "knowsAbout": ["Choral Recording", "Concert Performance"]
     })} />
 
     <slot name="head" />
