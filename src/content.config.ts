@@ -16,6 +16,11 @@ const events = defineCollection({
     ticketUrl: z.string().url().optional(),
     image: z.string().optional(),
     performers: z.array(z.string()).optional(),
+    featured: z.boolean().optional(),
+    programme: z.array(z.object({
+      composer: z.string(),
+      work: z.string(),
+    })).optional(),
   }),
 });
 

@@ -4,9 +4,13 @@ import ContactForm from '../components/ContactForm.astro';
 
 const success = Astro.url.searchParams.get('success') === 'true';
 ---
-<BaseLayout title="Contact" description="Get in touch with the Alma Consort for bookings, enquiries, and collaborations.">
+<BaseLayout title="Contact" description="Contact the Alma Consort — for recording projects, concert bookings, and general enquiries.">
   <div class="container">
     <h1>Contact</h1>
+
+    <p class="contact-intro">
+      We welcome enquiries about recording projects, concert collaborations, and any other way we might work together. Please use the form below and we will respond promptly.
+    </p>
 
     {success ? (
       <div class="success-message">
@@ -20,6 +24,12 @@ const success = Astro.url.searchParams.get('success') === 'true';
 </BaseLayout>
 
 <style>
+  .contact-intro {
+    margin-bottom: 2rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
   .success-message {
     padding: 2rem;
     background: var(--color-bg-white);

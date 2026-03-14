@@ -1,7 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="Home" description="The Alma Consort is a professional choir based in London, specialising in recording, function work, and commercial projects.">
+<BaseLayout title="Home" description="The Alma Consort is a professional chamber choir in London, dedicated to concerts and recordings of the highest calibre.">
   <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
   <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
   <div class="container">
@@ -15,10 +15,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
     <div class="home-text">
       <p>
-        The <strong>Alma Consort</strong> is a professional choir based in London. We specialise in recording, function work, and commercial projects. Our singers are highly experienced ensemble singers, working across a wide range of genres. We are available for both remote and on-site recording sessions where audio and video can be provided in-house.
+        The <strong>Alma Consort</strong> is a professional chamber choir based in London, bringing together some of the city's finest young choral singers. We perform across a broad repertoire — from Renaissance polyphony to contemporary commissions, and from the concert platform to the recording studio.
       </p>
       <p>
-        The Alma Consort is directed by <a href={`${import.meta.env.BASE_URL}about/`}>Luca Wetherall</a> and <a href={`${import.meta.env.BASE_URL}about/`}>Izzy Mohan</a>.
+        Central to our work is a commitment to <a href={`${import.meta.env.BASE_URL}recording/`}>recording</a> of the highest quality. The ensemble offers both studio sessions for external projects and produces its own recordings, with audio and video captured in-house by our dedicated production team.
+      </p>
+      <p>
+        The Alma Consort is directed by <a href={`${import.meta.env.BASE_URL}about/`}>Luca Wetherall</a> and <a href={`${import.meta.env.BASE_URL}about/`}>Izzy Mohan</a>. Explore our upcoming <a href={`${import.meta.env.BASE_URL}events/`}>events</a>, or <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a> to discuss a project.
       </p>
     </div>
   </div>
