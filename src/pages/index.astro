@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Newsletter from '../components/Newsletter.astro';
 ---
 <BaseLayout title="Home" description="The Alma Consort is a professional chamber choir in London, dedicated to concerts and recordings of the highest calibre.">
   <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
@@ -24,6 +25,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         The Alma Consort is directed by <a href={`${import.meta.env.BASE_URL}about/`}>Luca Wetherall</a> and <a href={`${import.meta.env.BASE_URL}about/`}>Izzy Mohan</a>. Explore our upcoming <a href={`${import.meta.env.BASE_URL}events/`}>events</a>, or <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a> to discuss a project.
       </p>
     </div>
+
+    <div class="home-newsletter">
+      <Newsletter />
+    </div>
   </div>
 </BaseLayout>
 
@@ -40,5 +45,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   .home-text {
     font-size: 1.1rem;
     line-height: 1.8;
+  }
+
+  .home-newsletter {
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(60, 60, 60, 0.1);
   }
 </style>

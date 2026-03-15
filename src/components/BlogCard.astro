@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;
+  date: Date;
+  description: string;
+  slug: string;
+}
+
+const { title, date, description, slug } = Astro.props;
+const base = import.meta.env.BASE_URL;
+
+const dateStr = date.toLocaleDateString('en-GB', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+<article class="blog-card">
+  <a href={`${base}blog/${slug}/`} class="blog-card-link">
+    <time datetime={date.toISOString().split('T')[0]}>{dateStr}</time>
+    <h3>{title}</h3>
+    <p>{description}</p>
+  </a>
+</article>
+
+<style>
+  .blog-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(60, 60, 60, 0.1);
+  }
+
+  .blog-card-link {
+    text-decoration: none;
+    color: var(--color-text);
+    display: block;
+  }
+
+  .blog-card-link:hover h3 {
+    color: var(--color-accent);
+  }
+
+  time {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    margin: 0.35rem 0 0.5rem;
+    transition: color 0.2s;
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+</style>

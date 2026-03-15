@@ -1,0 +1,99 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Work With Us" description="Engage the Alma Consort for concerts, recordings, private events, and ceremonies — a professional chamber choir based in London.">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Alma Consort — Professional Choral Services",
+    "description": "Professional chamber choir available for concerts, recordings, private events, weddings, and ceremonies in London and beyond.",
+    "provider": {
+      "@type": "PerformingGroup",
+      "name": "Alma Consort"
+    },
+    "areaServed": {
+      "@type": "City",
+      "name": "London"
+    },
+    "serviceType": ["Concert Performance", "Choral Recording", "Wedding Music", "Corporate Entertainment"]
+  })} />
+
+  <div class="container">
+    <h1>Work With Us</h1>
+
+    <p class="intro">
+      The Alma Consort is available for a range of musical engagements. Whether you are planning a concert series, commissioning a recording, or seeking music for a private occasion, we would be glad to hear from you.
+    </p>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>Concert Engagements</h2>
+      <p>
+        The Alma Consort performs across a wide-ranging repertoire — from Renaissance polyphony and Baroque sacred works to contemporary commissions and popular arrangements. We are experienced in programming for festivals, concert series, liturgical seasons, and bespoke events, and are happy to work with promoters, venues, and artistic directors to shape programmes that suit the occasion.
+      </p>
+      <p>
+        For concert bookings, please <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a>.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>Recording Sessions</h2>
+      <p>
+        Our singers are experienced session musicians, equally at ease with sight-reading demanding contemporary scores and delivering nuanced performances of Renaissance repertoire. We work with composers, producers, record labels, and creative agencies on projects of every scale — from a small vocal ensemble to a full choral sound. Our own production team can provide high-quality audio and video recording in-house.
+      </p>
+      <p>
+        To discuss a recording project, please visit our <a href={`${import.meta.env.BASE_URL}recording/`}>recording page</a> or <a href={`${import.meta.env.BASE_URL}contact/`}>contact us directly</a>.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>Private &amp; Corporate Events</h2>
+      <p>
+        We bring the same musicality and professionalism to private engagements as we do to the concert platform. The ensemble is available for corporate functions, receptions, dinners, and other occasions where live choral music can bring a distinctive atmosphere. Programmes can be tailored to suit the event, drawing on classical, sacred, jazz, and popular repertoire.
+      </p>
+      <p>
+        For enquiries about private events, please <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a>.
+      </p>
+    </section>
+
+    <hr class="section-divider" />
+
+    <section>
+      <h2>Weddings &amp; Ceremonies</h2>
+      <p>
+        The Alma Consort provides music for weddings, civil ceremonies, and other celebrations. From intimate vocal settings during the ceremony itself to fuller choral performances at receptions, we work with couples to select music that reflects the tone and significance of the occasion. We are happy to perform at venues across London and beyond.
+      </p>
+      <p>
+        To discuss your wedding or ceremony, please <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a>.
+      </p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .intro {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  section {
+    margin-bottom: 0.5rem;
+  }
+
+  h2 {
+    margin-top: 0.5rem;
+    margin-bottom: 1rem;
+  }
+
+  .section-divider {
+    border: none;
+    border-top: 1px solid rgba(60, 60, 60, 0.15);
+    margin: 2rem 0 1.5rem;
+  }
+</style>

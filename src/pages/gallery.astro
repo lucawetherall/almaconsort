@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+<BaseLayout title="Gallery" description="Watch performances and recordings by the Alma Consort — a professional chamber choir based in London.">
+  <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
+  <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
+
+  <div class="container">
+    <h1>Gallery</h1>
+
+    <section>
+      <h2>Recordings</h2>
+      <div class="video-grid">
+        <div class="video-item">
+          <lite-youtube videoid="GjNdZVs7g68" playlabel="Play: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)">
+            <a href="https://youtube.com/watch?v=GjNdZVs7g68" class="lty-playbtn" title="Play Video">
+              <span class="lyt-visually-hidden">Play Video: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)</span>
+            </a>
+          </lite-youtube>
+          <p class="video-caption"><strong>O Magnum Mysterium</strong> — Tomás Luis de Victoria</p>
+        </div>
+
+        <!-- Add more recordings here:
+        <div class="video-item">
+          <lite-youtube videoid="VIDEO_ID" playlabel="Play: Title">
+            <a href="https://youtube.com/watch?v=VIDEO_ID" class="lty-playbtn" title="Play Video">
+              <span class="lyt-visually-hidden">Play Video: Title</span>
+            </a>
+          </lite-youtube>
+          <p class="video-caption"><strong>Title</strong> — Composer</p>
+        </div>
+        -->
+      </div>
+    </section>
+
+    <section>
+      <h2>Performances</h2>
+      <p class="placeholder-text">More performance videos coming soon.</p>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  section {
+    margin-bottom: 3rem;
+  }
+
+  h2 {
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(60, 60, 60, 0.15);
+  }
+
+  .video-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .video-item lite-youtube {
+    max-width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .video-caption {
+    margin-top: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--color-text);
+  }
+
+  .placeholder-text {
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  @media (min-width: 769px) {
+    .video-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+</style>
