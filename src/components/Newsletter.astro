@@ -1,0 +1,80 @@
+---
+// TODO: Replace the form action with your newsletter provider URL
+// For Mailchimp: https://YOUR_ACCOUNT.us1.list-manage.com/subscribe/post?u=XXXXX&id=XXXXX
+// For Buttondown: https://buttondown.com/api/emails/embed-subscribe/YOUR_USERNAME
+const formAction = '#';
+---
+<div class="newsletter">
+  <p class="newsletter-text">Stay informed about upcoming concerts and recordings.</p>
+  <form action={formAction} method="POST" class="newsletter-form">
+    <label for="newsletter-email" class="visually-hidden">Email address</label>
+    <input
+      type="email"
+      id="newsletter-email"
+      name="email"
+      placeholder="Your email address"
+      required
+      autocomplete="email"
+    />
+    <button type="submit" class="btn btn-primary newsletter-btn">Subscribe</button>
+  </form>
+</div>
+
+<style>
+  .newsletter {
+    margin-top: 2rem;
+  }
+
+  .newsletter-text {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 0.5rem;
+    max-width: 420px;
+  }
+
+  .newsletter-form input[type="email"] {
+    flex: 1;
+    padding: 0.55rem 0.75rem;
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    border: 1px solid rgba(60, 60, 60, 0.25);
+    border-radius: 3px;
+    background: var(--color-bg-white);
+    color: var(--color-text);
+  }
+
+  .newsletter-form input:focus {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+  }
+
+  .newsletter-btn {
+    padding: 0.55rem 1.25rem;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+
+  @media (max-width: 768px) {
+    .newsletter-form {
+      flex-direction: column;
+      max-width: 100%;
+    }
+  }
+</style>

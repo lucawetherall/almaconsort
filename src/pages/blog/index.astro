@@ -1,0 +1,41 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import BlogCard from '../../components/BlogCard.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.date.getTime() - a.data.date.getTime()
+);
+---
+<BaseLayout title="News" description="News and reflections from the Alma Consort — on concerts, recordings, and the life of a professional chamber choir.">
+  <div class="container">
+    <h1>News</h1>
+
+    {posts.length > 0 ? (
+      <div class="blog-list">
+        {posts.map((post) => (
+          <BlogCard
+            title={post.data.title}
+            date={post.data.date}
+            description={post.data.description}
+            slug={post.id}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="no-posts">No posts yet. Check back soon.</p>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .blog-list {
+    margin-top: 0.5rem;
+  }
+
+  .no-posts {
+    padding: 2rem 0;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+</style>
