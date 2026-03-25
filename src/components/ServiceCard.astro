@@ -1,0 +1,53 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  linkUrl: string;
+  linkText?: string;
+}
+
+const { title, description, linkUrl, linkText = 'Get in touch →' } = Astro.props;
+---
+<div class="service-card">
+  <h3 class="service-title">{title}</h3>
+  <p class="service-desc">{description}</p>
+  <a href={linkUrl} class="service-link">{linkText}</a>
+</div>
+
+<style>
+  .service-card {
+    background: var(--color-bg-white);
+    border: 1px solid rgba(60, 60, 60, 0.1);
+    border-radius: 4px;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .service-title {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+  }
+
+  .service-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .service-link {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .service-link:hover {
+    text-decoration: underline;
+  }
+</style>

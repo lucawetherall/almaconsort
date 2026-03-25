@@ -1,11 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Newsletter from '../components/Newsletter.astro';
+import Divider from '../components/Divider.astro';
+import { getCollection } from 'astro:content';
+
+const base = import.meta.env.BASE_URL;
+
+const now = new Date();
+const allEvents = await getCollection('events');
+const upcoming = allEvents
+  .filter((e) => e.data.date >= now)
+  .sort((a, b) => a.data.date.getTime() - b.data.date.getTime())
+  .slice(0, 3);
+
+const allPosts = (await getCollection('blog'))
+  .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
+  .slice(0, 3);
 ---
 <BaseLayout title="Home" description="The Alma Consort is a professional chamber choir in London, dedicated to concerts and recordings of the highest calibre.">
   <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
   <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
-  <div class="container">
+
+  <!-- Video hero at site-width -->
+  <div class="site-container">
     <div class="video-wrapper">
       <lite-youtube videoid="GjNdZVs7g68" playlabel="Play: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)">
         <a href="https://youtube.com/watch?v=GjNdZVs7g68" class="lty-playbtn" title="Play Video">
@@ -13,28 +29,83 @@ import Newsletter from '../components/Newsletter.astro';
         </a>
       </lite-youtube>
     </div>
+  </div>
 
+  <!-- Introduction with drop cap -->
+  <div class="container">
     <div class="home-text">
-      <p>
+      <p class="drop-cap">
         The <strong>Alma Consort</strong> is a professional chamber choir based in London, bringing together some of the city's finest young choral singers. We perform across a broad repertoire — from Renaissance polyphony to contemporary commissions, and from the concert platform to the recording studio.
       </p>
       <p>
-        Central to our work is a commitment to <a href={`${import.meta.env.BASE_URL}recording/`}>recording</a> of the highest quality. The ensemble offers both studio sessions for external projects and produces its own recordings, with audio and video captured in-house by our dedicated production team.
+        Central to our work is a commitment to <a href={`${base}recording/`}>recording</a> of the highest quality. The ensemble offers both studio sessions for external projects and produces its own recordings, with audio and video captured in-house by our dedicated production team.
       </p>
       <p>
-        The Alma Consort is directed by <a href={`${import.meta.env.BASE_URL}about/`}>Luca Wetherall</a> and <a href={`${import.meta.env.BASE_URL}about/`}>Izzy Mohan</a>. Explore our upcoming <a href={`${import.meta.env.BASE_URL}events/`}>events</a>, or <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a> to discuss a project.
+        The Alma Consort is directed by <a href={`${base}about/`}>Luca Wetherall</a> and <a href={`${base}about/`}>Izzy Mohan</a>. Explore our upcoming <a href={`${base}events/`}>events</a>, or <a href={`${base}contact/`}>get in touch</a> to discuss a project.
       </p>
     </div>
 
-    <div class="home-newsletter">
-      <Newsletter />
+    <Divider />
+
+    <!-- Two-column: Events + News -->
+    <div class="home-grid">
+      <div class="home-column">
+        <h2 class="column-heading">Upcoming Events</h2>
+        {upcoming.length > 0 ? (
+          <ul class="column-list">
+            {upcoming.map((event) => {
+              const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+              const dateStr = `${event.data.date.getDate()} ${months[event.data.date.getMonth()]}`;
+              return (
+                <li>
+                  <a href={`${base}events/${event.id}/`}>
+                    <span class="item-date">{dateStr}</span>
+                    <span class="item-title">{event.data.title}</span>
+                    <span class="item-meta">{event.data.venue.name}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p class="column-empty">No upcoming events at the moment. Check back soon.</p>
+        )}
+        <a href={`${base}events/`} class="column-link">View all events →</a>
+      </div>
+
+      <div class="home-column">
+        <h2 class="column-heading">Latest News</h2>
+        {allPosts.length > 0 ? (
+          <ul class="column-list">
+            {allPosts.map((post) => {
+              const dateStr = post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
+              return (
+                <li>
+                  <a href={`${base}blog/${post.id}/`}>
+                    <span class="item-date">{dateStr}</span>
+                    <span class="item-title">{post.data.title}</span>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <p class="column-empty">No posts yet. Check back soon.</p>
+        )}
+        <a href={`${base}blog/`} class="column-link">Read all news →</a>
+      </div>
+    </div>
+
+    <!-- Support callout -->
+    <div class="pull-quote">
+      Support our <a href={`${base}support/`}>Alma Scholars</a> programme — nurturing the next generation of young choral singers through mentoring, performance opportunities, and professional recordings.
     </div>
   </div>
 </BaseLayout>
 
 <style>
   .video-wrapper {
-    margin-bottom: 2rem;
+    margin-bottom: 2.5rem;
   }
 
   lite-youtube {
@@ -47,9 +118,93 @@ import Newsletter from '../components/Newsletter.astro';
     line-height: 1.8;
   }
 
-  .home-newsletter {
-    margin-top: 2rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(60, 60, 60, 0.1);
+  /* Two-column grid */
+  .home-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+  }
+
+  .column-heading {
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--color-accent);
+    margin-bottom: 1rem;
+    color: var(--color-accent);
+  }
+
+  .column-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .column-list li {
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(60, 60, 60, 0.08);
+  }
+
+  .column-list li:last-child {
+    border-bottom: none;
+  }
+
+  .column-list a {
+    text-decoration: none;
+    color: var(--color-text);
+    display: block;
+  }
+
+  .column-list a:hover .item-title {
+    color: var(--color-accent);
+  }
+
+  .item-date {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .item-title {
+    display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: color 0.2s;
+  }
+
+  .item-meta {
+    display: block;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+
+  .column-empty {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+    padding: 0.5rem 0;
+  }
+
+  .column-link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--color-accent);
+    text-decoration: none;
+  }
+
+  .column-link:hover {
+    text-decoration: underline;
+  }
+
+  @media (max-width: 768px) {
+    .home-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
   }
 </style>
