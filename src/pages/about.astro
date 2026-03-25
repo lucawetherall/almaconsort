@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Divider from '../components/Divider.astro';
+import BioCard from '../components/BioCard.astro';
 ---
 <BaseLayout title="About" description="About the Alma Consort — a professional chamber choir in London directed by Luca Wetherall and Izzy Mohan.">
   <div class="container">
@@ -17,65 +19,37 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       Through the <strong>Alma Scholars</strong> programme, the Consort is dedicated to mentoring the next generation of young choral singers.
     </p>
 
+    <Divider />
+
     <h2>The Ensemble</h2>
 
     <p>
       The Consort's singers are drawn from the finest young professionals working in London's choral scene. Many hold positions with leading ensembles and cathedral choirs, bringing a wealth of experience in both concert and liturgical settings. The ensemble's size is flexible — from a small vocal consort to a larger choral force — allowing programmes to be shaped precisely to the repertoire and the occasion.
     </p>
 
-    <hr class="bio-divider" />
+    <Divider />
 
     <h2>Directors</h2>
 
-    <div class="bio">
-      <!-- TODO: Add director headshot — recommended size 300x400px -->
-      <!-- <img src="/almaconsort/images/luca-wetherall.jpg" alt="Luca Wetherall" class="bio-photo" /> -->
-      <p>
-        <strong>Luca Wetherall</strong> is a conductor, singer, and pianist. He is Director of Music and Organist at St Mary's Acton and Choral Director at St John the Baptist, Holland Road. A Clarendon Scholar at the University of Oxford, his doctoral research explores popular music, and he serves as a Tutor at the Faculty of Music. As a singer, Luca performs regularly with leading ensembles in London and beyond. His conducting brings a scholarly depth to programming and an instinct for drawing expressive, finely balanced sound from choral forces of every size.
-      </p>
-    </div>
+    <BioCard
+      name="Luca Wetherall"
+      role="Director"
+      initials="LW"
+      bio="Luca Wetherall is a conductor, singer, and pianist. He is Director of Music and Organist at St Mary's Acton and Choral Director at St John the Baptist, Holland Road. A Clarendon Scholar at the University of Oxford, his doctoral research explores popular music, and he serves as a Tutor at the Faculty of Music. As a singer, Luca performs regularly with leading ensembles in London and beyond. His conducting brings a scholarly depth to programming and an instinct for drawing expressive, finely balanced sound from choral forces of every size."
+    />
 
-    <div class="bio">
-      <!-- TODO: Add director headshot — recommended size 300x400px -->
-      <!-- <img src="/almaconsort/images/izzy-mohan.jpg" alt="Izzy Mohan" class="bio-photo" /> -->
-      <p>
-        <strong>Izzy Mohan</strong> is a pianist, conductor, and singer. She is Director of Music at St Mary's Harrow-on-the-Hill, where she directs the choral and organ programme. A graduate of the University of Oxford with a First Class degree, Izzy holds a Master of Music from the Royal Academy of Music, where she was awarded the Ruth Harte Scholarship. She has performed at the Royal Festival Hall, the Austrian Cultural Forum, and the Oxford International Song Festival. Her musicianship combines a pianist's sensitivity to texture and colour with a conductor's clarity of intention.
-      </p>
-    </div>
+    <BioCard
+      name="Izzy Mohan"
+      role="Director"
+      initials="IM"
+      bio="Izzy Mohan is a pianist, conductor, and singer. She is Director of Music at St Mary's Harrow-on-the-Hill, where she directs the choral and organ programme. A graduate of the University of Oxford with a First Class degree, Izzy holds a Master of Music from the Royal Academy of Music, where she was awarded the Ruth Harte Scholarship. She has performed at the Royal Festival Hall, the Austrian Cultural Forum, and the Oxford International Song Festival. Her musicianship combines a pianist's sensitivity to texture and colour with a conductor's clarity of intention."
+    />
   </div>
 </BaseLayout>
 
 <style>
-  .bio-divider {
-    border: none;
-    border-top: 1px solid rgba(60, 60, 60, 0.15);
-    margin: 2rem 0;
-  }
-
-  .bio {
-    margin-bottom: 1.5rem;
-  }
-
-  .bio strong {
-    font-size: 1.15rem;
-  }
-
   h2 {
-    margin-top: 2rem;
+    margin-top: 0.5rem;
     margin-bottom: 1rem;
-  }
-
-  .bio-photo {
-    float: right;
-    width: 180px;
-    margin: 0 0 1rem 1.5rem;
-    border-radius: 4px;
-  }
-
-  @media (max-width: 768px) {
-    .bio-photo {
-      float: none;
-      margin: 0 0 1rem 0;
-    }
   }
 </style>
