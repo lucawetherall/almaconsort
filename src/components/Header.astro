@@ -98,6 +98,7 @@ const navLinks = [
     text-decoration: none;
     color: var(--color-text);
     transition: color 0.2s;
+    white-space: nowrap;
   }
 
   .main-nav a:hover,
@@ -131,50 +132,88 @@ const navLinks = [
     transition: transform 0.3s, opacity 0.3s;
   }
 
-  @media (max-width: 768px) {
-    .nav-toggle-label {
-      display: flex;
-    }
+  :global(.hamburger-mode) .nav-toggle-label {
+    display: flex;
+  }
 
-    .main-nav {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background: var(--color-bg);
-      border-bottom: 1px solid rgba(60, 60, 60, 0.15);
-      z-index: 100;
-    }
+  :global(.hamburger-mode) .main-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--color-bg);
+    border-bottom: 1px solid rgba(60, 60, 60, 0.15);
+    z-index: 100;
+  }
 
-    .site-header {
-      position: relative;
-    }
+  :global(.hamburger-mode) .site-header {
+    position: relative;
+  }
 
-    .main-nav ul {
-      flex-direction: column;
-      gap: 0;
-      padding: 1rem 1.5rem;
-    }
+  :global(.hamburger-mode) .main-nav ul {
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 1.5rem;
+  }
 
-    .main-nav li {
-      padding: 0.5rem 0;
-    }
+  :global(.hamburger-mode) .main-nav li {
+    padding: 0.5rem 0;
+  }
 
-    .nav-toggle:checked ~ .main-nav {
-      display: block;
-    }
+  :global(.hamburger-mode) .nav-toggle:checked ~ .main-nav {
+    display: block;
+  }
 
-    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-    }
+  :global(.hamburger-mode) .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
 
-    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
-      opacity: 0;
-    }
+  :global(.hamburger-mode) .nav-toggle:checked ~ .nav-toggle-label span:nth-child(2) {
+    opacity: 0;
+  }
 
-    .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-    }
+  :global(.hamburger-mode) .nav-toggle:checked ~ .nav-toggle-label span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
   }
 </style>
+
+<script>
+  function checkNavFit() {
+    const header = document.querySelector('.site-header');
+    const headerInner = document.querySelector('.header-inner');
+    const nav = document.querySelector('.main-nav');
+    const brand = document.querySelector('.header-brand');
+    const toggleLabel = document.querySelector('.nav-toggle-label');
+    if (!header || !headerInner || !nav || !brand || !toggleLabel) return;
+
+    // Temporarily show as inline nav to measure
+    header.classList.remove('hamburger-mode');
+
+    const brandWidth = brand.offsetWidth;
+    const toggleWidth = toggleLabel.offsetWidth || 40; // fallback for when hidden
+    const headerPadding = 32; // approximate horizontal padding
+    const gap = 32; // space between brand and nav
+    const availableWidth = headerInner.clientWidth - brandWidth - gap - headerPadding;
+
+    const navUl = nav.querySelector('ul');
+    if (!navUl) return;
+
+    // Measure the natural width the nav needs
+    let navNeeded = 0;
+    const items = navUl.querySelectorAll('li');
+    const navGap = parseFloat(getComputedStyle(navUl).gap) || 32;
+    items.forEach((item, i) => {
+      navNeeded += item.scrollWidth;
+      if (i < items.length - 1) navNeeded += navGap;
+    });
+
+    if (navNeeded > availableWidth) {
+      header.classList.add('hamburger-mode');
+    }
+  }
+
+  // Run on load and resize
+  checkNavFit();
+  window.addEventListener('resize', checkNavFit);
+</script>
