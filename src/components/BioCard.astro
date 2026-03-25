@@ -1,0 +1,97 @@
+---
+interface Props {
+  name: string;
+  role?: string;
+  image?: string;
+  initials?: string;
+  bio: string;
+}
+
+const { name, role, image, initials, bio } = Astro.props;
+---
+<div class="bio-card">
+  <div class="bio-card-image">
+    {image ? (
+      <img src={image} alt={name} class="bio-photo" loading="lazy" />
+    ) : (
+      <div class="bio-placeholder">
+        <span>{initials || name.split(' ').map(w => w[0]).join('')}</span>
+      </div>
+    )}
+  </div>
+  <div class="bio-card-text">
+    <h3 class="bio-name">{name}</h3>
+    {role && <p class="bio-role">{role}</p>}
+    <p class="bio-body">{bio}</p>
+  </div>
+</div>
+
+<style>
+  .bio-card {
+    display: flex;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .bio-card-image {
+    flex-shrink: 0;
+    width: 140px;
+  }
+
+  .bio-photo {
+    width: 140px;
+    height: 175px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+
+  .bio-placeholder {
+    width: 140px;
+    height: 175px;
+    background: #e8e4db;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bio-placeholder span {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    color: var(--color-text-muted);
+  }
+
+  .bio-name {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.15rem;
+  }
+
+  .bio-role {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .bio-body {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .bio-card {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .bio-card-text {
+      text-align: left;
+    }
+  }
+</style>

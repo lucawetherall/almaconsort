@@ -132,6 +132,31 @@ main {
   color: var(--color-bg-white);
 }
 
+/* ===== Pull Quote ===== */
+.pull-quote {
+  border-left: 3px solid var(--color-accent);
+  padding-left: 1.5rem;
+  margin: 2rem 0;
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+.pull-quote a {
+  color: var(--color-accent);
+}
+
+/* ===== Drop Cap ===== */
+.drop-cap::first-letter {
+  font-family: var(--font-serif);
+  font-size: 3.5rem;
+  float: left;
+  line-height: 0.8;
+  margin-right: 0.1em;
+  margin-top: 0.05em;
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
 /* ===== Skip to content ===== */
 .skip-link {
   position: absolute;

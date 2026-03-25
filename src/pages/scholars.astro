@@ -1,5 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Divider from '../components/Divider.astro';
+import FeatureCard from '../components/FeatureCard.astro';
 ---
 <BaseLayout title="Alma Scholars" description="The Alma Scholars programme supports young upcoming singers, providing professional mentoring, performance opportunities, and a bridge to the profession.">
   <div class="container">
@@ -13,47 +15,43 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       Scholars benefit from real-world performance experience in a professional setting — learning repertoire, stagecraft, and ensemble discipline from the inside. The programme also gives scholars access to our in-house recording facilities, providing them with free professional recordings to support their careers as they move into the world of professional music-making.
     </p>
 
-    <hr class="section-divider" />
+    <Divider />
 
-    <h2>Valentine's Opera Gala</h2>
+    <FeatureCard>
+      <h2>Valentine's Opera Gala</h2>
 
-    <p>
-      Our Valentine's Day Opera Gala in February 2026 was a landmark event for the Alma Scholars programme. Scholars took centre stage alongside our professional singers in an evening of romantic opera arias and love duets at St Mary's Church, Acton. The event gave scholars the opportunity to perform operatic repertoire in a concert setting, with professional mentoring throughout the rehearsal process and free recordings of the performance to add to their portfolios.
-    </p>
+      <p>
+        Our Valentine's Day Opera Gala in February 2026 was a landmark event for the Alma Scholars programme. Scholars took centre stage alongside our professional singers in an evening of romantic opera arias and love duets at St Mary's Church, Acton. The event gave scholars the opportunity to perform operatic repertoire in a concert setting, with professional mentoring throughout the rehearsal process and free recordings of the performance to add to their portfolios.
+      </p>
 
-    <p>
-      The gala demonstrated the heart of the Scholars programme: giving young singers the chance to perform at a professional standard, with the guidance and support they need to thrive.
-    </p>
+      <p>
+        The gala demonstrated the heart of the Scholars programme: giving young singers the chance to perform at a professional standard, with the guidance and support they need to thrive.
+      </p>
+    </FeatureCard>
 
-    <hr class="section-divider" />
+    <Divider />
 
-    <h2>Christmas at St Mary's, Harrow on the Hill</h2>
+    <FeatureCard>
+      <h2>Christmas at St Mary's, Harrow on the Hill</h2>
 
-    <p>
-      Our Christmas concert at St Mary's, Harrow on the Hill was another proud moment for the programme. Two soprano scholars performed as soloists, stepping forward from the ensemble to sing solo movements within the concert programme, as well as singing alongside the professional choir in the full ensemble pieces.
-    </p>
+      <p>
+        Our Christmas concert at St Mary's, Harrow on the Hill was another proud moment for the programme. Two soprano scholars performed as soloists, stepping forward from the ensemble to sing solo movements within the concert programme, as well as singing alongside the professional choir in the full ensemble pieces.
+      </p>
 
-    <p>
-      For both scholars, it was a chance to experience the demands and rewards of solo performance within a supportive, professional environment — exactly the kind of opportunity the Alma Scholars programme exists to provide.
-    </p>
+      <p>
+        For both scholars, it was a chance to experience the demands and rewards of solo performance within a supportive, professional environment — exactly the kind of opportunity the Alma Scholars programme exists to provide.
+      </p>
+    </FeatureCard>
 
-    <hr class="section-divider" />
+    <Divider />
 
-    <h2>Supporting the Scholars</h2>
-
-    <p>
-      The Alma Scholars programme relies on the generosity of our supporters. By contributing to the Alma Consort, you help fund mentoring, rehearsal time, and recording sessions for young singers at the start of their careers. Visit our <a href="/support/">support page</a> to find out how you can help.
-    </p>
+    <div class="pull-quote">
+      The Alma Scholars programme relies on the generosity of our supporters. By contributing to the Alma Consort, you help fund mentoring, rehearsal time, and recording sessions for young singers at the start of their careers. Visit our <a href={`${import.meta.env.BASE_URL}support/`}>support page</a> to find out how you can help.
+    </div>
   </div>
 </BaseLayout>
 
 <style>
-  .section-divider {
-    border: none;
-    border-top: 1px solid rgba(60, 60, 60, 0.15);
-    margin: 2rem 0;
-  }
-
   h2 {
     font-size: 1.5rem;
     margin-bottom: 0.75rem;
