@@ -12,8 +12,33 @@ const upcoming = allEvents
   .filter((e) => e.data.date >= now)
   .sort((a, b) => a.data.date.getTime() - b.data.date.getTime());
 const past = allEvents.filter((e) => e.data.date < now);
+
+const eventsListJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Upcoming concerts — Alma Consort",
+  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+  "numberOfItems": upcoming.length,
+  "itemListElement": upcoming.map((e, i) => {
+    const iso = e.data.date.toISOString().split('T')[0];
+    return {
+      "@type": "ListItem",
+      "position": i + 1,
+      "item": {
+        "@type": "MusicEvent",
+        "name": e.data.title,
+        "startDate": e.data.startTime ? `${iso}T${e.data.startTime}:00` : iso,
+        "url": new URL(`${import.meta.env.BASE_URL}events/${e.id}/`, Astro.site).href,
+        "location": { "@type": "Place", "name": e.data.venue.name },
+      },
+    };
+  }),
+};
 ---
-<BaseLayout title="Events" description="Upcoming and past events from the Alma Consort.">
+<BaseLayout title="Concerts & Events | Alma Consort" description="Upcoming concerts and past events from the Alma Consort, a professional chamber choir based in London.">
+  {upcoming.length > 0 && (
+    <script slot="head" type="application/ld+json" set:html={JSON.stringify(eventsListJsonLd)} />
+  )}
   <div class="container">
     <h1>Events</h1>
 

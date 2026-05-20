@@ -6,8 +6,27 @@ import { getCollection } from 'astro:content';
 const posts = (await getCollection('blog')).sort(
   (a, b) => b.data.date.getTime() - a.data.date.getTime()
 );
+
+const siteOrigin = new URL(import.meta.env.BASE_URL, Astro.site).href;
+const blogJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "Alma Consort — News & Reflections",
+  "description": "News and reflections from the Alma Consort on concerts, recordings, programming, and choral life.",
+  "url": new URL(`${import.meta.env.BASE_URL}blog/`, Astro.site).href,
+  "inLanguage": "en-GB",
+  "publisher": { "@type": "Organization", "name": "Alma Consort", "url": siteOrigin },
+  "blogPost": posts.map((p) => ({
+    "@type": "BlogPosting",
+    "headline": p.data.title,
+    "description": p.data.description,
+    "datePublished": p.data.date.toISOString().split('T')[0],
+    "url": new URL(`${import.meta.env.BASE_URL}blog/${p.id}/`, Astro.site).href,
+  })),
+};
 ---
-<BaseLayout title="News" description="News and reflections from the Alma Consort — on concerts, recordings, and the life of a professional chamber choir.">
+<BaseLayout title="News & Reflections | Alma Consort" description="News and reflections from the Alma Consort on concerts, recordings, programming, and the life of a professional chamber choir in London.">
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(blogJsonLd)} />
   <div class="container">
     <h1>News</h1>
 

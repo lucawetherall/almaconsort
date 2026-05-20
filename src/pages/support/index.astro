@@ -7,8 +7,8 @@ import { getCollection } from 'astro:content';
 const tiers = (await getCollection('supportTiers')).sort((a, b) => a.data.order - b.data.order);
 ---
 <BaseLayout
-  title="Support"
-  description="Support the Alma Consort by becoming a Friend, Partner, or Patron. Your donations help fund our Alma Scholars mentoring scheme."
+  title="Support the Alma Consort | Friend, Partner, Patron"
+  description="Become a Friend, Partner, or Patron of the Alma Consort. Your donation funds the Alma Scholars mentoring scheme for young choral singers in London."
   includeStripe={true}
 >
   <div class="container">
@@ -18,10 +18,10 @@ const tiers = (await getCollection('supportTiers')).sort((a, b) => a.data.order 
       <div class="support-text">
         <h2>Become a Friend, Partner, or Patron of Alma Consort</h2>
         <p>
-          The Alma Consort is an independent organisation and relies on the generosity of its supporters. We are currently fundraising for our Alma Scholars scheme, which provides mentoring opportunities for young singers.
+          The Alma Consort is independent and runs on the support of its donors. We're fundraising for the Alma Scholars scheme, which provides mentoring for young singers.
         </p>
         <p>
-          You can support us with a one-off gift below, or choose to make a recurring donation by becoming a Friend, Partner, or Patron.
+          Make a one-off gift below, or set up a recurring donation as a Friend, Partner, or Patron.
         </p>
       </div>
 

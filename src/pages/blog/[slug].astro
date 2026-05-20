@@ -22,23 +22,32 @@ const dateStr = post.data.date.toLocaleDateString('en-GB', {
 
 const isoDate = post.data.date.toISOString().split('T')[0];
 
+const canonicalHref = new URL(`${import.meta.env.BASE_URL}blog/${post.id}/`, Astro.site).href;
+const ogImageHref = new URL(`${import.meta.env.BASE_URL}logo.png`, Astro.site).href;
+
 const postJsonLd = {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": canonicalHref },
   "headline": post.data.title,
   "description": post.data.description,
   "datePublished": isoDate,
+  "dateModified": isoDate,
+  "inLanguage": "en-GB",
+  "image": [ogImageHref],
+  "keywords": post.data.tags && post.data.tags.length > 0 ? post.data.tags.join(', ') : undefined,
   "author": {
-    "@type": "Organization",
-    "name": "Alma Consort",
+    "@type": post.data.author && post.data.author !== "Alma Consort" ? "Person" : "Organization",
+    "name": post.data.author || "Alma Consort",
   },
   "publisher": {
     "@type": "Organization",
     "name": "Alma Consort",
+    "logo": { "@type": "ImageObject", "url": ogImageHref },
   },
 };
 ---
-<BaseLayout title={post.data.title} description={post.data.description}>
+<BaseLayout title={`${post.data.title} | Alma Consort`} description={post.data.description}>
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(postJsonLd)} />
   <div class="container">
     <h1>{post.data.title}</h1>

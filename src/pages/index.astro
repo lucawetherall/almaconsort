@@ -16,9 +16,10 @@ const allPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
 ---
-<BaseLayout title="Home" description="The Alma Consort is a professional chamber choir in London, dedicated to concerts and recordings of the highest calibre.">
+<BaseLayout title="Alma Consort | Professional Chamber Choir in London" description="Alma Consort is a London-based professional chamber choir performing Renaissance polyphony, contemporary commissions, jazz, and popular repertoire, on the concert platform and in the recording studio.">
   <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
   <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
+  <h1 class="visually-hidden">Alma Consort — Professional Chamber Choir, London</h1>
 
   <!-- Video hero at site-width -->
   <div class="site-container">
@@ -35,13 +36,13 @@ const allPosts = (await getCollection('blog'))
   <div class="container">
     <div class="home-text">
       <p class="drop-cap">
-        The <strong>Alma Consort</strong> is a professional chamber choir based in London, bringing together some of the city's finest young choral singers. We perform across a broad repertoire — from Renaissance polyphony to contemporary commissions, and from the concert platform to the recording studio.
+        The <strong>Alma Consort</strong> is a professional chamber choir in London. Our singers come from the city's leading ensembles and cathedral choirs. We sing Renaissance polyphony, contemporary commissions, jazz arrangements, and popular repertoire, on the concert platform and in the recording studio.
       </p>
       <p>
-        Central to our work is a commitment to <a href={`${base}recording/`}>recording</a> of the highest quality. The ensemble offers both studio sessions for external projects and produces its own recordings, with audio and video captured in-house by our dedicated production team.
+        <a href={`${base}recording/`}>Recording</a> sits at the centre of what we do. We run studio sessions for composers, producers, and labels, and we produce our own releases. Our in-house team captures the audio and video.
       </p>
       <p>
-        The Alma Consort is directed by <a href={`${base}about/`}>Luca Wetherall</a> and <a href={`${base}about/`}>Izzy Mohan</a>. Explore our upcoming <a href={`${base}events/`}>events</a>, or <a href={`${base}contact/`}>get in touch</a> to discuss a project.
+        <a href={`${base}about/`}>Luca Wetherall</a> and <a href={`${base}about/`}>Izzy Mohan</a> direct the ensemble. Browse our upcoming <a href={`${base}events/`}>events</a>, or <a href={`${base}contact/`}>write to us</a> about a project.
       </p>
     </div>
 
