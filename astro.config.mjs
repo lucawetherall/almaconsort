@@ -12,7 +12,7 @@ export default defineConfig({
       lastmod: new Date(),
       serialize(item) {
         const url = item.url;
-        if (url.endsWith('/almaconsort/') || url.endsWith('/almaconsort')) {
+        if (new URL(url).pathname === '/') {
           item.priority = 1.0;
           item.changefreq = 'weekly';
         } else if (url.includes('/events/') || url.includes('/blog/')) {
