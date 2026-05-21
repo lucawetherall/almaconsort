@@ -3,4 +3,4 @@ Allow: /
 
 Crawl-delay: 1
 
-Sitemap: https://lucawetherall.github.io/almaconsort/sitemap-index.xml
+Sitemap: https://www.almaconsort.com/sitemap-index.xml
