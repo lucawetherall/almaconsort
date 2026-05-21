@@ -1,23 +1,63 @@
 ---
-// TODO: Replace the form action with your newsletter provider URL
-// For Mailchimp: https://YOUR_ACCOUNT.us1.list-manage.com/subscribe/post?u=XXXXX&id=XXXXX
-// For Buttondown: https://buttondown.com/api/emails/embed-subscribe/YOUR_USERNAME
-const formAction = '#';
+const zohoFormId = 'sf3z563da5293660e67b208aab5a241a0e6188c420ecb845d46151f6521b1fef47aa';
 ---
+<script is:inline defer src="https://zgnp-zngp.maillist-manage.com/js/optin.min.js" onload={`setupSF('${zohoFormId}','ZCFORMVIEW',false,'light',false,'0')`}></script>
+<script is:inline define:vars={{ zohoFormId }}>
+  // Required hook for Zoho Campaigns optin script. Name must match the form ID.
+  window['runOnFormSubmit_' + zohoFormId] = function () {};
+</script>
+
 <div class="newsletter">
   <p class="newsletter-text">Stay informed about upcoming concerts and recordings.</p>
-  <form action={formAction} method="POST" class="newsletter-form">
-    <label for="newsletter-email" class="visually-hidden">Email address</label>
-    <input
-      type="email"
-      id="newsletter-email"
-      name="email"
-      placeholder="Your email address"
-      required
-      autocomplete="email"
-    />
-    <button type="submit" class="btn btn-primary newsletter-btn">Subscribe</button>
-  </form>
+
+  <div id={zohoFormId} data-type="signupform">
+    <div id="Zc_SignupSuccess" class="newsletter-success" style="display:none">
+      Thank you — please check your inbox to confirm your subscription.
+    </div>
+    <div id="errorMsgDiv" class="newsletter-error" style="display:none">
+      Please enter a valid email address.
+    </div>
+
+    <form
+      id="zcampaignOptinForm"
+      method="POST"
+      action="https://zgnp-zngp.maillist-manage.com/weboptin.zc"
+      target="_zcSignup"
+      class="newsletter-form"
+    >
+      <label for="EMBED_FORM_EMAIL_LABEL" class="visually-hidden">Email address</label>
+      <input
+        type="email"
+        id="EMBED_FORM_EMAIL_LABEL"
+        name="CONTACT_EMAIL"
+        placeholder="Your email address"
+        required
+        autocomplete="email"
+        changeitem="SIGNUP_FORM_FIELD"
+      />
+      <input type="button" id="zcWebOptin" name="SIGNUP_SUBMIT_BUTTON" value="Subscribe" class="btn btn-primary newsletter-btn" />
+
+      <input type="hidden" name="submitType" value="optinCustomView" />
+      <input type="hidden" name="emailReportId" value="" />
+      <input type="hidden" name="formType" value="QuickForm" />
+      <input type="hidden" name="zx" value="11d54361" />
+      <input type="hidden" name="zcvers" value="3.0" />
+      <input type="hidden" name="oldListIds" value="" />
+      <input type="hidden" name="mode" value="OptinCreateView" />
+      <input type="hidden" name="zcld" value="1167de69c52b4e8a9" />
+      <input type="hidden" name="zctd" value="1167de69c52b3cb91" />
+      <input type="hidden" name="zc_trackCode" value="ZCFORMVIEW" />
+      <input type="hidden" name="zc_formIx" value="3z563da5293660e67b208aab5a241a0e6188c420ecb845d46151f6521b1fef47aa" />
+      <input type="hidden" id="document_domain" value="" />
+      <input type="hidden" id="zc_Url" value="zgnp-zngp.maillist-manage.com" />
+      <input type="hidden" id="new_optin_response_in" value="0" />
+      <input type="hidden" id="duplicate_optin_response_in" value="0" />
+      <input type="hidden" id="viewFrom" value="URL_ACTION" />
+      <input type="hidden" id="fieldBorder" value="" />
+      <input type="hidden" id="signupFormType" value="QuickForm_Vertical" />
+      <span style="display:none" id="dt_CONTACT_EMAIL">1,true,6,Contact Email,2</span>
+    </form>
+  </div>
 </div>
 
 <style>
@@ -59,6 +99,28 @@ const formAction = '#';
     font-size: 0.9rem;
     border-radius: 3px;
     white-space: nowrap;
+  }
+
+  .newsletter-success,
+  .newsletter-error {
+    max-width: 420px;
+    margin: 0 auto 0.75rem;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    text-align: center;
+  }
+
+  .newsletter-success {
+    background: rgba(120, 180, 120, 0.12);
+    border: 1px solid rgba(120, 180, 120, 0.35);
+    color: var(--color-text);
+  }
+
+  .newsletter-error {
+    background: rgba(210, 80, 80, 0.08);
+    border: 1px solid rgba(210, 80, 80, 0.35);
+    color: rgb(180, 40, 40);
   }
 
   .visually-hidden {
