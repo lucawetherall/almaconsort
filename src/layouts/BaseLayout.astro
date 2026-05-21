@@ -26,7 +26,7 @@ const {
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = ogImage
   ? new URL(ogImage, Astro.site).href
-  : new URL(`${import.meta.env.BASE_URL}logo.png`, Astro.site).href;
+  : new URL(`${import.meta.env.BASE_URL}og-image.png`, Astro.site).href;
 
 const displayTitle = title.includes('Alma Consort') ? title : `${title} | Alma Consort`;
 ---
@@ -111,10 +111,8 @@ const displayTitle = title.includes('Alma Consort') ? title : `${title} | Alma C
         ],
         "knowsAbout": ["Choral Recording", "Concert Performance", "Renaissance Polyphony", "Contemporary Choral Music", "Studio Sessions"],
         "sameAs": [
-          // TODO: Replace with actual social media profile URLs
-          // "https://www.instagram.com/almaconsort/",
-          // "https://www.youtube.com/@almaconsort",
-          // "https://www.facebook.com/almaconsort"
+          "https://www.instagram.com/almaconsort/",
+          "https://www.facebook.com/almaconsort/"
         ]
       })} />
     )}
