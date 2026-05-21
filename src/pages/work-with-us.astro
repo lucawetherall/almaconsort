@@ -4,20 +4,21 @@ import ServiceCard from '../components/ServiceCard.astro';
 
 const base = import.meta.env.BASE_URL;
 ---
-<BaseLayout title="Work With Us" description="Engage the Alma Consort for concerts, recordings, private events, and ceremonies — a professional chamber choir based in London.">
+<BaseLayout title="Hire a Chamber Choir in London | Work With the Alma Consort" description="Book the Alma Consort for concerts, recordings, weddings, ceremonies, and private events. A professional chamber choir based in London, available across the UK.">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Alma Consort — Professional Choral Services",
-    "description": "Professional chamber choir available for concerts, recordings, private events, weddings, and ceremonies in London and beyond.",
+    "description": "Hire a professional chamber choir in London for concerts, recordings, weddings, ceremonies, and corporate events.",
     "provider": {
       "@type": "PerformingGroup",
-      "name": "Alma Consort"
+      "name": "Alma Consort",
+      "url": new URL(import.meta.env.BASE_URL, Astro.site).href
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "London"
-    },
+    "areaServed": [
+      { "@type": "City", "name": "London" },
+      { "@type": "Country", "name": "United Kingdom" }
+    ],
     "serviceType": ["Concert Performance", "Choral Recording", "Wedding Music", "Corporate Entertainment"]
   })} />
 
@@ -25,32 +26,32 @@ const base = import.meta.env.BASE_URL;
     <h1>Work With Us</h1>
 
     <div class="pull-quote">
-      The Alma Consort is available for a range of musical engagements. Whether you are planning a concert series, commissioning a recording, or seeking music for a private occasion, we would be glad to hear from you.
+      The Alma Consort takes on concerts, recordings, private occasions, and ceremonies. Tell us what you're planning.
     </div>
 
     <div class="service-grid">
       <ServiceCard
         title="Concert Engagements"
-        description="The Alma Consort performs across a wide-ranging repertoire — from Renaissance polyphony and Baroque sacred works to contemporary commissions and popular arrangements. We are experienced in programming for festivals, concert series, liturgical seasons, and bespoke events."
+        description="We perform Renaissance polyphony, Baroque sacred works, contemporary commissions, and popular arrangements. We programme for festivals, concert series, liturgical seasons, and bespoke events."
         linkUrl={`${base}contact/`}
       />
 
       <ServiceCard
         title="Recording Sessions"
-        description="Our singers are experienced session musicians, equally at ease with sight-reading demanding contemporary scores and delivering nuanced performances of Renaissance repertoire. Our own production team can provide high-quality audio and video recording in-house."
+        description="Our singers are experienced session musicians, fluent in contemporary scores and Renaissance repertoire alike. Our production team records audio and video in-house."
         linkUrl={`${base}recording/`}
         linkText="Learn more →"
       />
 
       <ServiceCard
         title="Private & Corporate Events"
-        description="We bring the same musicality and professionalism to private engagements as we do to the concert platform. Programmes can be tailored to suit the event, drawing on classical, sacred, jazz, and popular repertoire."
+        description="Private engagements get the same musical standard as our concerts. We tailor programmes to the occasion, drawing on classical, sacred, jazz, and popular repertoire."
         linkUrl={`${base}contact/`}
       />
 
       <ServiceCard
         title="Weddings & Ceremonies"
-        description="The Alma Consort provides music for weddings, civil ceremonies, and other celebrations. From intimate vocal settings during the ceremony to fuller choral performances at receptions, we work with couples to reflect the tone and significance of the occasion."
+        description="We sing at weddings, civil ceremonies, and other celebrations. The music ranges from intimate settings during the ceremony to fuller choral performances at receptions. We plan with couples to match the tone of the day."
         linkUrl={`${base}contact/`}
       />
     </div>

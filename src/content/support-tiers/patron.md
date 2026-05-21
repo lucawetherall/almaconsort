@@ -21,50 +21,44 @@ stripeButtons:
     billingNote: "£2,500 billed annually"
 ---
 
-**Visionary support for the future of our music.**
+**Long-term support for the music.**
 
-The **Alma Patrons** represent the highest level of commitment to Alma Consort. Members of this circle are more than just supporters; they are the bedrock of our artistic ambition.
+The **Alma Patrons** are our highest tier of support. Patrons underwrite our most ambitious work.
 
-At this level, your contribution is transformative. It allows us to hire world-class orchestras, commission new works, produce high-quality studio recordings, and, most importantly, fund the **Alma Scholars** programme. Your donation covers entire bursaries and mentorship for one of our young singers, ensuring that financial barriers never stop a talented young singer from receiving the mentoring they deserve.
+A Patron's contribution lets us hire orchestras, commission new music, produce studio recordings, and, above all, fund the **Alma Scholars** programme. A patron's gift can cover the full cost of mentoring and bursary for a young singer.
 
-We recognize this extraordinary generosity by offering you a personal relationship with the choir's artistic leadership and unique musical experiences tailored just for you.
+In return, we offer a closer relationship with the choir's directors and musical experiences shaped around you.
 
 ---
 
 ## Choose Your Level of Support
 
-All members of the Alma Circle receive **all benefits from the Friends and Partner programmes** (priority booking, discounts, open rehearsal access, and programme recognition).
+All Patrons receive **the benefits of the Friends and Partner programmes** (priority booking, discounts, open rehearsal access, and programme recognition).
 
-In addition, we offer three distinct levels of engagement:
+We offer three levels:
 
 ### 1. Associate Patron
 
 **Annual Contribution: £500**
 
-At this level you will receive four free tickets per year to any of our performances and a free copy of any CD recordings made. You will have the opportunity to suggest new avenues and concert ideas with the Directors. Your name will be prominently displayed in concert programmes and recording liner notes (optional).
+Four free tickets a year to any performance, and a free copy of any CD recording. You can suggest concert ideas to the directors. Your name appears in concert programmes and recording liner notes (optional).
 
 ### 2. Patron
 
 **Annual Contribution: £1,000**
 
-At this level, we want to share our expertise with you. In addition to all the benefits of the Associate Patrons tier, you are invited to **discover your own musical voice**.
-
-You will be entitled to receive two one-hour music lessons per year with one of our Directors either in London or online at your convenience. Whether you want a vocal coaching session to improve your own singing, a piano lesson, or simply an hour of music theory and conversation to understand the scores we sing, this is your time to learn from the best.
+Everything in the Associate Patron tier, plus two one-hour music lessons a year with one of our directors, in London or online. Use the time for vocal coaching, piano lessons, or to talk through the scores we sing.
 
 ### 3. Principal Patron (The Director's Circle)
 
 **Annual Contribution: £2,500**
 
-This is our most prestigious level of support. For those who make this exceptional commitment, we want to give the music back to you.
+Our most committed level. Principal Patrons join the Director's Circle and have a voice in the choir's future direction.
 
-As a Principal Patron you will have all the benefits of the other Patron tiers as well as also being a member of the Director's Circle and have a voice in the future direction of the choir.
-
-You will receive a **bespoke private performance** by the choir at an event of your choosing. You will also be entitled to receive four one-hour music lessons per year with one of our Directors either in London or online.
-
-Whether it is a dinner party, a birthday celebration, or a corporate event, we will come to you to perform a curated 20-minute set. It is our way of bringing the magic of Alma Consort into your personal life, as a heartfelt thank you for sustaining ours.
+You receive a **private performance** by the choir at an event of your choosing — a dinner, a birthday, a corporate occasion — a curated 20-minute set. You also receive four one-hour music lessons a year with one of our directors, in London or online.
 
 ---
 
-## Become A Patron Today
+## Become a Patron
 
-Your generosity shapes our future. If you would like to discuss how your donation can be directed toward a specific part of the Scholars programme, please get in touch with us directly. Similarly, please don't hesitate to let us know if you are able to make a more substantial donation, for example to sponsor an entire recording or concert. You can get in touch with us via the contact form [here](/almaconsort/contact/).
+If you'd like to direct your donation toward a specific part of the Scholars programme, or to sponsor a recording or concert, please [get in touch](/almaconsort/contact/) and we'll talk it through.

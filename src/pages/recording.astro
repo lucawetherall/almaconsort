@@ -2,7 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Divider from '../components/Divider.astro';
 ---
-<BaseLayout title="Recording" description="Professional choral recording in London — studio sessions, in-house audio and video production, and the Alma Consort's own releases.">
+<BaseLayout title="Choral Recording in London | Alma Consort" description="Professional choral recording in London: studio sessions for composers, producers, and labels, with in-house audio and video production by the Alma Consort.">
   <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
   <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
 
@@ -10,33 +10,35 @@ import Divider from '../components/Divider.astro';
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Alma Consort — Choral Recording",
-    "description": "Professional choral recording services in London, including studio sessions and in-house audio and video production.",
+    "description": "Professional choral recording in London. Studio sessions for composers, producers, record labels, and creative agencies, with in-house audio and video production.",
     "provider": {
       "@type": "PerformingGroup",
-      "name": "Alma Consort"
+      "name": "Alma Consort",
+      "url": new URL(import.meta.env.BASE_URL, Astro.site).href
     },
-    "areaServed": {
-      "@type": "City",
-      "name": "London"
-    },
-    "serviceType": "Choral Recording"
+    "areaServed": [
+      { "@type": "City", "name": "London" },
+      { "@type": "Country", "name": "United Kingdom" }
+    ],
+    "serviceType": "Choral Recording",
+    "audience": { "@type": "BusinessAudience", "audienceType": "Composers, producers, record labels, creative agencies" }
   })} />
 
   <div class="container">
     <h1>Recording</h1>
 
     <p>
-      The Alma Consort brings the precision and musicality of the concert hall into the recording studio. Our singers are experienced session musicians, at ease with sight-reading demanding material across every genre — from Renaissance sacred music to film scores, from jazz arrangements to contemporary commissions.
+      The Alma Consort records with the precision and musicality of concert performance. Our singers are experienced session musicians, fluent in Renaissance sacred music, film scores, jazz arrangements, and contemporary commissions.
     </p>
 
     <h2>Sessions</h2>
 
     <p>
-      We work with composers, producers, record labels, and creative agencies on projects of every scale. Whether the brief calls for a small vocal ensemble or a full choral sound, we assemble the right forces and deliver polished, expressive recordings with the professionalism that studio work demands.
+      We work with composers, producers, record labels, and creative agencies. For each session we assemble the right forces, whether a small ensemble or a full choir, and deliver recordings that sit cleanly inside the project they're for.
     </p>
 
     <p>
-      The ensemble is available for on-site and remote sessions. Our own production team can provide high-quality audio and video recording in-house, from initial capture through to final delivery — an integrated approach that ensures artistic consistency throughout the process.
+      We take on-site and remote sessions. Our production team handles audio and video in-house, from capture through to final delivery, so artistic and technical decisions stay aligned.
     </p>
 
     <Divider />
@@ -44,7 +46,7 @@ import Divider from '../components/Divider.astro';
     <h2>Our recordings</h2>
 
     <p>
-      Alongside session work, the Alma Consort produces its own recordings. Below is a selection of our recent work.
+      Alongside session work, we produce our own recordings. A selection of recent work:
     </p>
 
     <div class="recordings-grid">
@@ -61,7 +63,7 @@ import Divider from '../components/Divider.astro';
     <Divider />
 
     <div class="pull-quote">
-      If you would like to discuss a recording project, please <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a>. We welcome enquiries from composers, producers, record labels, and creative agencies.
+      To discuss a recording project, please <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a>. We welcome enquiries from composers, producers, record labels, and creative agencies.
     </div>
   </div>
 </BaseLayout>

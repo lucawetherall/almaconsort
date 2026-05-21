@@ -1,0 +1,28 @@
+# Alma Consort
+
+> Alma Consort is a professional chamber choir based in London. We perform Renaissance polyphony, contemporary commissions, jazz arrangements, and popular repertoire, both on the concert platform and in the recording studio. The ensemble is directed by Luca Wetherall and Izzy Mohan.
+
+The Alma Consort runs studio recording sessions for composers, producers, record labels, and creative agencies, with audio and video production handled in-house. The ensemble also performs at concerts, weddings, ceremonies, and private events.
+
+The Alma Scholars programme supports early-career singers with mentoring, performance experience, and free studio recordings for their portfolios.
+
+## Pages
+
+- [Home](https://lucawetherall.github.io/almaconsort/): Overview of the ensemble, upcoming events, and latest news.
+- [About](https://lucawetherall.github.io/almaconsort/about/): The ensemble, its directors, and biographies of Luca Wetherall and Izzy Mohan.
+- [Recording](https://lucawetherall.github.io/almaconsort/recording/): Choral recording in London, studio sessions, and in-house audio/video production.
+- [Work With Us](https://lucawetherall.github.io/almaconsort/work-with-us/): Concert engagements, recording sessions, private and corporate events, weddings, and ceremonies.
+- [Alma Scholars](https://lucawetherall.github.io/almaconsort/scholars/): Mentoring programme for young choral singers.
+- [Events](https://lucawetherall.github.io/almaconsort/events/): Upcoming concerts and past events.
+- [News](https://lucawetherall.github.io/almaconsort/blog/): Reflections on programming, recording, and choral life.
+- [Support](https://lucawetherall.github.io/almaconsort/support/): Become a Friend, Partner, or Patron.
+- [Contact](https://lucawetherall.github.io/almaconsort/contact/): Enquiries for bookings, recordings, and collaborations.
+
+## Key facts
+
+- Type: Professional chamber choir
+- Location: London, United Kingdom
+- Directors: Luca Wetherall, Izzy Mohan
+- Repertoire: Renaissance polyphony, Baroque, Classical, Romantic, contemporary commissions, jazz arrangements, popular music
+- Services: Concert performance, choral recording (studio and on-location), weddings, civil ceremonies, private and corporate events
+- Mentoring: Alma Scholars programme for early-career singers

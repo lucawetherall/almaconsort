@@ -9,20 +9,26 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   includeStripe?: boolean;
+  noindex?: boolean;
 }
 
 const {
   title,
-  description = 'The Alma Consort is a professional chamber choir in London, dedicated to concerts and recordings of the highest calibre.',
+  description = 'Alma Consort is a professional chamber choir in London, performing concerts and producing studio recordings across six centuries of vocal music.',
   ogImage,
+  ogImageAlt = 'Alma Consort — professional chamber choir, London',
   includeStripe = false,
+  noindex = false,
 } = Astro.props;
 
 const canonicalUrl = new URL(Astro.url.pathname, Astro.site);
 const ogImageUrl = ogImage
   ? new URL(ogImage, Astro.site).href
   : new URL(`${import.meta.env.BASE_URL}logo.png`, Astro.site).href;
+
+const displayTitle = title.includes('Alma Consort') ? title : `${title} | Alma Consort`;
 ---
 <!doctype html>
 <html lang="en">
@@ -30,9 +36,11 @@ const ogImageUrl = ogImage
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <meta name="author" content="Alma Consort" />
-    <title>{title} | Alma Consort</title>
+    <meta name="theme-color" content="#fbf7f0" />
+    <meta name="format-detection" content="telephone=no" />
+    <title>{displayTitle}</title>
 
     <link rel="canonical" href={canonicalUrl.href} />
     <link rel="icon" type="image/png" href={`${import.meta.env.BASE_URL}favicon.png`} />
@@ -41,17 +49,20 @@ const ogImageUrl = ogImage
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content={`${title} | Alma Consort`} />
+    <meta property="og:title" content={displayTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalUrl.href} />
     <meta property="og:site_name" content="Alma Consort" />
+    <meta property="og:locale" content="en_GB" />
     <meta property="og:image" content={ogImageUrl} />
+    <meta property="og:image:alt" content={ogImageAlt} />
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={`${title} | Alma Consort`} />
+    <meta name="twitter:title" content={displayTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -79,42 +90,47 @@ const ogImageUrl = ogImage
     </script>
     -->
 
-    <!-- Structured Data -->
-    <script type="application/ld+json" set:html={JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "PerformingGroup",
-      "name": "Alma Consort",
-      "description": description,
-      "url": canonicalUrl.href,
-      "genre": ["Choral Music", "Classical", "Contemporary"],
-      "location": {
-        "@type": "City",
-        "name": "London"
-      },
-      "foundingLocation": {
-        "@type": "City",
-        "name": "London"
-      },
-      "member": [
-        {
-          "@type": "Person",
-          "name": "Luca Wetherall",
-          "jobTitle": "Director"
-        },
-        {
-          "@type": "Person",
-          "name": "Izzy Mohan",
-          "jobTitle": "Director"
-        }
-      ],
-      "knowsAbout": ["Choral Recording", "Concert Performance"],
-      "sameAs": [
-        // TODO: Replace with actual social media profile URLs
-        // "https://www.instagram.com/almaconsort/",
-        // "https://www.youtube.com/@almaconsort",
-        // "https://www.facebook.com/almaconsort"
-      ]
-    })} />
+    <!-- Structured Data: sitewide PerformingGroup (homepage only to avoid duplication) -->
+    {Astro.url.pathname === import.meta.env.BASE_URL && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "PerformingGroup",
+        "@id": new URL(import.meta.env.BASE_URL, Astro.site).href + '#org',
+        "name": "Alma Consort",
+        "alternateName": "The Alma Consort",
+        "description": description,
+        "url": new URL(import.meta.env.BASE_URL, Astro.site).href,
+        "logo": new URL(`${import.meta.env.BASE_URL}logo.png`, Astro.site).href,
+        "image": new URL(`${import.meta.env.BASE_URL}logo.png`, Astro.site).href,
+        "genre": ["Choral Music", "Classical", "Contemporary", "Renaissance Polyphony", "Sacred Music"],
+        "location": { "@type": "City", "name": "London", "address": { "@type": "PostalAddress", "addressLocality": "London", "addressCountry": "GB" } },
+        "foundingLocation": { "@type": "City", "name": "London" },
+        "member": [
+          { "@type": "Person", "name": "Luca Wetherall", "jobTitle": "Director" },
+          { "@type": "Person", "name": "Izzy Mohan", "jobTitle": "Director" }
+        ],
+        "knowsAbout": ["Choral Recording", "Concert Performance", "Renaissance Polyphony", "Contemporary Choral Music", "Studio Sessions"],
+        "sameAs": [
+          // TODO: Replace with actual social media profile URLs
+          // "https://www.instagram.com/almaconsort/",
+          // "https://www.youtube.com/@almaconsort",
+          // "https://www.facebook.com/almaconsort"
+        ]
+      })} />
+    )}
+
+    <!-- Structured Data: sitewide WebSite -->
+    {Astro.url.pathname === import.meta.env.BASE_URL && (
+      <script type="application/ld+json" set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": new URL(import.meta.env.BASE_URL, Astro.site).href,
+        "name": "Alma Consort",
+        "description": description,
+        "inLanguage": "en-GB",
+        "publisher": { "@id": new URL(import.meta.env.BASE_URL, Astro.site).href + '#org' }
+      })} />
+    )}
 
     <slot name="head" />
   </head>
