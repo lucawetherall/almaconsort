@@ -61,4 +61,4 @@ You receive a **private performance** by the choir at an event of your choosing 
 
 ## Become a Patron
 
-If you'd like to direct your donation toward a specific part of the Scholars programme, or to sponsor a recording or concert, please [get in touch](/almaconsort/contact/) and we'll talk it through.
+If you'd like to direct your donation toward a specific part of the Scholars programme, or to sponsor a recording or concert, please [get in touch](/contact/) and we'll talk it through.

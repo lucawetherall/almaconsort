@@ -8,15 +8,15 @@ The Alma Scholars programme supports early-career singers with mentoring, perfor
 
 ## Pages
 
-- [Home](https://lucawetherall.github.io/almaconsort/): Overview of the ensemble, upcoming events, and latest news.
-- [About](https://lucawetherall.github.io/almaconsort/about/): The ensemble, its directors, and biographies of Luca Wetherall and Izzy Mohan.
-- [Recording](https://lucawetherall.github.io/almaconsort/recording/): Choral recording in London, studio sessions, and in-house audio/video production.
-- [Work With Us](https://lucawetherall.github.io/almaconsort/work-with-us/): Concert engagements, recording sessions, private and corporate events, weddings, and ceremonies.
-- [Alma Scholars](https://lucawetherall.github.io/almaconsort/scholars/): Mentoring programme for young choral singers.
-- [Events](https://lucawetherall.github.io/almaconsort/events/): Upcoming concerts and past events.
-- [News](https://lucawetherall.github.io/almaconsort/blog/): Reflections on programming, recording, and choral life.
-- [Support](https://lucawetherall.github.io/almaconsort/support/): Become a Friend, Partner, or Patron.
-- [Contact](https://lucawetherall.github.io/almaconsort/contact/): Enquiries for bookings, recordings, and collaborations.
+- [Home](https://www.almaconsort.com/): Overview of the ensemble, upcoming events, and latest news.
+- [About](https://www.almaconsort.com/about/): The ensemble, its directors, and biographies of Luca Wetherall and Izzy Mohan.
+- [Recording](https://www.almaconsort.com/recording/): Choral recording in London, studio sessions, and in-house audio/video production.
+- [Work With Us](https://www.almaconsort.com/work-with-us/): Concert engagements, recording sessions, private and corporate events, weddings, and ceremonies.
+- [Alma Scholars](https://www.almaconsort.com/scholars/): Mentoring programme for young choral singers.
+- [Events](https://www.almaconsort.com/events/): Upcoming concerts and past events.
+- [News](https://www.almaconsort.com/blog/): Reflections on programming, recording, and choral life.
+- [Support](https://www.almaconsort.com/support/): Become a Friend, Partner, or Patron.
+- [Contact](https://www.almaconsort.com/contact/): Enquiries for bookings, recordings, and collaborations.
 
 ## Key facts
 
