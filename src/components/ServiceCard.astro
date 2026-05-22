@@ -17,37 +17,54 @@ const { title, description, linkUrl, linkText = 'Get in touch →' } = Astro.pro
 <style>
   .service-card {
     background: var(--color-bg-white);
-    border: 1px solid rgba(60, 60, 60, 0.1);
-    border-radius: 4px;
-    padding: 1.5rem;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--shadow-card);
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  }
+
+  .service-card:hover,
+  .service-card:focus-within {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
   }
 
   .service-title {
     font-family: var(--font-serif);
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     font-variant: small-caps;
     letter-spacing: 0.04em;
     margin-bottom: 0.75rem;
+    color: var(--color-heading);
   }
 
   .service-desc {
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     line-height: 1.7;
     color: var(--color-text);
-    margin-bottom: 1rem;
+    margin-bottom: 1.25rem;
     flex: 1;
   }
 
   .service-link {
     font-family: var(--font-serif);
     font-size: 0.95rem;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
     color: var(--color-accent);
     text-decoration: none;
+    align-self: flex-start;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 0.05em;
+    transition: border-color var(--transition);
   }
 
-  .service-link:hover {
-    text-decoration: underline;
+  .service-link:hover,
+  .service-link:focus-visible {
+    border-bottom-color: currentColor;
   }
 </style>

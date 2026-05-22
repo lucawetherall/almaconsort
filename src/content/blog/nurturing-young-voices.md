@@ -22,4 +22,4 @@ Scholars benefit from regular rehearsals with the Consort, performance opportuni
 
 We believe that investing in young singers is not an act of charity but an essential part of sustaining the choral tradition. The singers we mentor today are the section leaders, soloists, and directors of tomorrow. By welcoming them into a professional environment early, we hope to give them the confidence, skills, and musical instincts they will carry throughout their careers.
 
-To learn more about the Alma Scholars, visit our [Scholars page](/almaconsort/scholars/), or [get in touch](/almaconsort/contact/) if you are interested in joining the programme.
+To learn more about the Alma Scholars, visit our [Scholars page](/scholars/), or [get in touch](/contact/) if you are interested in joining the programme.

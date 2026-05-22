@@ -20,4 +20,4 @@ When planning a concert, we begin with the texts. Choral music is, at its heart,
 
 We are committed to performing and commissioning new work. The choral tradition is a living one, and the repertoire of the future is being written now. Working closely with composers, we aim to bring the same care and attention to a first performance as we would to a work that has been sung for five hundred years.
 
-Our [events page](/almaconsort/events/) lists upcoming concerts where you can hear this approach in practice.
+Our [events page](/events/) lists upcoming concerts where you can hear this approach in practice.

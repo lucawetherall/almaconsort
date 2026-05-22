@@ -22,4 +22,4 @@ Our singers are experienced session musicians, accustomed to the discipline and 
 
 Having our own audio and video production team means that the artistic vision and the technical execution remain closely aligned throughout the process. From microphone placement to final mastering, every decision is informed by an understanding of the choral idiom.
 
-We are always glad to discuss new recording projects. If you have a commission, a soundtrack, or a recording in mind, please [get in touch](/almaconsort/contact/).
+We are always glad to discuss new recording projects. If you have a commission, a soundtrack, or a recording in mind, please [get in touch](/contact/).

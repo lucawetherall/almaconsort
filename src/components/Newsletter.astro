@@ -80,24 +80,26 @@ const zohoFormId = 'sf3z563da5293660e67b208aab5a241a0e6188c420ecb845d46151f6521b
 
   .newsletter-form input[type="email"] {
     flex: 1;
-    padding: 0.55rem 0.75rem;
+    padding: 0.6rem 0.85rem;
     font-family: var(--font-serif);
     font-size: 0.95rem;
-    border: 1px solid rgba(60, 60, 60, 0.25);
-    border-radius: 3px;
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-sm);
     background: var(--color-bg-white);
     color: var(--color-text);
+    transition: border-color var(--transition), box-shadow var(--transition);
   }
 
   .newsletter-form input:focus {
-    outline: 2px solid var(--color-accent);
-    outline-offset: 1px;
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px var(--color-accent-soft);
   }
 
   .newsletter-btn {
-    padding: 0.55rem 1.25rem;
+    padding: 0.6rem 1.4rem;
     font-size: 0.9rem;
-    border-radius: 3px;
+    border-radius: var(--radius-sm);
     white-space: nowrap;
   }
 

@@ -15,10 +15,25 @@ const upcoming = allEvents
 const allPosts = (await getCollection('blog'))
   .sort((a, b) => b.data.date.getTime() - a.data.date.getTime())
   .slice(0, 3);
+
+const heroVideoJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "O Magnum Mysterium — Tomás Luis de Victoria",
+  "description": "Alma Consort, directed by Luca Wetherall, performing Victoria's O Magnum Mysterium.",
+  "thumbnailUrl": "https://i.ytimg.com/vi/GjNdZVs7g68/maxresdefault.jpg",
+  "embedUrl": "https://www.youtube.com/embed/GjNdZVs7g68",
+  "contentUrl": "https://www.youtube.com/watch?v=GjNdZVs7g68",
+  "uploadDate": "2025-12-01",
+  "publisher": { "@id": new URL(base, Astro.site).href + '#org' }
+};
 ---
 <BaseLayout title="Alma Consort | Professional Chamber Choir in London" description="Alma Consort is a London-based professional chamber choir performing Renaissance polyphony, contemporary commissions, jazz, and popular repertoire, on the concert platform and in the recording studio.">
+  <link slot="head" rel="preconnect" href="https://i.ytimg.com" />
+  <link slot="head" rel="preconnect" href="https://www.youtube.com" />
   <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
   <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify(heroVideoJsonLd)} />
   <h1 class="visually-hidden">Alma Consort — Professional Chamber Choir, London</h1>
 
   <!-- Video hero at site-width -->
@@ -69,7 +84,7 @@ const allPosts = (await getCollection('blog'))
             })}
           </ul>
         ) : (
-          <p class="column-empty">No upcoming events at the moment. Check back soon.</p>
+          <p class="column-empty">Our next concert hasn't been announced yet. Subscribe to the newsletter to hear first.</p>
         )}
         <a href={`${base}events/`} class="column-link">View all events →</a>
       </div>
@@ -91,7 +106,7 @@ const allPosts = (await getCollection('blog'))
             })}
           </ul>
         ) : (
-          <p class="column-empty">No posts yet. Check back soon.</p>
+          <p class="column-empty">New writing on its way. Follow along via the newsletter or RSS.</p>
         )}
         <a href={`${base}blog/`} class="column-link">Read all news →</a>
       </div>

@@ -1,0 +1,16 @@
+{
+  "name": "Alma Consort",
+  "short_name": "Alma",
+  "description": "Professional chamber choir in London.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#f8f5ec",
+  "theme_color": "#f8f5ec",
+  "lang": "en-GB",
+  "icons": [
+    { "src": "/favicon.svg", "type": "image/svg+xml", "sizes": "any", "purpose": "any" },
+    { "src": "/favicon.png", "type": "image/png", "sizes": "64x64" },
+    { "src": "/logo.png", "type": "image/png", "sizes": "200x200", "purpose": "any" }
+  ]
+}

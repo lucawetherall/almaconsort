@@ -20,40 +20,72 @@ const dateStr = date.toLocaleDateString('en-GB', {
     <time datetime={date.toISOString().split('T')[0]}>{dateStr}</time>
     <h3>{title}</h3>
     <p>{description}</p>
+    <span class="blog-card-cta" aria-hidden="true">Read more →</span>
   </a>
 </article>
 
 <style>
   .blog-card {
-    padding: 1.5rem 0;
-    border-bottom: 1px solid rgba(60, 60, 60, 0.1);
+    border-bottom: 1px solid var(--color-border);
   }
 
   .blog-card-link {
+    display: block;
+    padding: 1.5rem 0.75rem;
+    margin: 0 -0.75rem;
     text-decoration: none;
     color: var(--color-text);
-    display: block;
+    border-radius: var(--radius-sm);
+    transition: background-color var(--transition);
+  }
+
+  .blog-card-link:hover {
+    background-color: var(--color-accent-soft);
+  }
+
+  .blog-card-link:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  time {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    font-variant: all-small-caps;
+    letter-spacing: 0.05em;
+  }
+
+  h3 {
+    font-size: 1.3rem;
+    margin: 0.35rem 0 0.5rem;
+    transition: color var(--transition);
   }
 
   .blog-card-link:hover h3 {
     color: var(--color-accent);
   }
 
-  time {
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
-
-  h3 {
-    font-size: 1.25rem;
-    margin: 0.35rem 0 0.5rem;
-    transition: color 0.2s;
-  }
-
   p {
     font-size: 0.95rem;
     line-height: 1.6;
     color: var(--color-text-muted);
-    margin: 0;
+    margin: 0 0 0.75rem;
+  }
+
+  .blog-card-cta {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    opacity: 0;
+    transform: translateX(-4px);
+    transition: opacity var(--transition), transform var(--transition);
+  }
+
+  .blog-card-link:hover .blog-card-cta,
+  .blog-card-link:focus-visible .blog-card-cta {
+    opacity: 1;
+    transform: translateX(0);
   }
 </style>

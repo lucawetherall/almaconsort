@@ -10,6 +10,7 @@ export default defineConfig({
       changefreq: 'weekly',
       priority: 0.7,
       lastmod: new Date(),
+      filter: (page) => !page.includes('/contact/thanks/'),
       serialize(item) {
         const url = item.url;
         if (new URL(url).pathname === '/') {
