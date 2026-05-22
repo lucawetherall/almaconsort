@@ -58,7 +58,7 @@ const socialLinks: { href: string; label: string; icon: string }[] = [
           </a>
         ))}
       </div>
-      <p class="footer-copy">Alma Consort &copy; {year}</p>
+      <p class="footer-copy">&copy; {year} Alma Consort</p>
     </div>
   </div>
   <div class="footer-stripe" aria-hidden="true">
@@ -72,11 +72,12 @@ const socialLinks: { href: string; label: string; icon: string }[] = [
 
 <style>
   .site-footer {
-    border-top: 1px solid rgba(60, 60, 60, 0.15);
+    border-top: 1px solid var(--color-border-strong);
+    margin-top: 1rem;
   }
 
   .footer-inner {
-    padding: 1.25rem 1.5rem;
+    padding: 1.75rem 1.5rem 1.25rem;
   }
 
   nav ul {
@@ -84,8 +85,8 @@ const socialLinks: { href: string; label: string; icon: string }[] = [
     flex-wrap: wrap;
     justify-content: center;
     list-style: none;
-    gap: 1.25rem;
-    margin-bottom: 0.75rem;
+    gap: 0.5rem 1.25rem;
+    margin-bottom: 1.25rem;
   }
 
   nav a {
@@ -93,6 +94,7 @@ const socialLinks: { href: string; label: string; icon: string }[] = [
     font-size: 0.95rem;
     text-decoration: none;
     color: var(--color-text);
+    transition: color var(--transition);
   }
 
   nav a:hover {
@@ -102,6 +104,7 @@ const socialLinks: { href: string; label: string; icon: string }[] = [
   nav a:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
+    border-radius: 2px;
   }
 
   .footer-bottom {
@@ -113,23 +116,37 @@ const socialLinks: { href: string; label: string; icon: string }[] = [
 
   .social-links {
     display: flex;
-    gap: 0.6rem;
+    gap: 0.25rem;
   }
 
   .social-links a {
     color: var(--color-text-muted);
     text-decoration: none;
-    transition: color 0.2s;
+    width: 32px;
+    height: 32px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: color var(--transition), background-color var(--transition);
   }
 
   .social-links a:hover {
     color: var(--color-accent);
+    background-color: var(--color-accent-soft);
+  }
+
+  .social-links a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
   }
 
   .footer-copy {
     font-size: 0.85rem;
     color: var(--color-text-muted);
     margin: 0;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
   }
 
   .footer-stripe {
@@ -149,12 +166,12 @@ const socialLinks: { href: string; label: string; icon: string }[] = [
 
   @media (max-width: 768px) {
     nav ul {
-      gap: 0.75rem 1rem;
+      gap: 0.5rem 1rem;
     }
 
     .footer-bottom {
       flex-direction: column;
-      gap: 0.5rem;
+      gap: 0.75rem;
     }
   }
 </style>

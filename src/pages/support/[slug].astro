@@ -30,10 +30,10 @@ const { Content } = await render(tier);
       {tier.data.stripeButtons.map((btn) => (
         <div class="pricing-card">
           <p class="pricing-tier-name">{btn.tierName}</p>
-          <div class="pricing-amount">
+          <p class="pricing-amount">
             <span class="pricing-price">{btn.price}</span>
-            <span class="pricing-period">per<br />month</span>
-          </div>
+            <span class="pricing-period">/ month</span>
+          </p>
           {btn.billingNote && <p class="pricing-billing-note">{btn.billingNote}</p>}
           <StripeButton buyButtonId={btn.id} />
         </div>
@@ -55,7 +55,7 @@ const { Content } = await render(tier);
 
   .tier-content :global(hr) {
     border: none;
-    border-top: 1px solid rgba(60, 60, 60, 0.15);
+    border-top: 1px solid var(--color-border-strong);
     margin: 2.5rem 0;
   }
 
@@ -67,47 +67,56 @@ const { Content } = await render(tier);
   }
 
   .pricing-card {
-    border: 1px solid #d4d0c8;
-    border-radius: 6px;
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border-strong);
+    border-radius: var(--radius-md);
     padding: 1.5rem 1rem;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.5rem;
+    transition: border-color var(--transition), box-shadow var(--transition), transform var(--transition);
+  }
+
+  .pricing-card:hover {
+    border-color: var(--color-accent);
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-2px);
   }
 
   .pricing-tier-name {
-    font-size: 1rem;
-    font-weight: 600;
-    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    color: var(--color-text-muted);
+    margin-bottom: 0.25rem;
   }
 
   .pricing-amount {
     display: flex;
-    align-items: flex-start;
+    align-items: baseline;
     justify-content: center;
     gap: 0.2rem;
-    margin-bottom: 0.25rem;
+    margin: 0;
   }
 
   .pricing-price {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 700;
     line-height: 1;
+    color: var(--color-heading);
   }
 
   .pricing-period {
-    font-size: 0.8rem;
-    line-height: 1.2;
+    font-size: 0.95rem;
     color: var(--color-text-muted);
-    padding-top: 0.2rem;
   }
 
   .pricing-billing-note {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: var(--color-text-muted);
-    margin-bottom: 0.5rem;
+    margin: 0 0 0.25rem;
   }
 
   .back-link {

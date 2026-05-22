@@ -6,17 +6,18 @@ interface Props {
   cardImage?: string;
 }
 
-const { title, slug, tagline, cardImage } = Astro.props;
+const { title, slug, cardImage } = Astro.props;
 ---
-<a href={`${import.meta.env.BASE_URL}support/${slug}/`} class="tier-card">
+<a href={`${import.meta.env.BASE_URL}support/${slug}/`} class="tier-card" aria-label={`Become a ${title}`}>
   {cardImage ? (
     <img src={cardImage} alt="" class="tier-card-bg" loading="lazy" />
   ) : (
-    <div class="tier-card-bg tier-card-placeholder"></div>
+    <div class="tier-card-bg tier-card-placeholder" aria-hidden="true"></div>
   )}
   <div class="tier-card-overlay">
-    <h3>Become a {title}</h3>
-    <p>Find out more here</p>
+    <p class="tier-eyebrow">Become a</p>
+    <h3>{title}</h3>
+    <p class="tier-cta">Learn more <span aria-hidden="true">→</span></p>
   </div>
 </a>
 
@@ -25,10 +26,22 @@ const { title, slug, tagline, cardImage } = Astro.props;
     position: relative;
     display: block;
     overflow: hidden;
-    border-radius: 4px;
+    border-radius: var(--radius-md);
     aspect-ratio: 4 / 3;
     text-decoration: none;
-    color: white;
+    color: #fff;
+    box-shadow: var(--shadow-card);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+
+  .tier-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  .tier-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
   }
 
   .tier-card-bg {
@@ -40,7 +53,9 @@ const { title, slug, tagline, cardImage } = Astro.props;
   }
 
   .tier-card-placeholder {
-    background: linear-gradient(135deg, #5a6e8a 0%, #3c4f6e 100%);
+    background:
+      radial-gradient(120% 90% at 0% 0%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 60%),
+      linear-gradient(135deg, #c4621c 0%, #8a3d10 100%);
   }
 
   .tier-card-overlay {
@@ -50,29 +65,48 @@ const { title, slug, tagline, cardImage } = Astro.props;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: rgba(0, 0, 0, 0.45);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.18) 0%, rgba(0, 0, 0, 0.55) 100%);
     text-align: center;
     padding: 1.5rem;
-    transition: background 0.3s;
+    transition: background var(--transition);
   }
 
   .tier-card:hover .tier-card-overlay {
-    background: rgba(0, 0, 0, 0.55);
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.25) 0%, rgba(0, 0, 0, 0.6) 100%);
+  }
+
+  .tier-eyebrow {
+    font-family: var(--font-serif);
+    font-size: 0.8rem;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: rgba(255, 255, 255, 0.85);
+    margin: 0 0 0.25rem;
   }
 
   .tier-card-overlay h3 {
     font-family: var(--font-serif);
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     font-variant: small-caps;
     letter-spacing: 0.05em;
-    color: white;
-    margin-bottom: 0.5rem;
+    color: #fff;
+    margin-bottom: 0.75rem;
+    line-height: 1.1;
   }
 
-  .tier-card-overlay p {
+  .tier-cta {
     font-family: var(--font-serif);
-    font-size: 1rem;
-    text-decoration: underline;
+    font-size: 0.95rem;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: #fff;
     margin: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    padding-bottom: 0.1rem;
+    transition: border-color var(--transition);
+  }
+
+  .tier-card:hover .tier-cta {
+    border-bottom-color: #fff;
   }
 </style>

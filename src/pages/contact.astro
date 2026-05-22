@@ -1,10 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactForm from '../components/ContactForm.astro';
-
-const success = Astro.url.searchParams.get('success') === 'true';
 ---
-<BaseLayout title="Contact the Alma Consort" description="Contact Alma Consort for recording projects, concert bookings, wedding music, and general enquiries.">
+<BaseLayout
+  title="Contact the Alma Consort"
+  description="Contact Alma Consort for recording projects, concert bookings, wedding music, and general enquiries."
+>
   <div class="container">
     <h1>Contact</h1>
 
@@ -12,14 +13,7 @@ const success = Astro.url.searchParams.get('success') === 'true';
       We welcome enquiries about recording projects, concert collaborations, and other ways we might work together. Use the form below and we'll reply soon.
     </p>
 
-    {success ? (
-      <div class="success-message">
-        <p><strong>Thank you!</strong> Your message has been sent. We will get back to you as soon as possible.</p>
-        <p><a href={`${import.meta.env.BASE_URL}contact/`}>Send another message</a></p>
-      </div>
-    ) : (
-      <ContactForm />
-    )}
+    <ContactForm />
   </div>
 </BaseLayout>
 
@@ -28,13 +22,5 @@ const success = Astro.url.searchParams.get('success') === 'true';
     margin-bottom: 2rem;
     font-size: 1.05rem;
     line-height: 1.7;
-  }
-
-  .success-message {
-    padding: 2rem;
-    background: var(--color-bg-white);
-    border: 1px solid rgba(60, 60, 60, 0.1);
-    border-radius: 4px;
-    text-align: center;
   }
 </style>

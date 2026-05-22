@@ -9,12 +9,18 @@ const segments = relativePath ? relativePath.split('/') : [];
 // Don't render on homepage
 const isHome = segments.length === 0;
 
+// Display-name overrides for URL slugs whose human label differs from title-cased slug
+const labelOverrides: Record<string, string> = {
+  blog: 'News',
+  thanks: 'Thank You',
+};
+
 // Build breadcrumb items
 const crumbs = [{ label: 'Home', href: base }];
 let currentPath = base;
 for (const segment of segments) {
   currentPath += segment + '/';
-  const label = segment
+  const label = labelOverrides[segment] ?? segment
     .replace(/-/g, ' ')
     .replace(/\b\w/g, (c) => c.toUpperCase());
   crumbs.push({ label, href: currentPath });
@@ -51,7 +57,7 @@ const breadcrumbJsonLd = {
 
 <style>
   .breadcrumbs {
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
   .breadcrumbs ol {
@@ -60,18 +66,21 @@ const breadcrumbJsonLd = {
     list-style: none;
     gap: 0.25rem;
     font-size: 0.85rem;
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
     color: var(--color-text-muted);
   }
 
   .breadcrumbs li:not(:last-child)::after {
     content: '/';
-    margin-left: 0.25rem;
-    color: var(--color-text-muted);
+    margin-left: 0.35rem;
+    color: var(--color-border-strong);
   }
 
   .breadcrumbs a {
     color: var(--color-text-muted);
     text-decoration: none;
+    transition: color var(--transition);
   }
 
   .breadcrumbs a:hover {

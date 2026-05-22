@@ -17,29 +17,33 @@ const navLinks = [
 <header class="site-header">
   <div class="site-container header-inner">
     <a href={base} class="header-brand" aria-label="Alma Consort home">
-      <img src={`${base}logo.png`} alt="" class="brand-logo" aria-hidden="true" />
+      <img src={`${base}logo.png`} alt="" class="brand-logo" aria-hidden="true" width="48" height="48" />
       <span class="brand-name">Alma Consort</span>
     </a>
 
     <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-hidden="true" />
-    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu">
+    <label for="nav-toggle" class="nav-toggle-label" aria-label="Toggle navigation menu" aria-controls="primary-navigation">
       <span></span>
       <span></span>
       <span></span>
     </label>
 
-    <nav aria-label="Main navigation" class="main-nav">
+    <nav id="primary-navigation" aria-label="Main navigation" class="main-nav">
       <ul>
-        {navLinks.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class:list={[{ active: currentPath.startsWith(link.href) }]}
-            >
-              {link.label}
-            </a>
-          </li>
-        ))}
+        {navLinks.map((link) => {
+          const isActive = link.href === base ? currentPath === base : currentPath.startsWith(link.href);
+          return (
+            <li>
+              <a
+                href={link.href}
+                class:list={[{ active: isActive }]}
+                aria-current={isActive ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </nav>
   </div>
@@ -47,22 +51,26 @@ const navLinks = [
 
 <style>
   .site-header {
-    border-bottom: 1px solid rgba(60, 60, 60, 0.15);
+    border-bottom: 1px solid var(--color-border-strong);
     padding: 1rem 0;
+    position: relative;
+    background-color: var(--color-bg);
   }
 
   .header-inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1.5rem;
   }
 
   .header-brand {
     display: flex;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.85rem;
     text-decoration: none;
     color: var(--color-heading);
+    transition: color var(--transition);
   }
 
   .header-brand:hover {
@@ -73,8 +81,6 @@ const navLinks = [
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    border: none;
-    outline: none;
   }
 
   .brand-name {
@@ -83,22 +89,38 @@ const navLinks = [
     font-variant: small-caps;
     letter-spacing: 0.08em;
     font-weight: 600;
+    line-height: 1;
   }
 
   /* Nav */
   .main-nav ul {
     display: flex;
     list-style: none;
-    gap: 2rem;
+    gap: 1.85rem;
   }
 
   .main-nav a {
+    position: relative;
     font-family: var(--font-serif);
     font-size: 1.1rem;
     text-decoration: none;
     color: var(--color-text);
-    transition: color 0.2s;
+    transition: color var(--transition);
     white-space: nowrap;
+    padding-bottom: 0.15rem;
+  }
+
+  .main-nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--color-accent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform var(--transition);
   }
 
   .main-nav a:hover,
@@ -106,9 +128,15 @@ const navLinks = [
     color: var(--color-accent);
   }
 
+  .main-nav a.active::after,
+  .main-nav a:hover::after {
+    transform: scaleX(1);
+  }
+
   .main-nav a:focus-visible {
     outline: 2px solid var(--color-accent);
-    outline-offset: 2px;
+    outline-offset: 3px;
+    border-radius: 2px;
   }
 
   /* Mobile toggle */
@@ -129,7 +157,8 @@ const navLinks = [
     width: 24px;
     height: 2px;
     background-color: var(--color-text);
-    transition: transform 0.3s, opacity 0.3s;
+    transition: transform var(--transition), opacity var(--transition);
+    transform-origin: center;
   }
 
   :global(.hamburger-mode) .nav-toggle-label {
@@ -137,32 +166,39 @@ const navLinks = [
   }
 
   :global(.hamburger-mode) .main-nav {
-    display: none;
     position: absolute;
     top: 100%;
     left: 0;
     right: 0;
     background: var(--color-bg);
-    border-bottom: 1px solid rgba(60, 60, 60, 0.15);
+    border-bottom: 1px solid var(--color-border-strong);
     z-index: 100;
-  }
-
-  :global(.hamburger-mode) .site-header {
-    position: relative;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height var(--transition-slow) ease;
   }
 
   :global(.hamburger-mode) .main-nav ul {
     flex-direction: column;
     gap: 0;
-    padding: 1rem 1.5rem;
+    padding: 0.5rem 1.5rem 1rem;
   }
 
   :global(.hamburger-mode) .main-nav li {
     padding: 0.5rem 0;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  :global(.hamburger-mode) .main-nav li:last-child {
+    border-bottom: none;
+  }
+
+  :global(.hamburger-mode) .main-nav a::after {
+    display: none;
   }
 
   :global(.hamburger-mode) .nav-toggle:checked ~ .main-nav {
-    display: block;
+    max-height: 32rem;
   }
 
   :global(.hamburger-mode) .nav-toggle:checked ~ .nav-toggle-label span:nth-child(1) {
@@ -190,11 +226,10 @@ const navLinks = [
     // Temporarily show as inline nav to measure
     header.classList.remove('hamburger-mode');
 
-    const brandWidth = brand.offsetWidth;
-    const toggleWidth = toggleLabel.offsetWidth || 40; // fallback for when hidden
-    const headerPadding = 32; // approximate horizontal padding
-    const gap = 32; // space between brand and nav
-    const availableWidth = headerInner.clientWidth - brandWidth - gap - headerPadding;
+    const brandWidth = (brand as HTMLElement).offsetWidth;
+    const headerPadding = 48; // horizontal padding
+    const gap = 24; // space between brand and nav
+    const availableWidth = (headerInner as HTMLElement).clientWidth - brandWidth - gap - headerPadding;
 
     const navUl = nav.querySelector('ul');
     if (!navUl) return;
@@ -204,7 +239,7 @@ const navLinks = [
     const items = navUl.querySelectorAll('li');
     const navGap = parseFloat(getComputedStyle(navUl).gap) || 32;
     items.forEach((item, i) => {
-      navNeeded += item.scrollWidth;
+      navNeeded += (item as HTMLElement).scrollWidth;
       if (i < items.length - 1) navNeeded += navGap;
     });
 
@@ -216,4 +251,12 @@ const navLinks = [
   // Run on load and resize
   checkNavFit();
   window.addEventListener('resize', checkNavFit);
+
+  // Close mobile nav when a link is followed
+  document.querySelectorAll('.main-nav a').forEach((a) => {
+    a.addEventListener('click', () => {
+      const toggle = document.getElementById('nav-toggle') as HTMLInputElement | null;
+      if (toggle && toggle.checked) toggle.checked = false;
+    });
+  });
 </script>

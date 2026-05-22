@@ -1,0 +1,65 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Divider from '../../components/Divider.astro';
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout
+  title="Thank you | Alma Consort"
+  description="Your message has been sent. We aim to reply within two working days."
+  noindex={true}
+>
+  <div class="container thanks">
+    <p class="thanks-eyebrow">Message sent</p>
+    <h1>Thank you</h1>
+    <p class="thanks-body">Your message is on its way. We aim to reply within two working days.</p>
+    <Divider />
+    <p class="thanks-nav">
+      <a href={`${base}contact/`}>Send another message</a>
+      <span class="thanks-sep" aria-hidden="true">·</span>
+      <a href={base}>Return home</a>
+    </p>
+  </div>
+</BaseLayout>
+
+<style>
+  .thanks {
+    text-align: center;
+    padding: 3rem 0;
+  }
+
+  .thanks-eyebrow {
+    font-size: 0.85rem;
+    font-variant: small-caps;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .thanks-body {
+    font-size: 1.1rem;
+    max-width: 32rem;
+    margin: 0 auto 0.5rem;
+    color: var(--color-text-muted);
+  }
+
+  .thanks-nav {
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+  }
+
+  .thanks-nav a {
+    color: var(--color-text);
+    text-decoration: none;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+  }
+
+  .thanks-nav a:hover {
+    color: var(--color-accent);
+  }
+
+  .thanks-sep {
+    margin: 0 0.65rem;
+    color: var(--color-border-strong);
+  }
+</style>
