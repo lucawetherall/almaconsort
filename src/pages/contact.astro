@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import TitleBlock from '../components/TitleBlock.astro';
 import ContactForm from '../components/ContactForm.astro';
 ---
 <BaseLayout
@@ -7,20 +8,11 @@ import ContactForm from '../components/ContactForm.astro';
   description="Contact Alma Consort for recording projects, concert bookings, wedding music, and general enquiries."
 >
   <div class="container">
-    <h1>Contact</h1>
-
-    <p class="contact-intro">
-      We welcome enquiries about recording projects, concert collaborations, and other ways we might work together. Use the form below and we'll reply soon.
-    </p>
+    <TitleBlock
+      title="Contact"
+      pitch={`We welcome enquiries about <span class="accent">recording projects, concert collaborations</span>, and other ways we might work together.`}
+    />
 
     <ContactForm />
   </div>
 </BaseLayout>
-
-<style>
-  .contact-intro {
-    margin-bottom: 2rem;
-    font-size: 1.05rem;
-    line-height: 1.7;
-  }
-</style>
