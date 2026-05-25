@@ -1,0 +1,146 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  date: Date;
+  venue: { name: string; address?: string };
+  startTime?: string;
+  endTime?: string;
+  description: string;
+  priceFrom?: string;
+  past?: boolean;
+}
+
+const {
+  slug, title, date, venue, startTime, endTime, description, priceFrom, past = false,
+} = Astro.props;
+
+const monthsLong = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const day = date.getDate();
+const month = monthsLong[date.getMonth()];
+const year = date.getFullYear();
+const timeRange = startTime && endTime ? `${startTime} – ${endTime}` : startTime || '';
+
+const baseUrl = import.meta.env.BASE_URL;
+const href = `${baseUrl}events/${slug}/`;
+const ctaLabel = past ? 'Read more →' : 'Book →';
+---
+<a class={`event-row${past ? ' past' : ''}`} href={href}>
+  <div class="row-date">
+    <div class="day">{day}</div>
+    <span class="mo">{month}</span>
+    <span class="yr">{year}</span>
+  </div>
+  <div class="row-title">
+    <h3 set:html={title} />
+    <p class="excerpt">{description}</p>
+  </div>
+  <div class="row-venue">
+    <div class="name">{venue.name}</div>
+    {venue.address && <div class="addr">{venue.address}</div>}
+    {timeRange && <span class="time">{timeRange}</span>}
+    {priceFrom && <span class="price">{priceFrom}</span>}
+  </div>
+  <span class="row-cta">{ctaLabel}</span>
+</a>
+
+<style>
+  .event-row {
+    display: grid;
+    grid-template-columns: 92px 1.4fr 1fr auto;
+    gap: 28px;
+    align-items: center;
+    padding: 22px 8px;
+    border-top: 1px solid var(--color-border-strong);
+    text-decoration: none;
+    color: inherit;
+    transition: background var(--transition);
+  }
+  .event-row:last-child { border-bottom: 1px solid var(--color-border-strong); }
+  .event-row:hover { background: var(--color-claret-soft); }
+  .event-row:focus-visible {
+    outline: 2px solid var(--color-claret);
+    outline-offset: 2px;
+  }
+  .event-row.past { opacity: 0.78; }
+  .event-row.past .row-cta { color: var(--color-text-soft); border-color: rgba(60,40,20,0.3); }
+  .event-row.past .row-date .mo { color: var(--color-text-soft); }
+
+  .row-date {
+    font-family: var(--font-serif);
+    font-variant: small-caps;
+    letter-spacing: 0.05em;
+    text-align: left;
+  }
+  .row-date .day {
+    font-size: 2rem;
+    line-height: 1;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+  .row-date .mo {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-top: 4px;
+  }
+  .row-date .yr {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    color: var(--color-text-soft);
+    letter-spacing: 0.1em;
+  }
+  .row-title h3 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    line-height: 1.2;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: var(--color-heading);
+  }
+  .row-title .excerpt {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    margin: 0;
+    max-width: 42ch;
+  }
+  .row-venue {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: var(--color-text);
+    line-height: 1.55;
+  }
+  .row-venue .name { font-weight: 500; }
+  .row-venue .addr { color: var(--color-text-soft); }
+  .row-venue .time,
+  .row-venue .price { color: var(--color-claret); display: block; margin-top: 4px; }
+  .row-cta {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+    white-space: nowrap;
+    border: 1px solid var(--color-claret);
+    padding: 9px 14px;
+    transition: background var(--transition), color var(--transition);
+  }
+  .event-row:hover .row-cta { background: var(--color-claret); color: var(--color-bg); }
+
+  @media (max-width: 768px) {
+    .event-row {
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 18px 4px;
+    }
+    .row-date { display: flex; align-items: baseline; gap: 10px; }
+    .row-date .mo { display: inline-block; margin-top: 0; }
+    .row-cta { justify-self: start; margin-top: 6px; }
+  }
+</style>
