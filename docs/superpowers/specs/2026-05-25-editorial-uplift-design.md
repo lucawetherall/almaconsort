@@ -62,9 +62,25 @@ The prayer-book / parchment voice stays. The change is in the components, surfac
 - Page-specific copy changes beyond the small CTA labels shown in mockups
 - Adding individual recording detail pages (recordings link to YouTube — see §"Recording tile destination")
 
+## Brand constants
+
+These are real-world identifiers referenced throughout the spec and used by components / collections at build time. They should be declared once and imported, not hardcoded per file.
+
+```ts
+// src/lib/constants.ts (new file)
+export const YOUTUBE_CHANNEL_URL = 'https://www.youtube.com/@almaconsort';
+export const YOUTUBE_CHANNEL_HANDLE = '@almaconsort';
+export const YOUTUBE_THUMB = (id: string) => `https://i.ytimg.com/vi/${id}/maxresdefault.jpg`;
+export const YOUTUBE_WATCH = (id: string) => `https://www.youtube.com/watch?v=${id}`;
+```
+
+All recordings shown on the site originate from this single channel. The Featured Recordings collection seed data is sourced from this channel's published videos; the recording-page section head and the homepage video-hero caption both link to it (or to internal recording surfaces — see §"Recording page" and §"FeaturedRecordings").
+
 ## Visual direction
 
 Editorial direction B from brainstorming — quiet editorial, photography-friendly, parchment palette with deepened rust and claret accents. No ink-black surfaces or full-bleed dark bands. Reads as a serious arts publication, not a parish bulletin.
+
+**No scroll-triggered animations.** Interactions are limited to hover/focus on interactive elements (using `--transition`) and the existing `prefers-reduced-motion` handling in `global.css`. The page does not animate as you scroll; the typography and layout do the work.
 
 ## Design tokens
 
@@ -166,6 +182,15 @@ In any Cormorant heading, an emphasised phrase is wrapped in `<span class="accen
 ```
 
 Always use this span (not `<em>`). The frame template / global styles do not override class-based rules but may override `<em>`. This rule was validated during brainstorming.
+
+**Where the accent span is allowed:**
+- Headings (`h1`, `h2`, `h3`, including those rendered from frontmatter `title` strings — `set:html` is used to render the markup)
+- The TitleBlock `pitch` prop
+- The EmptyState `title` prop
+- Tile `title` props
+- Programme work titles
+
+**Not allowed inside Markdown body content.** Blog post bodies, programme notes, and prose paragraphs should use normal `*italic*` Markdown emphasis (rendered as `<em>`). The accent span is a heading/label primitive, not a body-text primitive.
 
 ### Drop-cap
 
@@ -328,7 +353,7 @@ Props:
 - `date: Date`
 - `venue: { name: string, address?: string }`
 - `startTime?: string`
-- `priceFrom?: string` (formatted price string, e.g. `"From £18"`)
+- `priceFrom?: string` (formatted, author-controlled string. Examples: `"From £18"`, `"Pay-what-you-can"`, `"Free admission"`, `"£12 / £8 concessions"`. The component renders it verbatim with no parsing or currency logic.)
 - `photo?: ImageMetadata` (Astro Image asset, optional)
 - `photoCaption?: string` (defaults to `venue.name` if photo is set and caption is omitted)
 - `composers?: string[]` (used in no-photo plate centre)
@@ -584,7 +609,9 @@ Two-column layout: left column has small-caps Cormorant heading + italic lede. R
 
 ### FeaturedRecordings (`src/components/FeaturedRecordings.astro`)
 
-Used on the homepage. Renders a `SectionHead` ("Featured Recordings" + "All recordings →" link pointing to `/recording/`) and three `RecordingTile`s. Always rendered (never empty — if the data source somehow has zero items, the entire section is omitted, but the spec assumes at least three are present). The video-hero caption's "All recordings →" link points to the same `/recording/` URL for consistency.
+Used on the homepage. Renders a `SectionHead` ("Featured Recordings" + "All recordings →" link pointing to `/recording/`) and exactly three `RecordingTile`s. Always rendered (never empty — if the data source somehow has zero items, the entire section is omitted, but the spec assumes at least three are present). The video-hero caption's "All recordings →" link points to the same `/recording/` URL for consistency.
+
+**Source of truth:** the `featuredRecordings` collection. All entries reference videos from `YOUTUBE_CHANNEL_URL`. The collection may hold more than three entries; the homepage picks the three lowest `order` values (or the first three by file order if `order` is omitted). The recording page (see below) shows up to six.
 
 **Data source:** new content collection `featuredRecordings` at `src/content/featuredRecordings/`. Each entry is a markdown file (or JSON) with frontmatter:
 ```yaml
@@ -635,7 +662,7 @@ The homepage selects the three lowest `order` values, or first three by file ord
 1. TitleBlock — `title="Recording"`, `pitch="Studio sessions for composers, producers, and labels — with <span class=\"accent\">in-house audio and video</span>, captured by a team that performs the music too."`
 2. **Capabilities** inline three-column row (Sessions · Production · Releases)
 3. OrnamentRule
-4. **Selected Recordings**: SectionHead + 2×3 RecordingTile grid sourced from `featuredRecordings` collection (limit 6)
+4. **Selected Recordings**: SectionHead "Selected Recordings" with right-link "YouTube channel →" pointing to `YOUTUBE_CHANNEL_URL` (opens in new tab, `rel="noopener"`). Below it: 2×3 RecordingTile grid sourced from the `featuredRecordings` collection (limit 6, sorted by `order` ascending then by file order)
 5. **How a session works**: process two-column block
 6. EnquiryBand
 
@@ -643,9 +670,9 @@ The homepage selects the three lowest `order` values, or first three by file ord
 
 1. TitleBlock — `title="About"`, `pitch="A professional chamber choir of young London singers — performing <span class=\"accent\">classical, contemporary, jazz, and popular repertoire</span> on the concert platform and in the recording studio."`
 2. Drop-cap intro (existing copy)
-3. Ensemble paragraph (no second drop cap)
+3. Ensemble paragraph — flows directly under the intro **without a "The Ensemble" h2 heading**. The current site's "The Ensemble" h2 is dropped; the paragraph reads as a continuation of the intro, which is more editorial
 4. OrnamentRule
-5. **Directors** section: SectionHead "Directors", two BioPlates side-by-side. Director photos are imported from `src/assets/directors/{slug}.jpg` if present; otherwise the no-photo monogram state renders. Pass `roleTags`, `name`, and `bio` props.
+5. **Directors** section: SectionHead "Directors", two BioPlates side-by-side. Director photos are imported from `src/assets/directors/{slug}.jpg` if present; otherwise the no-photo monogram state renders. Pass `roleTags`, `name`, and `bio` props
 6. ScholarsCallout (full variant)
 
 ### Scholars (`src/pages/scholars.astro`)
@@ -769,6 +796,16 @@ Deprecated (kept in place for one release cycle with a `<!-- @deprecated -->` HT
   - Bio plate: 4:5 portrait, head-and-shoulders, focal point near top third, minimum 800×1000 px
 - All photo plates use the legibility-only bottom-darkening overlay; **no decorative gradients exist anywhere in the design system**
 
+### Image processing
+
+Concert and director photos go through Astro's `astro:assets` `<Image />` component (or the underlying `getImage()` helper inside background-image CSS-via-template-literal — implementer's choice). Recommended responsive sizing:
+
+- Concert tile: `widths={[400, 600, 900]}` with `sizes="(max-width: 768px) 100vw, 33vw"`, format `webp` with JPEG fallback
+- Bio plate: `widths={[400, 600, 800]}` with `sizes="(max-width: 768px) 100vw, 50vw"`, format `webp`
+- Recording tile: not processed locally — pulled directly from YouTube CDN at native size
+
+YouTube CDN thumbnails are not subject to Astro Image processing; the spec accepts the bandwidth trade-off because the imagery would otherwise need to be re-fetched and re-published every time a video's metadata changes.
+
 ## Mobile rhythm
 
 - Single breakpoint at `768px` (token: `--bp-md`)
@@ -781,6 +818,10 @@ Deprecated (kept in place for one release cycle with a `<!-- @deprecated -->` HT
 - Drop cap reduces to 3rem
 - Header collapses to existing hamburger pattern at the same overflow breakpoint (logic in `Header.astro` unchanged)
 - EmptyState stacks text and form
+- **EventRow** restructures: instead of the 4-column grid, the row becomes a stacked block — date strip (Cormorant day + Inter month/year inline) above title, title above venue line, with the CTA aligned right at the bottom. Borders and hover behaviour preserved
+- **ConcertCard** (single concert sidebar) moves below the hero content as a full-width block; the dashed key/value rows remain
+- **Single concert hero** stacks: hero text → ConcertCard → ProgrammeList → programme note
+- **EnquiryBand** and **ScholarsCallout** action rows wrap; primary button retains width, secondary stacks below
 
 ## Accessibility
 
@@ -844,6 +885,53 @@ The writing-plans skill will sequence the work; for orientation:
 - **Tile component complexity.** Two distinct visual states per tile (photo / no-photo) means more CSS. Mitigated by sharing the title, meta, and outer-tile structure across both states; only the plate interior differs
 - **Photo asset readiness.** Director and event photos are optional. Until they exist, the no-photo states do the work — designed to be presentable on their own merits, not as obvious fallbacks
 - **YouTube CDN dependency.** Recording tile backgrounds depend on `i.ytimg.com`. If YouTube changes thumbnail URL format, the tiles fail gracefully (plate shows the parchment background colour through the missing image — play button still renders)
+
+## Verification checklist
+
+Before the implementation is considered done, every item below should be confirmed.
+
+**Tokens & build**
+- [ ] `grep -rn "#c4621c\|#3c3c3c\|#f8f5ec" src/` returns zero hits in component files (only `global.css` may contain colour literals)
+- [ ] `grep -rn "Cormorant Garamond" src/` matches only in `global.css`
+- [ ] `npm run build` produces no warnings; the build artefact contains the Inter font reference
+- [ ] No new runtime dependencies in `package.json`
+
+**Visual consistency**
+- [ ] Every interior page (About, Recording, Events, Scholars, Work With Us, Contact, blog index, single blog post, 404) renders the TitleBlock at the top
+- [ ] Every page has a single `<h1>`; no page has two
+- [ ] Every CTA button uses `.btn-primary` or `.btn-secondary`; no underline-only "ghost" buttons remain
+- [ ] The phrase `text-decoration: underline` does not appear in any new component CSS (only in the global link rule and where intentional)
+
+**Components**
+- [ ] ConcertTile renders correctly in both photo and no-photo states (tested with an event that has `photo` set, one with `composers`, one with `altTitle`, and one with neither — confirming the "rules only, no centre text" fallback)
+- [ ] RecordingTile renders all three Featured Recordings on the homepage and six on the recording page
+- [ ] BioPlate renders the photo state when `src/assets/directors/{slug}.jpg` exists and the no-photo monogram state when it does not, without an error
+- [ ] EmptyState renders both with and without the newsletter form (`newsletter={true|false}` prop)
+- [ ] Homepage renders correctly with **zero** upcoming events (EmptyState shows, Featured Recordings still present)
+- [ ] Single concert page renders the ConcertCard sidebar on desktop and stacked on mobile
+
+**Brand constants**
+- [ ] `src/lib/constants.ts` is the only place `https://www.youtube.com/@almaconsort` appears in source; every component imports the constant
+- [ ] Recording-tile `href` defaults route through `YOUTUBE_WATCH(youtubeId)`; targets set to open in a new tab with `rel="noopener"`
+- [ ] "YouTube channel →" link on the Recording page points to `YOUTUBE_CHANNEL_URL`
+
+**Accessibility**
+- [ ] Every interactive element shows a visible focus ring on Tab
+- [ ] Skip-to-content link still works; nav is keyboard-navigable
+- [ ] Lighthouse a11y score ≥ 95 on homepage, Recording, About, Events
+- [ ] Inverted (cream-on-dark) text on photo plates meets WCAG AA at the sizes used (manually verified with a contrast tool)
+- [ ] Director monogram is `aria-hidden`; screen reader announces director's real name
+
+**Performance**
+- [ ] Lighthouse performance ≥ 90 on homepage and Recording page
+- [ ] No layout shift from font swap (Cormorant + Inter both load with `display=swap`; verified visually)
+- [ ] Recording tile thumbnails lazy-load (`loading="lazy"` on the background image's underlying `<img>`, or on inline `<img>` if used)
+
+**Print**
+- [ ] Homepage and single concert page produce a clean printed page (no overlays, no transient prompts, no buttons)
+
+**Migration**
+- [ ] `Divider.astro`, `EventCard.astro`, `BioCard.astro`, `FeatureCard.astro` carry the `@deprecated` comment and are not imported by any active file
 
 ## Open questions
 
