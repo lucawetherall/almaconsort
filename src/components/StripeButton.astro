@@ -6,8 +6,23 @@ interface Props {
 const { buyButtonId } = Astro.props;
 const publishableKey = 'pk_live_51SL6CLFZ0c2qbCCWaBKXzJKcGZmTMskjcFySP5b8kyMpU0XekqztgnG8cuWEC8X6YdW7ybkO737ONmPTIVxHGVKH00pYN6Z9in';
 ---
-<stripe-buy-button
-  buy-button-id={buyButtonId}
-  publishable-key={publishableKey}
->
-</stripe-buy-button>
+<div class="stripe-button-wrap">
+  <stripe-buy-button
+    buy-button-id={buyButtonId}
+    publishable-key={publishableKey}
+  >
+  </stripe-buy-button>
+</div>
+
+<style>
+  .stripe-button-wrap {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .stripe-button-wrap :global(stripe-buy-button) {
+    width: 100%;
+    display: block;
+  }
+</style>

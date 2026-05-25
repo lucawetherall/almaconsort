@@ -12,49 +12,187 @@ const tiers = (await getCollection('supportTiers')).sort((a, b) => a.data.order 
   includeStripe={true}
 >
   <div class="container">
-    <h1>Support</h1>
+    <header class="support-header">
+      <p class="eyebrow">Support</p>
+      <h1>Stand with the Alma Consort</h1>
+      <p class="lede">
+        The Alma Consort is independent and runs on the support of its donors. We're fundraising for the
+        <strong>Alma Scholars</strong> scheme, which provides mentoring for young singers at the start of their careers.
+      </p>
+    </header>
 
-    <div class="support-layout">
-      <div class="support-text">
-        <h2>Become a Friend, Partner, or Patron of Alma Consort</h2>
-        <p>
-          The Alma Consort is independent and runs on the support of its donors. We're fundraising for the Alma Scholars scheme, which provides mentoring for young singers.
-        </p>
-        <p>
-          Make a one-off gift below, or set up a recurring donation as a Friend, Partner, or Patron.
-        </p>
+    <section class="funds-grid" aria-label="What your support funds">
+      <div class="funds-item">
+        <span class="funds-numeral" aria-hidden="true">I</span>
+        <h3>Scholars mentoring</h3>
+        <p>Vocal coaching, masterclasses, and one-to-one mentoring for young singers at the start of their careers.</p>
       </div>
+      <div class="funds-item">
+        <span class="funds-numeral" aria-hidden="true">II</span>
+        <h3>Studio recordings</h3>
+        <p>Producing and releasing recordings of the choir's work so the music reaches audiences far beyond the concert hall.</p>
+      </div>
+      <div class="funds-item">
+        <span class="funds-numeral" aria-hidden="true">III</span>
+        <h3>New commissions</h3>
+        <p>Commissioning composers, hiring orchestras, and bringing ambitious concert programmes to life across London.</p>
+      </div>
+    </section>
 
-      <div class="support-donate">
+    <section class="oneoff-card" aria-labelledby="oneoff-heading">
+      <div class="oneoff-text">
+        <p class="eyebrow">One-off gift</p>
+        <h2 id="oneoff-heading">Make a single donation</h2>
+        <p>Every gift, whatever the size, goes directly to the choir and the Scholars programme.</p>
+      </div>
+      <div class="oneoff-action">
         <StripeButton buyButtonId="buy_btn_1SVCHuFZ0c2qbCCWyUgXt6Oa" />
       </div>
-    </div>
+    </section>
 
-    <div class="tier-cards">
-      {tiers.map((tier) => (
-        <SupportTierCard
-          title={tier.data.title}
-          slug={tier.data.slug}
-          tagline={tier.data.tagline}
-          cardImage={tier.data.cardImage}
-        />
-      ))}
-    </div>
+    <section aria-labelledby="recurring-heading">
+      <div class="section-heading">
+        <h2 id="recurring-heading">Or join us as a recurring supporter</h2>
+        <p>Three ways to give regularly — each tier gets you closer to the music.</p>
+      </div>
+
+      <div class="tier-cards">
+        {tiers.map((tier) => (
+          <SupportTierCard
+            title={tier.data.title}
+            slug={tier.data.slug}
+            tagline={tier.data.tagline}
+            cardImage={tier.data.cardImage}
+          />
+        ))}
+      </div>
+    </section>
   </div>
 </BaseLayout>
 
 <style>
-  .support-layout {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 2.5rem;
-    align-items: start;
-    margin-bottom: 3rem;
+  .support-header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 3rem;
   }
 
-  .support-text h2 {
+  .support-header h1 {
+    margin-bottom: 1rem;
+  }
+
+  .eyebrow {
+    font-family: var(--font-serif);
+    font-size: 0.85rem;
+    font-variant: small-caps;
+    letter-spacing: 0.14em;
+    color: var(--color-text-muted);
+    margin: 0 0 0.5rem;
+  }
+
+  .lede {
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .funds-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+    margin-bottom: 3.5rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .funds-item {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .funds-grid > .funds-item + .funds-item {
+    border-left: 1px solid var(--color-border);
+    padding-left: 2rem;
+  }
+
+  .funds-numeral {
+    display: block;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .funds-item h3 {
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-size: 1.15rem;
+    color: var(--color-heading);
+    margin-bottom: 0.5rem;
+  }
+
+  .funds-item p {
+    color: var(--color-text-muted);
+    font-size: 1rem;
+    line-height: 1.65;
+    margin: 0;
+  }
+
+  .oneoff-card {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    margin-bottom: 3.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: center;
+    box-shadow: var(--shadow-card);
+  }
+
+  .oneoff-text h2 {
     font-variant: small-caps;
     letter-spacing: 0.03em;
+    margin-bottom: 0.5rem;
+  }
+
+  .oneoff-text p {
+    margin: 0;
+    color: var(--color-text-muted);
+  }
+
+  .oneoff-action {
+    min-width: 220px;
+  }
+
+  .section-heading {
+    text-align: center;
+    margin-bottom: 2.25rem;
+  }
+
+  .section-heading h2 {
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.75rem;
+  }
+
+  .section-heading h2::after {
+    content: "";
+    display: block;
+    width: 40px;
+    height: 1px;
+    background: var(--color-accent);
+    margin: 0.75rem auto 0;
+  }
+
+  .section-heading p {
+    color: var(--color-text-muted);
+    margin: 0;
   }
 
   .tier-cards {
@@ -64,12 +202,34 @@ const tiers = (await getCollection('supportTiers')).sort((a, b) => a.data.order 
   }
 
   @media (max-width: 768px) {
-    .support-layout {
+    .funds-grid {
       grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 1.5rem 0;
+    }
+
+    .funds-grid > .funds-item + .funds-item {
+      border-left: none;
+      border-top: 1px solid var(--color-border);
+      padding-left: 1.25rem;
+      padding-top: 2rem;
+    }
+
+    .oneoff-card {
+      grid-template-columns: 1fr;
+      text-align: center;
+      padding: 1.75rem 1.5rem;
+    }
+
+    .oneoff-action {
+      min-width: 0;
+      width: 100%;
     }
 
     .tier-cards {
       grid-template-columns: 1fr;
+      max-width: 360px;
+      margin: 0 auto;
     }
   }
 </style>

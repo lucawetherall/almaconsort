@@ -39,6 +39,7 @@ const supportTiers = defineCollection({
         tierName: z.string(),
         price: z.string(),
         billingNote: z.string().optional(),
+        highlight: z.string().optional(),
       })
     ),
   }),
