@@ -1,0 +1,225 @@
+---
+import { getImage } from 'astro:assets';
+
+interface Props {
+  slug: string;
+  title: string;            // may include <span class="accent">…</span>
+  date: Date;
+  venue: { name: string; address?: string };
+  startTime?: string;
+  priceFrom?: string;
+  composers?: string[];
+  altTitle?: string;
+  photo?: ImageMetadata;
+  photoAlt?: string;
+  photoCaption?: string;
+}
+
+const {
+  slug,
+  title,
+  date,
+  venue,
+  startTime,
+  priceFrom,
+  composers,
+  altTitle,
+  photo,
+  photoCaption,
+} = Astro.props;
+
+const monthsLong = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const day = date.getDate();
+const monthLong = monthsLong[date.getMonth()];
+const year = date.getFullYear();
+
+const baseUrl = import.meta.env.BASE_URL;
+const href = `${baseUrl}events/${slug}/`;
+
+const captionText = photoCaption ?? venue.name;
+
+const photoUrl = photo
+  ? (await getImage({ src: photo, widths: [400, 600, 900], formats: ['webp'] })).src
+  : undefined;
+---
+<a class="concert-tile" href={href} aria-label={`${date.toDateString()} — ${venue.name}`}>
+  {photoUrl ? (
+    <div class="plate photo" style={`background-image: url(${photoUrl})`}>
+      <div class="photo-date">
+        <div class="day">{day}</div>
+        <div class="mo">{monthLong}</div>
+      </div>
+      <div class="photo-year">{year}</div>
+      <div class="photo-cap">{captionText}</div>
+    </div>
+  ) : (
+    <div class="plate np">
+      <div class="corner-date">
+        <div class="day">{day}</div>
+        <div class="mo">{monthLong}</div>
+      </div>
+      <div class="corner-year">{year}</div>
+      <div class="centre-block">
+        <div class="centre-rule" />
+        {composers && composers.length > 0 ? (
+          <div class="composer-stack">
+            {composers.map((name) => <span class="name">{name}</span>)}
+          </div>
+        ) : altTitle ? (
+          <div class="composer-stack">
+            <span class="name alt-title">{altTitle}</span>
+          </div>
+        ) : null}
+        <div class="centre-rule" />
+      </div>
+    </div>
+  )}
+  <h3 class="tile-title" set:html={title} />
+  <div class="tile-meta">
+    {venue.name}{startTime ? ` · ${startTime}` : ''}{priceFrom ? ` · ${priceFrom}` : ''}
+  </div>
+</a>
+
+<style>
+  .concert-tile {
+    display: grid;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .concert-tile:focus-visible {
+    outline: 2px solid var(--color-claret);
+    outline-offset: 3px;
+  }
+
+  .plate {
+    aspect-ratio: 5 / 4;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+    border: 1px solid var(--color-border-strong);
+    transition: box-shadow var(--transition);
+  }
+  .concert-tile:hover .plate { box-shadow: var(--shadow-tile-hover); }
+
+  /* No-photo state */
+  .plate.np {
+    background: var(--color-bg-tint);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    padding: 38px 22px;
+  }
+  .corner-date {
+    position: absolute; top: 14px; left: 16px;
+    font-family: var(--font-serif);
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+  }
+  .corner-date .day { font-size: 2.1rem; line-height: 1; color: var(--color-text); font-weight: 500; }
+  .corner-date .mo {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-top: 4px;
+  }
+  .corner-year {
+    position: absolute; top: 14px; right: 14px;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: var(--color-claret);
+    border: 1px solid var(--color-claret-border);
+    padding: 3px 9px;
+    background: rgba(247, 243, 232, 0.6);
+  }
+  .centre-block {
+    display: grid;
+    gap: 12px;
+    justify-items: center;
+    max-width: 80%;
+    text-align: center;
+  }
+  .centre-rule { width: 36px; height: 1px; background: var(--color-claret-border); }
+  .composer-stack {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    line-height: 1.45;
+    color: var(--color-text);
+  }
+  .composer-stack .name { display: block; }
+  .composer-stack .name.alt-title {
+    font-style: italic;
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+
+  /* Photo state */
+  .plate.photo {
+    background-size: cover;
+    background-position: center;
+  }
+  .plate.photo::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+  }
+  .photo-date {
+    position: absolute; top: 12px; left: 14px; z-index: 1;
+    font-family: var(--font-serif);
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+  }
+  .photo-date .day {
+    font-size: 1.9rem; line-height: 1;
+    color: var(--color-text-light);
+    text-shadow: var(--shadow-text-on-photo);
+  }
+  .photo-date .mo {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-light);
+    text-shadow: var(--shadow-text-on-photo);
+  }
+  .photo-year {
+    position: absolute; top: 14px; right: 14px; z-index: 1;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: var(--color-text-light);
+    border: 1px solid rgba(251,243,223,0.55);
+    padding: 3px 9px;
+    background: rgba(0,0,0,0.25);
+  }
+  .photo-cap {
+    position: absolute; left: 14px; right: 14px; bottom: 12px; z-index: 1;
+    color: var(--color-text-light);
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    text-shadow: var(--shadow-text-on-photo);
+  }
+
+  .tile-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.2;
+    font-weight: 500;
+    margin: 4px 0 4px;
+    color: var(--color-heading);
+    transition: color var(--transition);
+  }
+  .concert-tile:hover .tile-title { color: var(--color-claret); }
+
+  .tile-meta {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+</style>
