@@ -12,9 +12,11 @@
   --color-heading: #3c3c3c;
   --color-border: rgba(60, 60, 60, 0.1);
   --color-border-strong: rgba(60, 60, 60, 0.2);
+  --color-claret: #7a1a2a;
 
   /* Type */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Layout widths */
   --content-width: 750px;
@@ -212,18 +214,48 @@ main {
   text-decoration-color: currentColor;
 }
 
-/* ===== Drop Cap ===== */
+/* ===== Utility classes ===== */
+
+/* Italic claret accent — used inside Cormorant headings and label props.
+   Use this span (not <em>) to bypass conflicts with global em styling. */
+.accent {
+  color: var(--color-claret);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Drop cap — applied as a class on a paragraph */
 .drop-cap::first-letter {
   font-family: var(--font-serif);
-  font-size: 3.6rem;
+  font-size: 3.8rem;
   float: left;
   line-height: 0.85;
-  margin-right: 0.08em;
-  margin-top: 0.06em;
+  margin: 0.06em 0.08em 0 0;
   color: var(--color-accent);
-  font-weight: 400;
   font-variant: small-caps;
 }
+@media (max-width: 768px) {
+  .drop-cap::first-letter { font-size: 3rem; }
+}
+
+/* Form input — used in Contact, Newsletter, EmptyState */
+.input {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.3;
+  padding: 10px 14px;
+  background: rgba(247, 243, 232, 0.6);
+  border: 1px solid rgba(60, 40, 20, 0.4);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  transition: border-color var(--transition), background var(--transition);
+}
+.input:focus-visible {
+  outline: none;
+  border-color: var(--color-claret);
+  background: var(--color-bg-white);
+}
+textarea.input { min-height: 8rem; resize: vertical; }
 
 /* ===== Skip to content ===== */
 .skip-link {
@@ -281,10 +313,6 @@ main {
 
   main {
     padding: 2rem 0;
-  }
-
-  .drop-cap::first-letter {
-    font-size: 3rem;
   }
 }
 
