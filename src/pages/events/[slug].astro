@@ -1,5 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import ConcertCard from '../../components/ConcertCard.astro';
+import ProgrammeList from '../../components/ProgrammeList.astro';
+import Button from '../../components/Button.astro';
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -19,6 +22,7 @@ const dateStr = event.data.date.toLocaleDateString('en-GB', {
   month: 'long',
   day: 'numeric',
 });
+const eyebrow = `Concert · ${dateStr}`;
 
 const timeRange = event.data.startTime && event.data.endTime
   ? `${event.data.startTime} – ${event.data.endTime}`
@@ -87,11 +91,18 @@ const eventJsonLd = {
   }),
 };
 
-// Check if event is in the future
 const isFuture = event.data.date >= new Date();
 
-// Share URL
-const eventUrl = new URL(`${import.meta.env.BASE_URL}events/${event.id}/`, Astro.site).href;
+const directedBy = (event.data.performers ?? []).find(
+  (p) => p.toLowerCase().includes('director')
+);
+
+const programmeItems = (event.data.programme ?? []).map((p) => ({
+  work: p.work,
+  composer: p.composer,
+}));
+
+const baseUrl = import.meta.env.BASE_URL;
 ---
 <BaseLayout
   title={`${event.data.title} | Alma Consort`}
@@ -99,27 +110,42 @@ const eventUrl = new URL(`${import.meta.env.BASE_URL}events/${event.id}/`, Astro
   ogImage={event.data.image}
 >
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(eventJsonLd)} />
-  <div class="container">
-    <h1>{event.data.title}</h1>
 
-    <div class="event-meta">
-      <p class="event-date">{dateStr}</p>
-      {timeRange && <p class="event-time">{timeRange}</p>}
-      <p class="event-venue">
-        {event.data.venue.name}
-        {event.data.venue.address && <span> &mdash; {event.data.venue.address}</span>}
-      </p>
+  <div class="container">
+    <nav class="breadcrumb">
+      <a href={`${baseUrl}events/`}>Events</a> &nbsp;/&nbsp; <span>{event.data.title}</span>
+    </nav>
+
+    <div class="concert-hero">
+      <div>
+        <div class="eyebrow">{eyebrow}</div>
+        <h1 set:html={event.data.title} />
+        <p class="deck">{event.data.description}</p>
+        <div class="actions">
+          {event.data.ticketUrl && (
+            <Button variant="primary" href={event.data.ticketUrl} target="_blank" rel="noopener noreferrer">
+              Book tickets
+            </Button>
+          )}
+          {isFuture && (
+            <Button variant="secondary" href={googleCalendarUrl} target="_blank" rel="noopener noreferrer">
+              Add to calendar
+            </Button>
+          )}
+        </div>
+      </div>
+      <ConcertCard
+        date={event.data.date}
+        time={timeRange}
+        venue={event.data.venue}
+        priceFrom={event.data.priceFrom}
+        directedBy={directedBy}
+      />
     </div>
 
-    {event.data.ticketUrl && (
-      <p>
-        <a href={event.data.ticketUrl} class="btn btn-primary" target="_blank" rel="noopener noreferrer">
-          Get Tickets
-        </a>
-      </p>
-    )}
+    {programmeItems.length > 0 && <ProgrammeList items={programmeItems} />}
 
-    <div class="event-body">
+    <div class="prose">
       <Content />
     </div>
 
@@ -132,83 +158,100 @@ const eventUrl = new URL(`${import.meta.env.BASE_URL}events/${event.id}/`, Astro
       </div>
     )}
 
-    {isFuture && (
-      <div class="event-actions">
-        <a href={googleCalendarUrl} target="_blank" rel="noopener noreferrer" class="action-link">Add to Google Calendar</a>
-        <span class="action-sep">&middot;</span>
-        <a href={`mailto:?subject=${calendarTitle}&body=${encodeURIComponent(`${event.data.title}\n${dateStr}\n${event.data.venue.name}\n\n${eventUrl}`)}`} class="action-link">Share via email</a>
-      </div>
-    )}
-
     <p class="back-link">
-      <a href={`${import.meta.env.BASE_URL}events/`}>&larr; Back to Events</a>
+      <a href={`${baseUrl}events/`}>&larr; Back to Events</a>
     </p>
   </div>
 </BaseLayout>
 
 <style>
-  .event-meta {
-    margin-bottom: 2rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid rgba(60, 60, 60, 0.15);
+  .breadcrumb {
+    padding: 22px 0 0;
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-text-soft);
   }
+  .breadcrumb a { color: var(--color-accent); text-decoration: none; }
 
-  .event-date {
+  .concert-hero {
+    padding: 30px 0 40px;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 56px;
+    align-items: start;
+    border-bottom: 1px solid var(--color-border-strong);
+    margin-bottom: 8px;
+  }
+  .concert-hero .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 16px;
+    font-weight: 500;
+  }
+  .concert-hero h1 {
+    font-family: var(--font-serif);
+    font-size: 3.4rem;
+    line-height: 0.98;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 18px;
+    color: var(--color-heading);
+  }
+  .concert-hero .deck {
+    font-family: var(--font-serif);
+    font-style: italic;
     font-size: 1.15rem;
-    font-weight: 600;
-    margin-bottom: 0.25rem;
-  }
-
-  .event-time {
+    line-height: 1.55;
     color: var(--color-text-muted);
-    margin-bottom: 0.25rem;
+    max-width: 34ch;
+    margin-bottom: 24px;
   }
-
-  .event-venue {
-    color: var(--color-text-muted);
+  .actions {
+    display: flex;
+    gap: 14px;
+    align-items: center;
+    flex-wrap: wrap;
   }
-
-  .event-body {
-    margin-bottom: 2rem;
+  .prose {
+    max-width: var(--content-width);
+    margin: 24px auto 0;
+    font-family: var(--font-serif);
     font-size: 1.1rem;
-    line-height: 1.8;
+    line-height: 1.7;
   }
-
+  .prose :global(p) { margin: 0 0 1rem; }
   .performers {
-    margin-bottom: 2rem;
+    max-width: var(--content-width);
+    margin: 2rem auto;
   }
-
-  .performers ul {
-    list-style: none;
-    padding: 0;
+  .performers h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    color: var(--color-heading);
+    margin: 0 0 0.5rem;
   }
-
-  .performers li {
-    padding: 0.25rem 0;
+  .performers ul { list-style: none; padding: 0; margin: 0; }
+  .performers li { padding: 0.25rem 0; }
+  .back-link {
+    max-width: var(--content-width);
+    margin: 2rem auto 0;
   }
-
-  .event-actions {
-    margin: 1.5rem 0;
-    padding: 1rem 0;
-    border-top: 1px solid rgba(60, 60, 60, 0.1);
-    font-size: 0.9rem;
-  }
-
-  .action-link {
+  .back-link a {
     color: var(--color-text-muted);
     text-decoration: none;
   }
+  .back-link a:hover { color: var(--color-claret); }
 
-  .action-link:hover {
-    color: var(--color-accent);
-  }
-
-  .action-sep {
-    margin: 0 0.5rem;
-    color: var(--color-text-muted);
-  }
-
-  .back-link {
-    margin-top: 2rem;
+  @media (max-width: 768px) {
+    .concert-hero { grid-template-columns: 1fr; gap: 24px; padding: 24px 0 32px; }
+    .concert-hero h1 { font-size: 2.4rem; }
   }
 </style>
