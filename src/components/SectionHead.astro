@@ -1,0 +1,48 @@
+---
+interface Props {
+  title: string;
+  link?: { href: string; label: string; target?: string; rel?: string };
+}
+const { title, link } = Astro.props;
+---
+<header class="section-head">
+  <h2 set:html={title} />
+  {link && (
+    <a href={link.href} target={link.target} rel={link.rel}>{link.label}</a>
+  )}
+</header>
+
+<style>
+  .section-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    border-bottom: 1px solid var(--color-border-strong);
+    padding-bottom: 10px;
+    margin-bottom: 22px;
+    gap: 16px;
+  }
+  .section-head h2 {
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    margin: 0;
+    color: var(--color-heading);
+  }
+  .section-head a {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .section-head a:hover { color: var(--color-claret); }
+  .section-head a:focus-visible {
+    outline: 2px solid var(--color-claret);
+    outline-offset: 3px;
+  }
+</style>
