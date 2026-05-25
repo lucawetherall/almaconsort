@@ -1,13 +1,20 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Divider from '../components/Divider.astro';
+import TitleBlock from '../components/TitleBlock.astro';
+import OrnamentRule from '../components/OrnamentRule.astro';
+import SectionHead from '../components/SectionHead.astro';
+import RecordingTile from '../components/RecordingTile.astro';
+import EnquiryBand from '../components/EnquiryBand.astro';
+import { getCollection } from 'astro:content';
+import { YOUTUBE_CHANNEL_URL } from '../lib/constants';
+
+const recordings = (await getCollection('featuredRecordings'))
+  .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+  .slice(0, 6);
+
+const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="Choral Recording in London | Alma Consort" description="Professional choral recording in London: studio sessions for composers, producers, and labels, with in-house audio and video production by the Alma Consort.">
-  <link slot="head" rel="preconnect" href="https://i.ytimg.com" />
-  <link slot="head" rel="preconnect" href="https://www.youtube.com" />
-  <link slot="head" rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.css" />
-  <script slot="head" is:inline src="https://cdn.jsdelivr.net/npm/lite-youtube-embed@0.3.3/src/lite-yt-embed.min.js"></script>
-
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Service",
@@ -16,7 +23,7 @@ import Divider from '../components/Divider.astro';
     "provider": {
       "@type": "PerformingGroup",
       "name": "Alma Consort",
-      "url": new URL(import.meta.env.BASE_URL, Astro.site).href
+      "url": new URL(base, Astro.site).href
     },
     "areaServed": [
       { "@type": "City", "name": "London" },
@@ -35,74 +42,178 @@ import Divider from '../components/Divider.astro';
     "embedUrl": "https://www.youtube.com/embed/GjNdZVs7g68",
     "contentUrl": "https://www.youtube.com/watch?v=GjNdZVs7g68",
     "uploadDate": "2025-12-01",
-    "publisher": { "@id": new URL(import.meta.env.BASE_URL, Astro.site).href + '#org' }
+    "publisher": { "@id": new URL(base, Astro.site).href + '#org' }
   })} />
 
   <div class="container">
-    <h1>Recording</h1>
+    <TitleBlock
+      title="Recording"
+      pitch={`Studio sessions for composers, producers, and labels — with <span class="accent">in-house audio and video</span>, captured by a team that performs the music too.`}
+    />
 
-    <p>
-      The Alma Consort records with the precision and musicality of concert performance. Our singers are experienced session musicians, fluent in Renaissance sacred music, film scores, jazz arrangements, and contemporary commissions.
-    </p>
-
-    <h2>Sessions</h2>
-
-    <p>
-      We work with composers, producers, record labels, and creative agencies. For each session we assemble the right forces, whether a small ensemble or a full choir, and deliver recordings that sit cleanly inside the project they're for.
-    </p>
-
-    <p>
-      We take on-site and remote sessions. Our production team handles audio and video in-house, from capture through to final delivery, so artistic and technical decisions stay aligned.
-    </p>
-
-    <Divider />
-
-    <h2>Our recordings</h2>
-
-    <p>
-      Alongside session work, we produce our own recordings. A selection of recent work:
-    </p>
-
-    <div class="recordings-grid">
-      <div class="recording-item">
-        <lite-youtube videoid="GjNdZVs7g68" playlabel="Play: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)">
-          <a href="https://youtube.com/watch?v=GjNdZVs7g68" class="lty-playbtn" title="Play Video">
-            <span class="lyt-visually-hidden">Play Video: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)</span>
-          </a>
-        </lite-youtube>
-        <p class="recording-caption"><strong>O Magnum Mysterium</strong> — Tomás Luis de Victoria</p>
+    <section class="caps">
+      <div class="cap">
+        <div class="lead-no">01 · Sessions</div>
+        <h3>Studio &amp; on-site</h3>
+        <p>We assemble the right forces for each session — small consort or full choir, sacred or secular — and deliver recordings that sit cleanly inside the project they're for.</p>
       </div>
-    </div>
+      <div class="cap">
+        <div class="lead-no">02 · Production</div>
+        <h3>Audio &amp; video</h3>
+        <p>Our in-house team handles capture and post — from multi-track recording to final delivery. Artistic and technical decisions stay aligned.</p>
+      </div>
+      <div class="cap">
+        <div class="lead-no">03 · Releases</div>
+        <h3>The Alma label</h3>
+        <p>Alongside session work, we produce our own releases — Renaissance polyphony, contemporary commissions, jazz arrangements, and popular repertoire.</p>
+      </div>
+    </section>
 
-    <Divider />
+    <OrnamentRule />
 
-    <div class="pull-quote">
-      To discuss a recording project, please <a href={`${import.meta.env.BASE_URL}contact/`}>get in touch</a>. We welcome enquiries from composers, producers, record labels, and creative agencies.
-    </div>
+    {recordings.length > 0 && (
+      <section class="recordings">
+        <SectionHead
+          title="Selected Recordings"
+          link={{ href: YOUTUBE_CHANNEL_URL, label: 'YouTube channel →', target: '_blank', rel: 'noopener' }}
+        />
+        <div class="video-grid">
+          {recordings.map((rec) => (
+            <RecordingTile
+              youtubeId={rec.data.youtubeId}
+              title={rec.data.title}
+              composer={rec.data.composer}
+            />
+          ))}
+        </div>
+      </section>
+    )}
+
+    <section class="process">
+      <div>
+        <h2>How a session works</h2>
+        <p class="lede">From a first conversation to delivered masters, sessions typically run on a four-week cadence — flexible to deadline and forces.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-no">i</div><div><h3>Conversation</h3><p>You send the score or brief. We discuss forces, timeline, venue, and budget. No commitment until both sides are confident in the fit.</p></div></div>
+        <div class="step"><div class="step-no">ii</div><div><h3>Preparation</h3><p>Singers receive parts and recordings ahead of the session. Our directors lead any preliminary rehearsal.</p></div></div>
+        <div class="step"><div class="step-no">iii</div><div><h3>Capture</h3><p>In-studio or on-site, with our own audio and video team. You're welcome in the control room throughout.</p></div></div>
+        <div class="step"><div class="step-no">iv</div><div><h3>Delivery</h3><p>Edited and mixed to your spec. Masters and video stems delivered within two to three weeks of the session.</p></div></div>
+      </div>
+    </section>
+
+    <EnquiryBand
+      title={`Discuss a <span class="accent">session</span>`}
+      body="Composers, producers, labels, and creative agencies — we welcome enquiries of any scale."
+      primaryHref={`${base}contact/`}
+      primaryLabel="Make an enquiry"
+      secondaryHref="mailto:hello@almaconsort.com"
+      secondaryLabel="Email directly"
+    />
   </div>
 </BaseLayout>
 
 <style>
-  h2 {
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .recordings-grid {
+  .caps {
     display: grid;
-    grid-template-columns: 1fr;
-    gap: 2rem;
-    margin-top: 1.5rem;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+    margin-bottom: 24px;
   }
-
-  .recording-item lite-youtube {
-    max-width: 100%;
-    aspect-ratio: 16 / 9;
+  .cap .lead-no {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+    margin-bottom: 6px;
   }
-
-  .recording-caption {
-    margin-top: 0.75rem;
-    font-size: 0.95rem;
+  .cap h3 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    margin: 0 0 10px;
+    color: var(--color-heading);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-claret-border);
+  }
+  .cap p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.6;
     color: var(--color-text);
+    margin: 0;
+  }
+
+  .recordings { margin-bottom: 56px; }
+  .video-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .process {
+    padding: 16px 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .process h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    line-height: 1;
+    font-variant: small-caps;
+    letter-spacing: -0.005em;
+    font-weight: 500;
+    margin: 0 0 16px;
+    color: var(--color-heading);
+  }
+  .process .lede {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .steps { display: grid; gap: 18px; }
+  .step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 18px;
+    padding: 14px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .step:first-child { border-top: none; padding-top: 0; }
+  .step-no {
+    font-family: var(--font-serif);
+    font-variant: small-caps;
+    font-size: 1.6rem;
+    color: var(--color-claret);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+  .step h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: var(--color-heading);
+  }
+  .step p {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .caps { grid-template-columns: 1fr; gap: 2rem; }
+    .video-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .process { grid-template-columns: 1fr; gap: 2rem; }
   }
 </style>

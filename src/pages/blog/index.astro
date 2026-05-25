@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import TitleBlock from '../../components/TitleBlock.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import { getCollection } from 'astro:content';
 
@@ -28,7 +29,7 @@ const blogJsonLd = {
 <BaseLayout title="News & Reflections | Alma Consort" description="News and reflections from the Alma Consort on concerts, recordings, programming, and the life of a professional chamber choir in London.">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(blogJsonLd)} />
   <div class="container">
-    <h1>News</h1>
+    <TitleBlock title="News" />
 
     {posts.length > 0 ? (
       <div class="blog-list">

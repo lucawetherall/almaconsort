@@ -1,64 +1,27 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Divider from '../components/Divider.astro';
+import TitleBlock from '../components/TitleBlock.astro';
+import Button from '../components/Button.astro';
 const base = import.meta.env.BASE_URL;
 ---
-<BaseLayout title="Page Not Found" description="The page you are looking for could not be found." noindex={true}>
-  <div class="container not-found">
-    <p class="not-found-eyebrow">404</p>
-    <h1>Page Not Found</h1>
-    <p class="not-found-body">That page isn't here. It may have moved, or you may have followed an out-of-date link.</p>
-    <Divider />
-    <nav aria-label="Suggested pages">
-      <ul>
-        <li><a href={base}>Home</a></li>
-        <li><a href={`${base}events/`}>Events</a></li>
-        <li><a href={`${base}about/`}>About</a></li>
-        <li><a href={`${base}contact/`}>Contact</a></li>
-      </ul>
-    </nav>
+<BaseLayout title="Not found | Alma Consort" description="The page you're looking for doesn't exist." noindex={true}>
+  <div class="container">
+    <TitleBlock
+      title="Not found"
+      pitch={`The page you're looking for doesn't exist. <span class="accent">Try the homepage</span>, or browse upcoming events.`}
+    />
+    <div class="actions">
+      <Button variant="primary" href={base} arrow>Back to home</Button>
+      <Button variant="secondary" href={`${base}events/`}>See upcoming events</Button>
+    </div>
   </div>
 </BaseLayout>
 
 <style>
-  .not-found {
-    text-align: center;
-    padding: 4rem 0;
-  }
-
-  .not-found-eyebrow {
-    font-size: 0.85rem;
-    font-variant: small-caps;
-    letter-spacing: 0.12em;
-    color: var(--color-accent);
-    margin-bottom: 0.5rem;
-  }
-
-  .not-found-body {
-    font-size: 1.1rem;
-    max-width: 32rem;
-    margin: 0 auto 0.5rem;
-    color: var(--color-text-muted);
-  }
-
-  nav ul {
+  .actions {
     display: flex;
+    gap: 14px;
+    margin-top: 24px;
     flex-wrap: wrap;
-    justify-content: center;
-    gap: 1.5rem;
-    list-style: none;
-  }
-
-  nav a {
-    font-family: var(--font-serif);
-    font-size: 1rem;
-    color: var(--color-text);
-    font-variant: small-caps;
-    letter-spacing: 0.05em;
-    text-decoration: none;
-  }
-
-  nav a:hover {
-    color: var(--color-accent);
   }
 </style>

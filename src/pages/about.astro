@@ -1,57 +1,77 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Divider from '../components/Divider.astro';
-import BioCard from '../components/BioCard.astro';
+import TitleBlock from '../components/TitleBlock.astro';
+import OrnamentRule from '../components/OrnamentRule.astro';
+import SectionHead from '../components/SectionHead.astro';
+import BioPlate from '../components/BioPlate.astro';
+import ScholarsCallout from '../components/ScholarsCallout.astro';
+
+// Director portraits — uncomment imports and add photo={...} + photoAlt="..."
+// props to the corresponding BioPlate when image files arrive at these paths.
+// import lucaPhoto from '../assets/directors/luca-wetherall.jpg';
+// import izzyPhoto from '../assets/directors/izzy-mohan.jpg';
 ---
 <BaseLayout title="About the Alma Consort" description="A professional chamber choir of young London singers directed by Luca Wetherall and Izzy Mohan. We perform classical, contemporary, jazz, and popular repertoire on the concert platform and in the recording studio.">
   <div class="container">
-    <h1>About</h1>
-
-    <p>
-      The Alma Consort is a professional chamber choir of young London singers. We perform across classical, contemporary, jazz, and popular repertoire, on the concert platform and in the recording studio.
-    </p>
-
-    <p>
-      We run our own audio and video production. That lets us record to the same standard in the studio or on location.
-    </p>
-
-    <p>
-      We mentor early-career singers through the <strong>Alma Scholars</strong> programme.
-    </p>
-
-    <Divider />
-
-    <h2>The Ensemble</h2>
-
-    <p>
-      Our singers are young professionals working across London's choral scene. Many hold positions with leading ensembles and cathedral choirs, and carry experience from both concert and liturgical work. We scale the ensemble to the music: a small consort for chamber polyphony, a fuller choir for larger forces.
-    </p>
-
-    <Divider />
-
-    <h2>Directors</h2>
-
-    <BioCard
-      name="Luca Wetherall"
-      role="Director"
-      initials="LW"
-      bio="Luca Wetherall is a conductor, singer, and pianist. He is Director of Music and Organist at St Mary's Acton and Choral Director at St John the Baptist, Holland Road. A Clarendon Scholar at the University of Oxford, his doctoral research focuses on popular music, and he tutors at the Faculty of Music. As a singer, he performs regularly with leading ensembles in London and elsewhere. He programmes with scholarly depth and draws balanced, expressive sound from choirs of any size."
+    <TitleBlock
+      title="About"
+      pitch={`A professional chamber choir of young London singers — performing <span class="accent">classical, contemporary, jazz, and popular repertoire</span> on the concert platform and in the recording studio.`}
     />
 
-    <BioCard
-      name="Izzy Mohan"
-      role="Director"
-      initials="IM"
-      bio="Izzy Mohan is a pianist, conductor, and singer. She is Director of Music at St Mary's Harrow-on-the-Hill, where she runs the choral and organ programme. A graduate of the University of Oxford with a First Class degree, she holds a Master of Music from the Royal Academy of Music, where she was awarded the Ruth Harte Scholarship. She has performed at the Royal Festival Hall, the Austrian Cultural Forum, and the Oxford International Song Festival. She conducts with a pianist's ear for texture and colour."
-    />
+    <div class="intro">
+      <p class="drop-cap">
+        The <strong>Alma Consort</strong> is a professional chamber choir of young London singers. We perform across classical, contemporary, jazz, and popular repertoire, on the concert platform and in the recording studio. We run our own audio and video production. That lets us record to the same standard in the studio or on location.
+      </p>
+    </div>
+
+    <div class="ensemble">
+      <p>Our singers are young professionals working across London's choral scene. Many hold positions with leading ensembles and cathedral choirs, and carry experience from both concert and liturgical work. We scale the ensemble to the music: a small consort for chamber polyphony, a fuller choir for larger forces.</p>
+    </div>
+
+    <OrnamentRule />
+
+    <section class="directors">
+      <SectionHead title="Directors" />
+      <div class="bios-grid">
+        <BioPlate
+          name="Luca Wetherall"
+          role="Director"
+          roleTags={["Director", "Conductor", "Singer"]}
+          monogramSubtitle="Conductor · Singer · Pianist"
+        >
+          <p>Luca Wetherall is a conductor, singer, and pianist. He is Director of Music and Organist at St Mary's Acton and Choral Director at St John the Baptist, Holland Road.</p>
+          <p>A Clarendon Scholar at the University of Oxford, his doctoral research focuses on popular music, and he tutors at the Faculty of Music. As a singer, he performs regularly with leading ensembles in London and elsewhere. He programmes with scholarly depth and draws balanced, expressive sound from choirs of any size.</p>
+        </BioPlate>
+
+        <BioPlate
+          name="Izzy Mohan"
+          role="Director"
+          roleTags={["Director", "Pianist", "Conductor"]}
+          monogramSubtitle="Pianist · Conductor · Singer"
+        >
+          <p>Izzy Mohan is a pianist, conductor, and singer. She is Director of Music at St Mary's Harrow-on-the-Hill, where she runs the choral and organ programme.</p>
+          <p>A graduate of the University of Oxford with a First Class degree, she holds a Master of Music from the Royal Academy of Music, where she was awarded the Ruth Harte Scholarship. She has performed at the Royal Festival Hall, the Austrian Cultural Forum, and the Oxford International Song Festival. She conducts with a pianist's ear for texture and colour.</p>
+        </BioPlate>
+      </div>
+    </section>
+
+    <ScholarsCallout variant="full" />
   </div>
 </BaseLayout>
 
 <style>
-  h2 {
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    font-variant: small-caps;
-    letter-spacing: 0.04em;
+  .intro { max-width: 720px; margin: 0 auto 8px; }
+  .intro p { font-size: 1.15rem; line-height: 1.75; color: var(--color-text); }
+  .ensemble { max-width: 720px; margin: 0 auto 16px; }
+  .ensemble p { font-size: 1.1rem; line-height: 1.75; color: var(--color-text); }
+
+  .directors { margin-bottom: 36px; }
+  .bios-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+  }
+  @media (max-width: 768px) {
+    .bios-grid { grid-template-columns: 1fr; gap: 2rem; }
   }
 </style>

@@ -1,0 +1,62 @@
+---
+interface Props {
+  title: string;          // may include <span class="accent">…</span>
+  body: string;
+  primaryHref: string;
+  primaryLabel: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+const { title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } = Astro.props;
+---
+<section class="enquiry-band">
+  <div class="text">
+    <h2 set:html={title} />
+    <p>{body}</p>
+  </div>
+  <div class="actions">
+    <a href={primaryHref} class="btn-primary">{primaryLabel}</a>
+    {secondaryHref && secondaryLabel && (
+      <a href={secondaryHref} class="btn-secondary">{secondaryLabel}</a>
+    )}
+  </div>
+</section>
+
+<style>
+  .enquiry-band {
+    padding: 48px 0;
+    border-top: 1px solid var(--color-border-strong);
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .enquiry-band h2 {
+    font-family: var(--font-serif);
+    font-size: 2.4rem;
+    line-height: 1;
+    letter-spacing: -0.01em;
+    font-weight: 500;
+    margin: 0 0 14px;
+    color: var(--color-heading);
+  }
+  .enquiry-band p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.1rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .actions {
+    display: flex;
+    gap: 14px;
+    justify-self: end;
+    align-items: center;
+  }
+  @media (max-width: 768px) {
+    .enquiry-band { grid-template-columns: 1fr; gap: 24px; padding: 32px 0; }
+    .enquiry-band h2 { font-size: 2rem; }
+    .actions { justify-self: start; flex-direction: column; align-items: stretch; }
+  }
+</style>

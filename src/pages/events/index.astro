@@ -1,6 +1,9 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import EventCard from '../../components/EventCard.astro';
+import TitleBlock from '../../components/TitleBlock.astro';
+import EventRow from '../../components/EventRow.astro';
+import OrnamentRule from '../../components/OrnamentRule.astro';
+import EmptyState from '../../components/EmptyState.astro';
 import { getCollection } from 'astro:content';
 
 const allEvents = (await getCollection('events')).sort(
@@ -40,67 +43,64 @@ const eventsListJsonLd = {
     <script slot="head" type="application/ld+json" set:html={JSON.stringify(eventsListJsonLd)} />
   )}
   <div class="container">
-    <h1>Events</h1>
+    <TitleBlock title="Concerts & Events" />
 
-    {upcoming.length > 0 && (
-      <section>
-        <h2>Upcoming</h2>
-        {upcoming.map((event) => (
-          <EventCard
+    <section class="list-section">
+      <h2>Upcoming</h2>
+      {upcoming.length > 0 ? (
+        upcoming.map((event) => (
+          <EventRow
+            slug={event.id}
             title={event.data.title}
             date={event.data.date}
+            venue={event.data.venue}
             startTime={event.data.startTime}
             endTime={event.data.endTime}
-            venue={event.data.venue}
             description={event.data.description}
-            slug={event.id}
+            priceFrom={event.data.priceFrom}
           />
-        ))}
-      </section>
-    )}
-
-    {upcoming.length === 0 && (
-      <p class="no-events">Our next concert hasn't been announced yet. Subscribe to the newsletter to hear first.</p>
-    )}
+        ))
+      ) : (
+        <EmptyState
+          title={`No concerts on the schedule <span class="accent">just yet</span>.`}
+          body="Subscribe to be the first to hear when dates are confirmed."
+        />
+      )}
+    </section>
 
     {past.length > 0 && (
-      <section class="past-events">
-        <h2>Latest Past Events</h2>
-        {past.map((event) => (
-          <EventCard
-            title={event.data.title}
-            date={event.data.date}
-            startTime={event.data.startTime}
-            endTime={event.data.endTime}
-            venue={event.data.venue}
-            description={event.data.description}
-            slug={event.id}
-          />
-        ))}
-      </section>
+      <>
+        <OrnamentRule />
+        <section class="list-section">
+          <h2>Past</h2>
+          {past.map((event) => (
+            <EventRow
+              slug={event.id}
+              title={event.data.title}
+              date={event.data.date}
+              venue={event.data.venue}
+              startTime={event.data.startTime}
+              endTime={event.data.endTime}
+              description={event.data.description}
+              priceFrom={event.data.priceFrom}
+              past
+            />
+          ))}
+        </section>
+      </>
     )}
   </div>
 </BaseLayout>
 
 <style>
-  section {
-    margin-bottom: 3rem;
-  }
-
-  h2 {
+  .list-section h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
     font-variant: small-caps;
-    letter-spacing: 0.03em;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid rgba(60, 60, 60, 0.15);
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    margin: 0 0 16px;
+    color: var(--color-heading);
   }
-
-  .past-events {
-    opacity: 0.8;
-  }
-
-  .no-events {
-    padding: 2rem 0;
-    color: var(--color-text-muted);
-    font-style: italic;
-  }
+  .list-section { margin-bottom: 36px; }
 </style>

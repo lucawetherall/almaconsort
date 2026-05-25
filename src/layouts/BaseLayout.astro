@@ -59,7 +59,7 @@ const webPageJsonLd = !isHome
     <meta name="description" content={description} />
     <meta name="robots" content={noindex ? 'noindex, nofollow' : 'index, follow'} />
     <meta name="author" content="Alma Consort" />
-    <meta name="theme-color" content="#f8f5ec" />
+    <meta name="theme-color" content="#f7f3e8" />
     <meta name="color-scheme" content="light" />
     <meta name="format-detection" content="telephone=no" />
     <title>{displayTitle}</title>
@@ -93,9 +93,8 @@ const webPageJsonLd = !isHome
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap"
       rel="stylesheet"
     />
 
@@ -179,7 +178,7 @@ const webPageJsonLd = !isHome
       </div>
       <slot />
     </main>
-    <div class="site-newsletter">
+    <div class="site-newsletter" id="newsletter">
       <div class="container">
         <Newsletter />
       </div>

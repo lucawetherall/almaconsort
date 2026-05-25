@@ -1,4 +1,31 @@
 ---
+/**
+ * Stripe Buy Button wrapper.
+ *
+ * NOTE on visual styling:
+ * The Stripe Buy Button is a web component that renders inside its own shadow
+ * DOM. Its colours, fonts, and shape are NOT controllable from this file — they
+ * are configured per-button in the Stripe Dashboard.
+ *
+ * To match the editorial-uplift palette:
+ *   1. Open Stripe Dashboard → Product Catalogue → select the product
+ *   2. Open the Buy Button → Customise appearance
+ *   3. Set:
+ *        Button colour:  #7a1a2a   (--color-claret)
+ *        Button text:    #f7f3e8   (--color-bg)
+ *        Border radius:  3px       (--radius-sm)
+ *        Font:           the closest match to Inter (Stripe offers a curated list)
+ *   4. Save. The change propagates to every embed of that button.
+ *
+ * Repeat for every buyButtonId used across the support tiers.
+ *
+ * Longer-term option: migrate from Buy Buttons to Stripe Payment Links and
+ * render them as <a class="btn-primary" href="https://buy.stripe.com/...">.
+ * That gives full CSS control (the link is a normal anchor styled by the site).
+ * Migration steps: create Payment Links in Stripe Dashboard → swap the buyButtonId
+ * field in src/content/support-tiers/*.md for paymentLinkUrl → replace this
+ * component with a Button render.
+ */
 interface Props {
   buyButtonId: string;
 }
@@ -6,7 +33,7 @@ interface Props {
 const { buyButtonId } = Astro.props;
 const publishableKey = 'pk_live_51SL6CLFZ0c2qbCCWaBKXzJKcGZmTMskjcFySP5b8kyMpU0XekqztgnG8cuWEC8X6YdW7ybkO737ONmPTIVxHGVKH00pYN6Z9in';
 ---
-<div class="stripe-button-wrap">
+<div class="stripe-button-wrapper">
   <stripe-buy-button
     buy-button-id={buyButtonId}
     publishable-key={publishableKey}
@@ -15,14 +42,19 @@ const publishableKey = 'pk_live_51SL6CLFZ0c2qbCCWaBKXzJKcGZmTMskjcFySP5b8kyMpU0X
 </div>
 
 <style>
-  .stripe-button-wrap {
+  .stripe-button-wrapper {
     display: flex;
     justify-content: center;
     width: 100%;
   }
 
-  .stripe-button-wrap :global(stripe-buy-button) {
-    width: 100%;
+  /* Stripe injects its own button inside a shadow root — we can only target
+     the host element. Width:100% lets the inner Stripe button stretch to the
+     pricing card's content area, giving consistent visual weight across all
+     three tier cards. */
+  .stripe-button-wrapper :global(stripe-buy-button) {
     display: block;
+    width: 100%;
+    max-width: 240px;
   }
 </style>

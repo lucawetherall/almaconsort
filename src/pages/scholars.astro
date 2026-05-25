@@ -1,11 +1,15 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Divider from '../components/Divider.astro';
+import TitleBlock from '../components/TitleBlock.astro';
+import OrnamentRule from '../components/OrnamentRule.astro';
 import FeatureCard from '../components/FeatureCard.astro';
 ---
 <BaseLayout title="Alma Scholars | Mentoring Young Choral Singers in London" description="The Alma Scholars programme supports early-career singers between training and full professional work, with concerts, recordings, and mentoring from senior choral musicians.">
   <div class="container">
-    <h1>Alma Scholars</h1>
+    <TitleBlock
+      title="Alma Scholars"
+      pitch={`Mentoring the <span class="accent">next generation</span> of young choral singers through performance and recording opportunities.`}
+    />
 
     <p>
       The <strong>Alma Scholars</strong> programme supports singers early in their careers, between training and full professional work. Scholars join the ensemble for concerts and recordings, and sing alongside the professional choir with mentoring from senior singers.
@@ -15,7 +19,7 @@ import FeatureCard from '../components/FeatureCard.astro';
       They learn repertoire, stagecraft, and ensemble discipline from inside a working choir. Scholars also get free studio recordings from our in-house facility, which they keep for portfolios and auditions.
     </p>
 
-    <Divider />
+    <OrnamentRule />
 
     <FeatureCard>
       <h2>Valentine's Opera Gala</h2>
@@ -25,7 +29,7 @@ import FeatureCard from '../components/FeatureCard.astro';
       </p>
     </FeatureCard>
 
-    <Divider />
+    <OrnamentRule />
 
     <FeatureCard>
       <h2>Christmas at St Mary's, Harrow on the Hill</h2>
@@ -39,7 +43,7 @@ import FeatureCard from '../components/FeatureCard.astro';
       </p>
     </FeatureCard>
 
-    <Divider />
+    <OrnamentRule />
 
     <div class="pull-quote">
       The Alma Scholars programme runs on the support of our donors. Your contribution funds mentoring, rehearsal time, and recording sessions for young singers at the start of their careers. Visit our <a href={`${import.meta.env.BASE_URL}support/`}>support page</a> to help.

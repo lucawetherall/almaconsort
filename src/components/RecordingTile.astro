@@ -1,0 +1,90 @@
+---
+import { YOUTUBE_THUMB, YOUTUBE_WATCH } from '../lib/constants';
+
+interface Props {
+  youtubeId: string;
+  title: string;          // may include <span class="accent">…</span>
+  composer: string;
+  href?: string;          // defaults to YouTube watch URL
+}
+
+const { youtubeId, title, composer, href } = Astro.props;
+const targetHref = href ?? YOUTUBE_WATCH(youtubeId);
+const thumbUrl = YOUTUBE_THUMB(youtubeId);
+const isExternal = targetHref.startsWith('http');
+---
+<a
+  class="recording-tile"
+  href={targetHref}
+  target={isExternal ? '_blank' : undefined}
+  rel={isExternal ? 'noopener' : undefined}
+  aria-label={`Play recording: ${composer}`}
+>
+  <div class="plate" style={`background-image: url(${thumbUrl})`}>
+    <div class="play-btn" aria-hidden="true"><span>▶</span></div>
+  </div>
+  <h3 class="tile-title" set:html={title} />
+  <div class="tile-meta">{composer}</div>
+</a>
+
+<style>
+  .recording-tile {
+    display: grid;
+    gap: 10px;
+    text-decoration: none;
+    color: inherit;
+  }
+  .recording-tile:focus-visible {
+    outline: 2px solid var(--color-claret);
+    outline-offset: 3px;
+  }
+  .plate {
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+    border-radius: 1px;
+    border: 1px solid var(--color-border-strong);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--color-bg-tint);
+    transition: box-shadow var(--transition);
+  }
+  .recording-tile:hover .plate { box-shadow: var(--shadow-tile-hover); }
+  .play-btn {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    pointer-events: none;
+  }
+  .play-btn span {
+    display: flex; align-items: center; justify-content: center;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: rgba(247, 243, 232, 0.92);
+    color: var(--color-claret);
+    font-size: 1.1rem;
+    padding-left: 4px;
+    box-shadow: var(--shadow-play-btn);
+    transition: transform var(--transition), background var(--transition);
+  }
+  .recording-tile:hover .play-btn span {
+    transform: scale(1.08);
+    background: var(--color-text-light);
+  }
+
+  .tile-title {
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    line-height: 1.2;
+    font-weight: 500;
+    margin: 4px 0 4px;
+    color: var(--color-heading);
+    transition: color var(--transition);
+  }
+  .recording-tile:hover .tile-title { color: var(--color-claret); }
+  .tile-meta {
+    font-family: var(--font-sans);
+    font-size: 0.78rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+</style>

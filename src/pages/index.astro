@@ -1,6 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import Divider from '../components/Divider.astro';
+import OrnamentRule from '../components/OrnamentRule.astro';
+import SectionHead from '../components/SectionHead.astro';
+import ConcertTile from '../components/ConcertTile.astro';
+import EmptyState from '../components/EmptyState.astro';
+import FeaturedRecordings from '../components/FeaturedRecordings.astro';
+import ScholarsCallout from '../components/ScholarsCallout.astro';
 import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL;
@@ -44,10 +49,13 @@ const heroVideoJsonLd = {
           <span class="lyt-visually-hidden">Play Video: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)</span>
         </a>
       </lite-youtube>
+      <div class="video-caption">
+        <span class="caption-text"><strong>O Magnum Mysterium</strong> — Tomás Luis de Victoria (1572)</span>
+        <a href={`${base}recording/`} class="caption-link">All recordings →</a>
+      </div>
     </div>
   </div>
 
-  <!-- Introduction with drop cap -->
   <div class="container">
     <div class="home-text">
       <p class="drop-cap">
@@ -61,166 +69,149 @@ const heroVideoJsonLd = {
       </p>
     </div>
 
-    <Divider />
+    <OrnamentRule />
 
-    <!-- Two-column: Events + News -->
-    <div class="home-grid">
-      <div class="home-column">
-        <h2 class="column-heading">Upcoming Events</h2>
-        {upcoming.length > 0 ? (
-          <ul class="column-list">
-            {upcoming.map((event) => {
-              const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-              const dateStr = `${event.data.date.getDate()} ${months[event.data.date.getMonth()]}`;
-              return (
-                <li>
-                  <a href={`${base}events/${event.id}/`}>
-                    <span class="item-date">{dateStr}</span>
-                    <span class="item-title">{event.data.title}</span>
-                    <span class="item-meta">{event.data.venue.name}</span>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        ) : (
-          <p class="column-empty">Our next concert hasn't been announced yet. Subscribe to the newsletter to hear first.</p>
-        )}
-        <a href={`${base}events/`} class="column-link">View all events →</a>
-      </div>
+    <!-- Upcoming Concerts -->
+    <section class="home-section">
+      <SectionHead title="Upcoming Concerts" link={{ href: `${base}events/`, label: 'View all events →' }} />
+      {upcoming.length > 0 ? (
+        <div class="tile-row">
+          {upcoming.map((event) => (
+            <ConcertTile
+              slug={event.id}
+              title={event.data.title}
+              date={event.data.date}
+              venue={event.data.venue}
+              startTime={event.data.startTime}
+              priceFrom={event.data.priceFrom}
+              composers={event.data.composers}
+              altTitle={event.data.altTitle}
+              photo={event.data.photo}
+              photoAlt={event.data.photoAlt}
+              photoCaption={event.data.photoCaption}
+            />
+          ))}
+        </div>
+      ) : (
+        <EmptyState
+          title={`Our next concert hasn't been announced <span class="accent">yet</span>.`}
+          body="Subscribe to be the first to hear when dates are confirmed."
+        />
+      )}
+    </section>
 
+    <!-- Featured Recordings -->
+    <FeaturedRecordings />
+
+    <!-- Latest News + Scholars -->
+    <div class="home-duo">
       <div class="home-column">
-        <h2 class="column-heading">Latest News</h2>
+        <SectionHead title="Latest News" link={{ href: `${base}blog/`, label: 'Read all news →' }} />
         {allPosts.length > 0 ? (
-          <ul class="column-list">
+          <ul class="news-list">
             {allPosts.map((post) => {
               const dateStr = post.data.date.toLocaleDateString('en-GB', { day: 'numeric', month: 'short' });
               return (
                 <li>
                   <a href={`${base}blog/${post.id}/`}>
-                    <span class="item-date">{dateStr}</span>
-                    <span class="item-title">{post.data.title}</span>
+                    <span class="news-date">{dateStr}</span>
+                    <span class="news-title" set:html={post.data.title} />
                   </a>
                 </li>
               );
             })}
           </ul>
         ) : (
-          <p class="column-empty">New writing on its way. Follow along via the newsletter or RSS.</p>
+          <p class="news-empty">New writing on its way.</p>
         )}
-        <a href={`${base}blog/`} class="column-link">Read all news →</a>
       </div>
-    </div>
 
-    <!-- Support callout -->
-    <div class="pull-quote">
-      Support our <a href={`${base}support/`}>Alma Scholars</a> programme — nurturing the next generation of young choral singers through mentoring, performance opportunities, and professional recordings.
+      <ScholarsCallout variant="compact" />
     </div>
   </div>
 </BaseLayout>
 
 <style>
-  .video-wrapper {
-    margin-bottom: 2.5rem;
-  }
-
-  lite-youtube {
-    max-width: 100%;
-    aspect-ratio: 16 / 9;
-  }
-
-  .home-text {
-    font-size: 1.1rem;
-    line-height: 1.8;
-  }
-
-  /* Two-column grid */
-  .home-grid {
+  .video-wrapper { margin-bottom: 2.5rem; }
+  lite-youtube { max-width: 100%; aspect-ratio: 16 / 9; }
+  .video-caption {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
+    grid-template-columns: 1fr auto;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 2px 0;
   }
-
-  .column-heading {
+  .caption-text {
     font-family: var(--font-serif);
-    font-size: 1.1rem;
-    font-variant: small-caps;
-    letter-spacing: 0.06em;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid var(--color-accent);
-    margin-bottom: 1rem;
-    color: var(--color-accent);
-  }
-
-  .column-list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  .column-list li {
-    padding: 0.6rem 0;
-    border-bottom: 1px solid rgba(60, 60, 60, 0.08);
-  }
-
-  .column-list li:last-child {
-    border-bottom: none;
-  }
-
-  .column-list a {
-    text-decoration: none;
-    color: var(--color-text);
-    display: block;
-  }
-
-  .column-list a:hover .item-title {
-    color: var(--color-accent);
-  }
-
-  .item-date {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--color-text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.04em;
-  }
-
-  .item-title {
-    display: block;
-    font-size: 1rem;
-    font-weight: 600;
-    transition: color 0.2s;
-  }
-
-  .item-meta {
-    display: block;
-    font-size: 0.85rem;
-    color: var(--color-text-muted);
-  }
-
-  .column-empty {
-    font-size: 0.95rem;
-    color: var(--color-text-muted);
     font-style: italic;
+    font-size: 1.05rem;
+    color: var(--color-text-muted);
+  }
+  .caption-text strong { font-style: normal; font-weight: 500; color: var(--color-text); }
+  .caption-link {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-claret);
+    padding-bottom: 2px;
+    white-space: nowrap;
+  }
+
+  .home-text { font-size: 1.1rem; line-height: 1.8; }
+
+  .home-section { margin-bottom: 56px; }
+  .tile-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .home-duo {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 56px;
+    align-items: start;
+    margin-top: 8px;
+    padding-bottom: 32px;
+  }
+
+  .news-list { list-style: none; padding: 0; margin: 0; }
+  .news-list li { padding: 14px 0; border-bottom: 1px solid var(--color-border); }
+  .news-list li:last-child { border-bottom: none; }
+  .news-list a {
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 16px;
+    align-items: baseline;
+    text-decoration: none;
+    color: inherit;
+  }
+  .news-date {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+  }
+  .news-title {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--color-heading);
+  }
+  .news-list a:hover .news-title { color: var(--color-claret); }
+  .news-empty {
+    font-style: italic;
+    color: var(--color-text-muted);
     padding: 0.5rem 0;
   }
 
-  .column-link {
-    display: inline-block;
-    margin-top: 0.75rem;
-    font-size: 0.9rem;
-    color: var(--color-accent);
-    text-decoration: none;
-  }
-
-  .column-link:hover {
-    text-decoration: underline;
-  }
-
   @media (max-width: 768px) {
-    .home-grid {
-      grid-template-columns: 1fr;
-      gap: 2rem;
-    }
+    .tile-row { grid-template-columns: 1fr; gap: 2rem; }
+    .home-duo { grid-template-columns: 1fr; gap: 2rem; }
+    .video-caption { grid-template-columns: 1fr; gap: 8px; }
   }
 </style>
