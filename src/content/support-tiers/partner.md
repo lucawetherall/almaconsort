@@ -6,16 +6,19 @@ tagline: "Become a Partner of Alma Consort"
 stripeButtons:
   - id: "buy_btn_1SVrPCFZ0c2qbCCWCTTA9cq4"
     label: "£20/month"
-    tierName: "Alma Associate Partner"
+    tierName: "Associate Partner"
     price: "£20"
+    highlight: "All Friend benefits + open rehearsals + named in programmes"
   - id: "buy_btn_1SVrQFFZ0c2qbCCWuuuA10EX"
     label: "£25/month"
-    tierName: "Alma Partner"
+    tierName: "Partner"
     price: "£25"
+    highlight: "Associate benefits + reserved seats at every concert"
   - id: "buy_btn_1SVrQoFZ0c2qbCCWjzwWAYIZ"
     label: "£30/month"
-    tierName: "Alma Core Partner"
+    tierName: "Core Partner"
     price: "£30"
+    highlight: "Partner benefits + one free guest ticket each year"
 ---
 
 **Step inside the rehearsal room.**
@@ -35,11 +38,5 @@ As a Partner you receive **all the benefits of a Friend** (priority booking, tic
 - **Early programmes:** receive the full concert programme before each performance.
 - **Reserved seats** at every concert, on top of priority booking.
 - **One free ticket a year:** a discount code for a complimentary ticket to bring a friend or family member.
-
----
-
-## Join as an Alma Partner
-
-**Monthly Contribution:** £20, £25, £30
 
 Partners stand alongside us in our artistic work. Thank you for backing the choir and the next generation of singers.

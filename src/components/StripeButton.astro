@@ -46,14 +46,13 @@ const publishableKey = 'pk_live_51SL6CLFZ0c2qbCCWaBKXzJKcGZmTMskjcFySP5b8kyMpU0X
     display: flex;
     justify-content: center;
     width: 100%;
-    margin-top: 0.5rem;
   }
 
   /* Stripe injects its own button inside a shadow root — we can only target
      the host element. Width:100% lets the inner Stripe button stretch to the
      pricing card's content area, giving consistent visual weight across all
      three tier cards. */
-  .stripe-button-wrapper stripe-buy-button {
+  .stripe-button-wrapper :global(stripe-buy-button) {
     display: block;
     width: 100%;
     max-width: 240px;

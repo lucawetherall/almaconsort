@@ -6,16 +6,19 @@ tagline: "Become a Friend of Alma Consort"
 stripeButtons:
   - id: "buy_btn_1SVqnnFZ0c2qbCCWIfyTeBCr"
     label: "£3.50/month"
-    tierName: "Friend (Chorister Tier)"
+    tierName: "Chorister"
     price: "£3.50"
+    highlight: "Priority booking + Friends-only ticket discounts"
   - id: "buy_btn_1SVqpqFZ0c2qbCCWv7OsAzhH"
     label: "£5/month"
-    tierName: "Friend (Choral Scholar Tier)"
+    tierName: "Choral Scholar"
     price: "£5"
+    highlight: "Everything in Chorister, plus early access to recordings"
   - id: "buy_btn_1SVqqgFZ0c2qbCCWNtDzou9V"
     label: "£10/month"
-    tierName: "Friend (Consort Tier)"
+    tierName: "Consort"
     price: "£10"
+    highlight: "Everything in Choral Scholar, plus our deepest thanks"
 ---
 
 **Help us keep the music playing and the next generation singing.**
@@ -33,11 +36,5 @@ As a Friend you directly support the **Alma Scholars** programme. Your contribut
 - **The best seats in the house:** priority access to tickets before the general public.
 - **Discount codes:** Friends-only discounts on tickets for every concert in the season.
 - **Early access to recordings:** hear and watch concert recordings before they go public.
-
----
-
-## Join the Friends Programme
-
-**Monthly Contribution:** £3.50, £5, £10
 
 Your support makes a real difference to our scholars and to the music we make together.
