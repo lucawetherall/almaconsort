@@ -1,0 +1,71 @@
+---
+interface Props {
+  variant?: 'compact' | 'full';
+}
+const { variant = 'full' } = Astro.props;
+const baseUrl = import.meta.env.BASE_URL;
+---
+<aside class={`scholars-callout ${variant}`}>
+  <div class="text">
+    <div class="eyebrow">Mentoring · Performance · Recording</div>
+    <h3>
+      We mentor early-career singers through the <span class="accent">Alma Scholars</span> programme.
+    </h3>
+    {variant === 'full' && (
+      <p>Nurturing the next generation of young choral singers through mentoring, performance opportunities, and professional recordings.</p>
+    )}
+  </div>
+  <div class="actions">
+    <a href={`${baseUrl}scholars/`} class="btn-primary">About the programme</a>
+    <a href={`${baseUrl}support/`} class="btn-secondary">How to support</a>
+  </div>
+</aside>
+
+<style>
+  .scholars-callout {
+    border: 1px solid var(--color-claret-border);
+    background: linear-gradient(180deg, var(--color-claret-soft), transparent);
+    padding: 26px 24px;
+    display: grid;
+    grid-template-columns: 1.3fr auto;
+    gap: 36px;
+    align-items: center;
+  }
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+    margin-bottom: 8px;
+  }
+  .scholars-callout h3 {
+    font-family: var(--font-serif);
+    font-size: 1.55rem;
+    line-height: 1.15;
+    font-weight: 500;
+    margin: 0 0 10px;
+    color: var(--color-heading);
+  }
+  .scholars-callout.compact h3 { font-size: 1.35rem; }
+  .scholars-callout p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-self: end;
+  }
+  @media (max-width: 768px) {
+    .scholars-callout { grid-template-columns: 1fr; gap: 16px; }
+    .actions { justify-self: start; flex-direction: column; align-items: stretch; }
+    .actions .btn-primary,
+    .actions .btn-secondary { justify-content: center; }
+  }
+</style>
