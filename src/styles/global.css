@@ -395,10 +395,30 @@ textarea.input { min-height: 8rem; resize: vertical; }
   lite-youtube,
   .video-wrapper,
   .btn,
+  .btn-primary,
+  .btn-secondary,
   .back-link,
   .event-actions,
-  .nav-toggle-label {
+  .nav-toggle-label,
+  .empty-state,
+  .scholars-callout,
+  .enquiry-band,
+  .featured-recordings,
+  .ornament-rule,
+  .recording-tile,
+  .section-head a {
     display: none !important;
+  }
+  /* Decorative overlays / photo darkening — strip in print */
+  .concert-tile .plate.photo::after,
+  .bio-plate.photo::after {
+    display: none !important;
+  }
+  /* No-photo tile plates: thin black border, no decorative background */
+  .concert-tile .plate.np,
+  .bio-plate.np {
+    background: none !important;
+    border: 1px solid #000 !important;
   }
 
   main {
