@@ -42,19 +42,19 @@ const publishableKey = 'pk_live_51SL6CLFZ0c2qbCCWaBKXzJKcGZmTMskjcFySP5b8kyMpU0X
 </div>
 
 <style>
+  /* Stripe Buy Button renders inside its own shadow root, so we can't style
+     the inner button. We let the host element take its natural width and
+     centre it within a block-level wrapper. Overflow:hidden guards against
+     any sub-pixel spill on narrow cards. */
   .stripe-button-wrapper {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-  }
-
-  /* Stripe injects its own button inside a shadow root — we can only target
-     the host element. Width:100% lets the inner Stripe button stretch to the
-     pricing card's content area, giving consistent visual weight across all
-     three tier cards. */
-  .stripe-button-wrapper :global(stripe-buy-button) {
     display: block;
     width: 100%;
-    max-width: 240px;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .stripe-button-wrapper :global(stripe-buy-button) {
+    display: inline-block;
+    max-width: 100%;
   }
 </style>
