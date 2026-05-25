@@ -1,6 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import Divider from '../../components/Divider.astro';
+import OrnamentRule from '../../components/OrnamentRule.astro';
 const base = import.meta.env.BASE_URL;
 ---
 <BaseLayout
@@ -12,7 +12,7 @@ const base = import.meta.env.BASE_URL;
     <p class="thanks-eyebrow">Message sent</p>
     <h1>Thank you</h1>
     <p class="thanks-body">Your message is on its way. We aim to reply within two working days.</p>
-    <Divider />
+    <OrnamentRule />
     <p class="thanks-nav">
       <a href={`${base}contact/`}>Send another message</a>
       <span class="thanks-sep" aria-hidden="true">·</span>
