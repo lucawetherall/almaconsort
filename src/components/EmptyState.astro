@@ -1,0 +1,59 @@
+---
+interface Props {
+  title: string;          // may contain <span class="accent">…</span>
+  body?: string;
+  newsletter?: boolean;   // default true — renders a Subscribe CTA anchoring to #newsletter
+}
+const { title, body, newsletter = true } = Astro.props;
+---
+<div class={`empty-state${newsletter ? ' with-cta' : ''}`}>
+  <div class="empty-text">
+    <h3 set:html={title} />
+    {body && <p>{body}</p>}
+  </div>
+  {newsletter && (
+    <a href="#newsletter" class="btn-primary empty-cta">
+      Subscribe
+      <span class="btn-arrow" aria-hidden="true">→</span>
+    </a>
+  )}
+</div>
+
+<style>
+  .empty-state {
+    border: 1px solid var(--color-border-strong);
+    background:
+      repeating-linear-gradient(135deg, transparent 0 8px, rgba(60,40,20,0.025) 8px 9px),
+      rgba(247, 243, 232, 0.4);
+    padding: 36px 28px;
+  }
+  .empty-state.with-cta {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 28px;
+    align-items: center;
+  }
+  .empty-text h3 {
+    font-family: var(--font-serif);
+    font-size: 1.3rem;
+    line-height: 1.25;
+    font-weight: 500;
+    margin: 0 0 6px;
+    color: var(--color-heading);
+  }
+  .empty-text p {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+    max-width: 48ch;
+  }
+  .empty-cta { justify-self: end; }
+
+  @media (max-width: 768px) {
+    .empty-state.with-cta { grid-template-columns: 1fr; }
+    .empty-cta { justify-self: start; }
+  }
+</style>
