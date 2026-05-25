@@ -173,39 +173,68 @@ main {
 }
 
 /* ===== Buttons ===== */
-.btn {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  border: 1px solid transparent;
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 12px 22px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color var(--transition), color var(--transition),
-    border-color var(--transition), transform var(--transition),
-    box-shadow var(--transition);
+  line-height: 1;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
 }
 
 .btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-bg-white);
-  border-color: var(--color-accent);
+  background: var(--color-claret);
+  color: var(--color-bg);
+  border: 1px solid var(--color-claret);
 }
-
-.btn-primary:hover {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  color: var(--color-bg-white);
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--color-claret-hover);
+  border-color: var(--color-claret-hover);
+  color: var(--color-bg);
 }
-
-.btn-primary:active {
-  transform: translateY(1px);
-}
-
-.btn:focus-visible {
-  outline: 2px solid var(--color-accent);
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-claret);
   outline-offset: 3px;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid rgba(42, 38, 32, 0.55);
+}
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background: rgba(42, 38, 32, 0.06);
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+.btn-arrow {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: transform var(--transition);
+}
+.btn-primary:hover .btn-arrow,
+.btn-secondary:hover .btn-arrow {
+  transform: translateX(3px);
 }
 
 /* ===== Pull Quote ===== */
