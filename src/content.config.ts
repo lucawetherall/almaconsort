@@ -3,7 +3,7 @@ import { defineCollection, z } from 'astro:content';
 
 const events = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/events' }),
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
     date: z.coerce.date(),
     startTime: z.string().optional(),
@@ -14,14 +14,25 @@ const events = defineCollection({
     }),
     description: z.string(),
     ticketUrl: z.string().url().optional(),
-    image: z.string().optional(),
+    image: z.string().optional(),          // legacy — kept for compatibility
     performers: z.array(z.string()).optional(),
     featured: z.boolean().optional(),
     programme: z.array(z.object({
       composer: z.string(),
       work: z.string(),
     })).optional(),
-  }),
+
+    // Editorial uplift additions
+    photo: image().optional(),
+    photoAlt: z.string().optional(),
+    photoCaption: z.string().optional(),
+    composers: z.array(z.string()).optional(),
+    altTitle: z.string().optional(),
+    priceFrom: z.string().optional(),
+  }).refine(
+    (data) => !data.photo || (data.photo && data.photoAlt),
+    { message: 'photoAlt is required when photo is set', path: ['photoAlt'] }
+  ),
 });
 
 const supportTiers = defineCollection({
@@ -55,4 +66,14 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = { events, supportTiers, blog };
+const featuredRecordings = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/featuredRecordings' }),
+  schema: z.object({
+    youtubeId: z.string(),
+    title: z.string(),
+    composer: z.string(),
+    order: z.number().optional(),
+  }),
+});
+
+export const collections = { events, supportTiers, blog, featuredRecordings };
