@@ -1,35 +1,42 @@
 /* ===== Design Tokens ===== */
 :root {
   /* Colour */
-  --color-bg: #f8f5ec;
-  --color-bg-white: #ffffff;
-  --color-bg-tint: #fbf9f2;
-  --color-text: #3c3c3c;
-  --color-text-muted: #5f5f5f;
-  --color-accent: #c4621c;
-  --color-accent-hover: #a4520f;
-  --color-accent-soft: rgba(196, 98, 28, 0.08);
-  --color-heading: #3c3c3c;
-  --color-border: rgba(60, 60, 60, 0.1);
-  --color-border-strong: rgba(60, 60, 60, 0.2);
+  --color-bg:            #f7f3e8;
+  --color-bg-tint:       #f0e8d4;
+  --color-bg-white:      #ffffff;
+  --color-text:          #2a2620;
+  --color-text-muted:    #524a40;
+  --color-text-soft:     #6a6660;
+  --color-text-light:    #fbf3df;
+  --color-heading:       #2a2620;
+  --color-border:        rgba(60, 40, 20, 0.10);
+  --color-border-strong: rgba(60, 40, 20, 0.18);
+
+  --color-accent:        #8b3a0a;
+  --color-accent-hover:  #6e2d07;
+  --color-accent-soft:   rgba(139, 58, 10, 0.08);
+
+  --color-claret:        #7a1a2a;
+  --color-claret-hover:  #5e1320;
+  --color-claret-soft:   rgba(122, 26, 42, 0.05);
+  --color-claret-border: rgba(122, 26, 42, 0.35);
 
   /* Type */
   --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-sans:  'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
 
   /* Layout widths */
   --content-width: 750px;
-  --site-width: 1100px;
+  --site-width:    1100px;
+
+  /* Breakpoints (documentation only — actual media queries hardcode the px value) */
+  --bp-md: 768px;
+  --bp-lg: 1024px;
 
   /* Spacing scale */
-  --space-1: 0.25rem;
-  --space-2: 0.5rem;
-  --space-3: 0.75rem;
-  --space-4: 1rem;
-  --space-5: 1.25rem;
-  --space-6: 1.5rem;
-  --space-8: 2rem;
-  --space-10: 2.5rem;
-  --space-12: 3rem;
+  --space-1: 0.25rem;  --space-2: 0.5rem;   --space-3: 0.75rem;
+  --space-4: 1rem;     --space-5: 1.25rem;  --space-6: 1.5rem;
+  --space-8: 2rem;     --space-10: 2.5rem;  --space-12: 3rem;
   --space-16: 4rem;
 
   /* Radii */
@@ -37,19 +44,26 @@
   --radius-md: 6px;
 
   /* Shadows */
-  --shadow-card: 0 1px 2px rgba(60, 40, 20, 0.04);
-  --shadow-card-hover: 0 6px 20px rgba(60, 40, 20, 0.08);
+  --shadow-tile:          0 1px 2px rgba(60, 40, 20, 0.04);
+  --shadow-tile-hover:    0 6px 20px rgba(60, 40, 20, 0.08);
+  --shadow-play-btn:      0 4px 16px rgba(0, 0, 0, 0.35);
+  --shadow-text-on-photo: 0 1px 6px rgba(0, 0, 0, 0.5);
+
+  /* Legacy aliases — temporarily kept so existing component styles still resolve.
+     Remove in the migration cleanup task. */
+  --shadow-card:        var(--shadow-tile);
+  --shadow-card-hover:  var(--shadow-tile-hover);
 
   /* Motion */
   --transition: 180ms ease;
   --transition-slow: 280ms ease;
 
-  /* Footer stripe colors */
-  --stripe-blue: #4a7fb5;
-  --stripe-teal: #5bb5a2;
+  /* Footer stripe colours — unchanged */
+  --stripe-blue:   #4a7fb5;
+  --stripe-teal:   #5bb5a2;
   --stripe-yellow: #f0c75e;
-  --stripe-coral: #e8765a;
-  --stripe-pink: #d65b8a;
+  --stripe-coral:  #e8765a;
+  --stripe-pink:   #d65b8a;
 }
 
 /* ===== Reset ===== */
@@ -159,39 +173,68 @@ main {
 }
 
 /* ===== Buttons ===== */
-.btn {
-  display: inline-block;
-  padding: 0.75rem 2rem;
-  font-family: var(--font-serif);
-  font-size: 1rem;
-  border: 1px solid transparent;
+.btn-primary,
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 500;
+  padding: 12px 22px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   text-decoration: none;
-  transition: background-color var(--transition), color var(--transition),
-    border-color var(--transition), transform var(--transition),
-    box-shadow var(--transition);
+  line-height: 1;
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition);
 }
 
 .btn-primary {
-  background-color: var(--color-accent);
-  color: var(--color-bg-white);
-  border-color: var(--color-accent);
+  background: var(--color-claret);
+  color: var(--color-bg);
+  border: 1px solid var(--color-claret);
 }
-
-.btn-primary:hover {
-  background-color: var(--color-accent-hover);
-  border-color: var(--color-accent-hover);
-  color: var(--color-bg-white);
+.btn-primary:hover,
+.btn-primary:focus {
+  background: var(--color-claret-hover);
+  border-color: var(--color-claret-hover);
+  color: var(--color-bg);
 }
-
-.btn-primary:active {
-  transform: translateY(1px);
-}
-
-.btn:focus-visible {
-  outline: 2px solid var(--color-accent);
+.btn-primary:focus-visible {
+  outline: 2px solid var(--color-claret);
   outline-offset: 3px;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text);
+  border: 1px solid rgba(42, 38, 32, 0.55);
+}
+.btn-secondary:hover,
+.btn-secondary:focus {
+  background: rgba(42, 38, 32, 0.06);
+  border-color: var(--color-text);
+  color: var(--color-text);
+}
+.btn-secondary:focus-visible {
+  outline: 2px solid var(--color-text);
+  outline-offset: 3px;
+}
+
+.btn-arrow {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  line-height: 1;
+  transition: transform var(--transition);
+}
+.btn-primary:hover .btn-arrow,
+.btn-secondary:hover .btn-arrow {
+  transform: translateX(3px);
 }
 
 /* ===== Pull Quote ===== */
@@ -212,18 +255,48 @@ main {
   text-decoration-color: currentColor;
 }
 
-/* ===== Drop Cap ===== */
+/* ===== Utility classes ===== */
+
+/* Italic claret accent — used inside Cormorant headings and label props.
+   Use this span (not <em>) to bypass conflicts with global em styling. */
+.accent {
+  color: var(--color-claret);
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* Drop cap — applied as a class on a paragraph */
 .drop-cap::first-letter {
   font-family: var(--font-serif);
-  font-size: 3.6rem;
+  font-size: 3.8rem;
   float: left;
   line-height: 0.85;
-  margin-right: 0.08em;
-  margin-top: 0.06em;
+  margin: 0.06em 0.08em 0 0;
   color: var(--color-accent);
-  font-weight: 400;
   font-variant: small-caps;
 }
+@media (max-width: 768px) {
+  .drop-cap::first-letter { font-size: 3rem; }
+}
+
+/* Form input — used in Contact, Newsletter, EmptyState */
+.input {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  line-height: 1.3;
+  padding: 10px 14px;
+  background: rgba(247, 243, 232, 0.6);
+  border: 1px solid rgba(60, 40, 20, 0.4);
+  border-radius: var(--radius-sm);
+  color: var(--color-text);
+  transition: border-color var(--transition), background var(--transition);
+}
+.input:focus-visible {
+  outline: none;
+  border-color: var(--color-claret);
+  background: var(--color-bg-white);
+}
+textarea.input { min-height: 8rem; resize: vertical; }
 
 /* ===== Skip to content ===== */
 .skip-link {
@@ -282,10 +355,6 @@ main {
   main {
     padding: 2rem 0;
   }
-
-  .drop-cap::first-letter {
-    font-size: 3rem;
-  }
 }
 
 /* ===== Reduced motion ===== */
@@ -326,10 +395,30 @@ main {
   lite-youtube,
   .video-wrapper,
   .btn,
+  .btn-primary,
+  .btn-secondary,
   .back-link,
   .event-actions,
-  .nav-toggle-label {
+  .nav-toggle-label,
+  .empty-state,
+  .scholars-callout,
+  .enquiry-band,
+  .featured-recordings,
+  .ornament-rule,
+  .recording-tile,
+  .section-head a {
     display: none !important;
+  }
+  /* Decorative overlays / photo darkening — strip in print */
+  .concert-tile .plate.photo::after,
+  .bio-plate.photo::after {
+    display: none !important;
+  }
+  /* No-photo tile plates: thin black border, no decorative background */
+  .concert-tile .plate.np,
+  .bio-plate.np {
+    background: none !important;
+    border: 1px solid #000 !important;
   }
 
   main {

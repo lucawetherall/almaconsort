@@ -1,0 +1,38 @@
+---
+import { getCollection } from 'astro:content';
+import SectionHead from './SectionHead.astro';
+import RecordingTile from './RecordingTile.astro';
+
+const base = import.meta.env.BASE_URL;
+const all = await getCollection('featuredRecordings');
+const items = all
+  .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
+  .slice(0, 3);
+---
+{items.length > 0 && (
+  <section class="featured-recordings home-section">
+    <SectionHead title="Featured Recordings" link={{ href: `${base}recording/`, label: 'All recordings →' }} />
+    <div class="tile-row">
+      {items.map((rec) => (
+        <RecordingTile
+          youtubeId={rec.data.youtubeId}
+          title={rec.data.title}
+          composer={rec.data.composer}
+        />
+      ))}
+    </div>
+  </section>
+)}
+
+<style>
+  /* auto-fit lets the row degrade gracefully if fewer than 3 seeds exist */
+  .tile-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+  .home-section { margin-bottom: 56px; }
+  @media (max-width: 768px) {
+    .tile-row { grid-template-columns: 1fr; gap: 2rem; }
+  }
+</style>

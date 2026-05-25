@@ -1,0 +1,180 @@
+---
+import { getImage } from 'astro:assets';
+
+interface Props {
+  name: string;
+  role: string;                 // top-left overlay/corner label, e.g. "Director"
+  roleTags?: string[];          // Inter eyebrow above bio heading
+  photo?: ImageMetadata;
+  photoAlt?: string;
+  monogram?: string;            // auto-derived if absent
+  monogramSubtitle?: string;    // italic line beneath monogram in no-photo state
+}
+
+const { name, role, roleTags, photo, monogram, monogramSubtitle } = Astro.props;
+
+function deriveMonogram(fullName: string): string {
+  const parts = fullName.trim().split(/\s+/);
+  if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase();
+  return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+}
+
+const mono = monogram ?? deriveMonogram(name);
+const year = new Date().getFullYear();
+
+const photoUrl = photo
+  ? (await getImage({ src: photo, widths: [400, 600, 800], formats: ['webp'] })).src
+  : undefined;
+---
+<article class="bio">
+  {photoUrl ? (
+    <div class="bio-plate photo" style={`background-image: url(${photoUrl})`}>
+      <div class="bio-photo-role">{role}</div>
+      <div class="bio-photo-name">{name}</div>
+    </div>
+  ) : (
+    <div class="bio-plate np">
+      <div class="corner-role">{role}</div>
+      <div class="corner-year">{year}</div>
+      <div class="bio-centre">
+        <div class="monogram" aria-hidden="true">{mono}</div>
+        <div class="monogram-name">{name}</div>
+        <div class="monogram-rule" />
+        {monogramSubtitle && <div class="monogram-foot">{monogramSubtitle}</div>}
+      </div>
+    </div>
+  )}
+  <div class="bio-body">
+    {roleTags && (
+      <div class="bio-eyebrow">{roleTags.join(' · ')}</div>
+    )}
+    <h3>{name}</h3>
+    <slot />
+  </div>
+</article>
+
+<style>
+  .bio { display: grid; gap: 16px; }
+  .bio-plate {
+    aspect-ratio: 4 / 5;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border-strong);
+    border-radius: 1px;
+  }
+
+  /* Photo state */
+  .bio-plate.photo {
+    background-size: cover;
+    background-position: center 25%;
+  }
+  .bio-plate.photo::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(180deg, transparent 55%, rgba(0,0,0,0.55) 100%);
+    pointer-events: none;
+  }
+  .bio-photo-role {
+    position: absolute; left: 18px; top: 16px; z-index: 1;
+    color: var(--color-text-light);
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    text-shadow: var(--shadow-text-on-photo);
+  }
+  .bio-photo-name {
+    position: absolute; left: 18px; right: 18px; bottom: 14px; z-index: 1;
+    color: var(--color-text-light);
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    text-shadow: var(--shadow-text-on-photo);
+  }
+
+  /* No-photo state */
+  .bio-plate.np {
+    background: var(--color-bg-tint);
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    padding: 32px 20px;
+  }
+  .corner-role {
+    position: absolute; top: 14px; left: 16px;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+  .corner-year {
+    position: absolute; top: 14px; right: 14px;
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    color: var(--color-claret);
+    border: 1px solid var(--color-claret-border);
+    padding: 3px 9px;
+    background: rgba(247, 243, 232, 0.6);
+  }
+  .bio-centre { text-align: center; }
+  .monogram {
+    font-family: var(--font-serif);
+    color: var(--color-claret);
+    font-size: 5rem; line-height: 1;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+  }
+  .monogram-name {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-variant: small-caps;
+    letter-spacing: 0.1em;
+    color: var(--color-text);
+    margin-top: 12px;
+  }
+  .monogram-rule {
+    width: 36px; height: 1px;
+    background: var(--color-claret-border);
+    margin: 12px auto;
+  }
+  .monogram-foot {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.92rem;
+    color: var(--color-text-muted);
+    max-width: 26ch;
+    margin: 0 auto;
+  }
+
+  /* Bio body */
+  .bio-body {
+    display: grid;
+    gap: 8px;
+  }
+  .bio-eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+  }
+  .bio-body h3 {
+    font-family: var(--font-serif);
+    font-size: 1.8rem;
+    line-height: 1.1;
+    font-weight: 500;
+    margin: 2px 0 8px;
+    color: var(--color-heading);
+  }
+  .bio-body :global(p) {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--color-text);
+    margin: 0 0 10px;
+  }
+</style>

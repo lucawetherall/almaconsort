@@ -1,0 +1,103 @@
+---
+interface Props {
+  date: Date;
+  time?: string;
+  venue: { name: string; address?: string };
+  priceFrom?: string;
+  directedBy?: string;
+}
+const { date, time, venue, priceFrom, directedBy } = Astro.props;
+
+const monthsLong = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const day = date.getDate();
+const month = monthsLong[date.getMonth()];
+const year = date.getFullYear();
+---
+<aside class="concert-card">
+  <div class="date-block">
+    <div class="day">{day}</div>
+    <div class="mo-yr">{month} {year}</div>
+  </div>
+  <div class="rows">
+    {time && (
+      <div class="crow">
+        <div class="k">Time</div>
+        <div class="v">{time}</div>
+      </div>
+    )}
+    <div class="crow">
+      <div class="k">Venue</div>
+      <div class="v">
+        {venue.name}
+        {venue.address && <><br /><span class="addr">{venue.address}</span></>}
+      </div>
+    </div>
+    {priceFrom && (
+      <div class="crow">
+        <div class="k">Tickets</div>
+        <div class="v" set:html={priceFrom} />
+      </div>
+    )}
+    {directedBy && (
+      <div class="crow">
+        <div class="k">Directed by</div>
+        <div class="v">{directedBy}</div>
+      </div>
+    )}
+  </div>
+</aside>
+
+<style>
+  .concert-card {
+    border: 1px solid var(--color-border-strong);
+    background: linear-gradient(180deg, #fbf8ec, #f5efdf);
+  }
+  .date-block {
+    padding: 26px 24px 20px;
+    border-bottom: 1px solid var(--color-border-strong);
+    text-align: center;
+  }
+  .day {
+    font-family: var(--font-serif);
+    font-size: 4rem;
+    line-height: 1;
+    font-weight: 500;
+    font-variant: small-caps;
+    color: var(--color-text);
+  }
+  .mo-yr {
+    font-family: var(--font-sans);
+    font-size: 0.72rem;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+    margin-top: 8px;
+  }
+  .rows { padding: 8px 4px; }
+  .crow {
+    padding: 12px 20px;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    gap: 10px;
+    border-top: 1px dashed var(--color-border-strong);
+  }
+  .crow:first-child { border-top: none; }
+  .crow .k {
+    font-family: var(--font-sans);
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--color-text-soft);
+    align-self: center;
+  }
+  .crow .v {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.35;
+    color: var(--color-text);
+  }
+  .crow .v .addr {
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+  }
+</style>
