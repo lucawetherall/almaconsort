@@ -337,12 +337,6 @@ textarea.input { min-height: 8rem; resize: vertical; }
 }
 
 /* ===== Responsive ===== */
-@media (max-width: 1024px) {
-  .container {
-    max-width: 90%;
-  }
-}
-
 @media (max-width: 768px) {
   body {
     font-size: 1rem;
