@@ -44,7 +44,7 @@ const isPatron = tier.data.slug === 'patron';
               <p class="pricing-tier-name">{btn.tierName}</p>
               <p class="pricing-amount">
                 <span class="pricing-price">{btn.price}</span>
-                <span class="pricing-period">/ month</span>
+                <span class="pricing-period">{btn.period}</span>
               </p>
               {btn.billingNote && <p class="pricing-billing-note">{btn.billingNote}</p>}
               {btn.highlight && <p class="pricing-highlight">{btn.highlight}</p>}

@@ -49,6 +49,7 @@ const supportTiers = defineCollection({
         label: z.string(),
         tierName: z.string(),
         price: z.string(),
+        period: z.string().default('/ month'),
         billingNote: z.string().optional(),
         highlight: z.string().optional(),
       })
