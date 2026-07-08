@@ -112,10 +112,6 @@ const baseUrl = import.meta.env.BASE_URL;
   <script slot="head" type="application/ld+json" set:html={JSON.stringify(eventJsonLd)} />
 
   <div class="container">
-    <nav class="breadcrumb">
-      <a href={`${baseUrl}events/`}>Events</a> &nbsp;/&nbsp; <span>{event.data.title}</span>
-    </nav>
-
     <div class="concert-hero">
       <div>
         <div class="eyebrow">{eyebrow}</div>
@@ -165,16 +161,6 @@ const baseUrl = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <style>
-  .breadcrumb {
-    padding: 22px 0 0;
-    font-family: var(--font-sans);
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--color-text-soft);
-  }
-  .breadcrumb a { color: var(--color-accent); text-decoration: none; }
-
   .concert-hero {
     padding: 30px 0 40px;
     display: grid;

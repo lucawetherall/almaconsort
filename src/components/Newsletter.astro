@@ -33,7 +33,7 @@ const zohoFormId = 'sf3z563da5293660e67b208aab5a241a0e6188c420ecb845d46151f6521b
         placeholder="Your email address"
         required
         autocomplete="email"
-        changeitem="SIGNUP_FORM_FIELD"
+        {...{ changeitem: 'SIGNUP_FORM_FIELD' }}
         class="input newsletter-input"
       />
       <input type="button" id="zcWebOptin" name="SIGNUP_SUBMIT_BUTTON" value="Subscribe" class="btn-primary newsletter-btn" />

@@ -1,18 +1,9 @@
 ---
+import { NAV_LINKS as navLinks } from '../lib/constants';
+
 const currentPath = Astro.url.pathname;
 
 const base = import.meta.env.BASE_URL;
-
-const navLinks = [
-  { href: `${base}about/`, label: 'About' },
-  { href: `${base}scholars/`, label: 'Scholars' },
-  { href: `${base}recording/`, label: 'Recording' },
-  { href: `${base}events/`, label: 'Events' },
-  { href: `${base}blog/`, label: 'News' },
-  { href: `${base}work-with-us/`, label: 'Work With Us' },
-  { href: `${base}support/`, label: 'Support' },
-  { href: `${base}contact/`, label: 'Contact' },
-];
 ---
 <header class="site-header">
   <div class="site-container header-inner">

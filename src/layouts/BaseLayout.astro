@@ -4,6 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Newsletter from '../components/Newsletter.astro';
+import { SOCIAL_LINKS } from '../lib/constants';
 
 interface Props {
   title: string;
@@ -139,12 +140,7 @@ const webPageJsonLd = !isHome
           { "@type": "Person", "name": "Izzy Mohan", "jobTitle": "Director" }
         ],
         "knowsAbout": ["Choral Recording", "Concert Performance", "Renaissance Polyphony", "Contemporary Choral Music", "Studio Sessions"],
-        "sameAs": [
-          "https://www.instagram.com/almaconsort/",
-          "https://www.facebook.com/almaconsort/",
-          "https://www.youtube.com/@almaconsort",
-          "https://www.tiktok.com/@almaconsort"
-        ]
+        "sameAs": SOCIAL_LINKS.map((s) => s.href)
       })} />
     )}
 
