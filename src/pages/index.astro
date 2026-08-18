@@ -6,6 +6,8 @@ import ConcertTile from '../components/ConcertTile.astro';
 import EmptyState from '../components/EmptyState.astro';
 import FeaturedRecordings from '../components/FeaturedRecordings.astro';
 import ScholarsCallout from '../components/ScholarsCallout.astro';
+import EditorialPhoto from '../components/EditorialPhoto.astro';
+import singersProfile from '../assets/photos/singers-profile.jpg';
 import { getCollection } from 'astro:content';
 
 const base = import.meta.env.BASE_URL;
@@ -24,12 +26,12 @@ const allPosts = (await getCollection('blog'))
 const heroVideoJsonLd = {
   "@context": "https://schema.org",
   "@type": "VideoObject",
-  "name": "O Magnum Mysterium — Tomás Luis de Victoria",
-  "description": "Alma Consort, directed by Luca Wetherall, performing Victoria's O Magnum Mysterium.",
-  "thumbnailUrl": "https://i.ytimg.com/vi/GjNdZVs7g68/maxresdefault.jpg",
-  "embedUrl": "https://www.youtube.com/embed/GjNdZVs7g68",
-  "contentUrl": "https://www.youtube.com/watch?v=GjNdZVs7g68",
-  "uploadDate": "2025-12-01",
+  "name": "Abide With Me — arr. Moses Hogan",
+  "description": "Alma Consort, directed by Luca Wetherall, performing Moses Hogan's arrangement of Abide With Me.",
+  "thumbnailUrl": "https://i.ytimg.com/vi/x6XVNkIXqlU/maxresdefault.jpg",
+  "embedUrl": "https://www.youtube.com/embed/x6XVNkIXqlU",
+  "contentUrl": "https://www.youtube.com/watch?v=x6XVNkIXqlU",
+  "uploadDate": "2026-07-23",
   "publisher": { "@id": new URL(base, Astro.site).href + '#org' }
 };
 ---
@@ -44,13 +46,13 @@ const heroVideoJsonLd = {
   <!-- Video hero at site-width -->
   <div class="site-container">
     <div class="video-wrapper">
-      <lite-youtube videoid="GjNdZVs7g68" playlabel="Play: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)">
-        <a href="https://youtube.com/watch?v=GjNdZVs7g68" class="lty-playbtn" title="Play Video">
-          <span class="lyt-visually-hidden">Play Video: O Magnum Mysterium - Victoria (Alma Consort / Luca Wetherall)</span>
+      <lite-youtube videoid="x6XVNkIXqlU" playlabel="Play: Abide With Me - arr. Moses Hogan (Alma Consort / Luca Wetherall)">
+        <a href="https://youtube.com/watch?v=x6XVNkIXqlU" class="lty-playbtn" title="Play Video">
+          <span class="lyt-visually-hidden">Play Video: Abide With Me - arr. Moses Hogan (Alma Consort / Luca Wetherall)</span>
         </a>
       </lite-youtube>
       <div class="video-caption">
-        <span class="caption-text"><strong>O Magnum Mysterium</strong> — Tomás Luis de Victoria (1572)</span>
+        <span class="caption-text"><strong>Abide With Me</strong> — arr. Moses Hogan</span>
         <a href={`${base}recording/`} class="caption-link">All recordings →</a>
       </div>
     </div>
@@ -68,6 +70,15 @@ const heroVideoJsonLd = {
         <a href={`${base}about/`}>Luca Wetherall</a> and <a href={`${base}about/`}>Izzy Mohan</a> direct the ensemble. Browse our upcoming <a href={`${base}events/`}>events</a>, or <a href={`${base}contact/`}>write to us</a> about a project.
       </p>
     </div>
+
+    <!-- Editorial photo band -->
+    <section class="home-photo">
+      <EditorialPhoto
+        src={singersProfile}
+        alt="Five Alma Consort singers performing from iPads during a recording session in a London church."
+        caption="In session — captured by our in-house team."
+      />
+    </section>
 
     <OrnamentRule />
 
@@ -161,6 +172,8 @@ const heroVideoJsonLd = {
   }
 
   .home-text { font-size: 1.1rem; line-height: 1.8; }
+
+  .home-photo { margin: 4px 0 8px; }
 
   .home-section { margin-bottom: 56px; }
   .tile-row {
