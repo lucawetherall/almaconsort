@@ -5,6 +5,9 @@ import OrnamentRule from '../components/OrnamentRule.astro';
 import SectionHead from '../components/SectionHead.astro';
 import RecordingTile from '../components/RecordingTile.astro';
 import EnquiryBand from '../components/EnquiryBand.astro';
+import EditorialPhoto from '../components/EditorialPhoto.astro';
+import recordingSession from '../assets/photos/recording-session.jpg';
+import recordingSetup from '../assets/photos/recording-setup.jpg';
 import { getCollection } from 'astro:content';
 import { YOUTUBE_CHANNEL_URL } from '../lib/constants';
 
@@ -50,6 +53,24 @@ const base = import.meta.env.BASE_URL;
       title="Recording"
       pitch={`Studio sessions for composers, producers, and labels — with <span class="accent">in-house audio and video</span>, captured by a team that performs the music too.`}
     />
+
+    <section class="photo-band" aria-label="Alma Consort recording on location">
+      <EditorialPhoto
+        src={recordingSession}
+        alt="The full Alma Consort choir performing to a conductor, with recording microphones set up in a London church."
+        ratio="3 / 2"
+        widths={[400, 600, 900, 1200]}
+        sizes="(max-width: 768px) 100vw, 540px"
+      />
+      <EditorialPhoto
+        src={recordingSetup}
+        alt="A soloist and small ensemble of Alma Consort singers being recorded on camera and microphone on location."
+        ratio="3 / 2"
+        widths={[400, 600, 900, 1200]}
+        sizes="(max-width: 768px) 100vw, 540px"
+      />
+      <p class="band-caption">Recording on location — audio and video captured by our own team.</p>
+    </section>
 
     <section class="caps">
       <div class="cap">
@@ -114,6 +135,22 @@ const base = import.meta.env.BASE_URL;
 </BaseLayout>
 
 <style>
+  .photo-band {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin: 8px 0 44px;
+  }
+  .photo-band .band-caption {
+    grid-column: 1 / -1;
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--color-text-muted);
+    text-align: center;
+    margin: 4px 0 0;
+  }
+
   .caps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -215,5 +252,6 @@ const base = import.meta.env.BASE_URL;
     .caps { grid-template-columns: 1fr; gap: 2rem; }
     .video-grid { grid-template-columns: 1fr; gap: 2rem; }
     .process { grid-template-columns: 1fr; gap: 2rem; }
+    .photo-band { grid-template-columns: 1fr; gap: 16px; }
   }
 </style>
