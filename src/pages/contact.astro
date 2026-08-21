@@ -2,10 +2,11 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import TitleBlock from '../components/TitleBlock.astro';
 import ContactForm from '../components/ContactForm.astro';
+import { LCS_URL, LCS_NAME } from '../lib/constants';
 ---
 <BaseLayout
   title="Contact the Alma Consort"
-  description="Contact Alma Consort for recording projects, concert bookings, wedding music, and general enquiries."
+  description="Contact Alma Consort about recording projects, concert bookings, and collaborations."
 >
   <div class="container">
     <TitleBlock
@@ -13,6 +14,67 @@ import ContactForm from '../components/ContactForm.astro';
       pitch={`We welcome enquiries about <span class="accent">recording projects, concert collaborations</span>, and other ways we might work together.`}
     />
 
+    <aside class="sister-service" aria-labelledby="sister-service-heading">
+      <h2 id="sister-service-heading">Planning a wedding, funeral, or private occasion?</h2>
+      <p>
+        Those are looked after by {LCS_NAME}, our sister service for ceremonies
+        and events across London. They arrange the singers, plan the music with
+        you, and handle the day itself.
+      </p>
+      <a href={LCS_URL} target="_blank" rel="noopener">Visit {LCS_NAME} →</a>
+    </aside>
+
     <ContactForm />
   </div>
 </BaseLayout>
+
+<style>
+  .sister-service {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .sister-service h2 {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    color: var(--color-heading);
+    margin: 0 0 0.6rem;
+  }
+
+  .sister-service p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 1rem;
+  }
+
+  .sister-service a {
+    font-family: var(--font-serif);
+    font-size: 0.95rem;
+    font-variant: small-caps;
+    letter-spacing: 0.08em;
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    padding-bottom: 0.05em;
+    transition: border-color var(--transition);
+  }
+
+  .sister-service a:hover,
+  .sister-service a:focus-visible {
+    border-bottom-color: currentColor;
+  }
+
+  @media (max-width: 768px) {
+    .sister-service {
+      padding: 1.25rem 1.25rem;
+      margin-bottom: 2rem;
+    }
+  }
+</style>

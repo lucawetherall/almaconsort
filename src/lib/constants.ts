@@ -18,6 +18,17 @@ export const YOUTUBE_EMBED = (id: string): string =>
   `https://www.youtube.com/embed/${id}`;
 
 /**
+ * London Choral Service — the commercial arm, handling weddings, funerals,
+ * carol services, parties, and corporate events.
+ *
+ * Deliberately NOT part of SOCIAL_LINKS: that array drives the footer icon
+ * row and the JSON-LD `sameAs` on the homepage, and neither is the right
+ * home for a sister-brand link.
+ */
+export const LCS_URL = 'https://londonchoralservice.com/';
+export const LCS_NAME = 'London Choral Service';
+
+/**
  * Primary site navigation — single source of truth for Header and Footer.
  */
 const base = import.meta.env.BASE_URL;

@@ -8,6 +8,12 @@ interface Props {
   secondaryLabel?: string;
 }
 const { title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } = Astro.props;
+
+// Outbound links open in a new tab. `noopener` without `noreferrer`, so the
+// destination can still see that the traffic came from here. `mailto:` hrefs
+// are not http-prefixed, so they stay in-tab.
+const primaryExternal = primaryHref.startsWith('http');
+const secondaryExternal = secondaryHref?.startsWith('http') ?? false;
 ---
 <section class="enquiry-band">
   <div class="text">
@@ -15,9 +21,19 @@ const { title, body, primaryHref, primaryLabel, secondaryHref, secondaryLabel } 
     <p>{body}</p>
   </div>
   <div class="actions">
-    <a href={primaryHref} class="btn-primary">{primaryLabel}</a>
+    <a
+      href={primaryHref}
+      class="btn-primary"
+      target={primaryExternal ? '_blank' : undefined}
+      rel={primaryExternal ? 'noopener' : undefined}
+    >{primaryLabel}</a>
     {secondaryHref && secondaryLabel && (
-      <a href={secondaryHref} class="btn-secondary">{secondaryLabel}</a>
+      <a
+        href={secondaryHref}
+        class="btn-secondary"
+        target={secondaryExternal ? '_blank' : undefined}
+        rel={secondaryExternal ? 'noopener' : undefined}
+      >{secondaryLabel}</a>
     )}
   </div>
 </section>

@@ -2,15 +2,17 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import TitleBlock from '../components/TitleBlock.astro';
 import ServiceCard from '../components/ServiceCard.astro';
+import EnquiryBand from '../components/EnquiryBand.astro';
+import { LCS_URL, LCS_NAME } from '../lib/constants';
 
 const base = import.meta.env.BASE_URL;
 ---
-<BaseLayout title="Hire a Chamber Choir in London | Work With the Alma Consort" description="Book the Alma Consort for concerts, recordings, weddings, ceremonies, and private events. A professional chamber choir based in London, available across the UK.">
+<BaseLayout title="Hire a Chamber Choir in London | Work With the Alma Consort" description="Book the Alma Consort for concerts and studio recordings. A professional chamber choir based in London, available across the UK.">
   <script slot="head" type="application/ld+json" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Alma Consort — Professional Choral Services",
-    "description": "Hire a professional chamber choir in London for concerts, recordings, weddings, ceremonies, and corporate events.",
+    "description": "Hire a professional chamber choir in London for concert engagements and studio recordings.",
     "provider": {
       "@type": "PerformingGroup",
       "name": "Alma Consort",
@@ -20,13 +22,13 @@ const base = import.meta.env.BASE_URL;
       { "@type": "City", "name": "London" },
       { "@type": "Country", "name": "United Kingdom" }
     ],
-    "serviceType": ["Concert Performance", "Choral Recording", "Wedding Music", "Corporate Entertainment"]
+    "serviceType": ["Concert Performance", "Choral Recording"]
   })} />
 
   <div class="container">
     <TitleBlock
       title="Work With Us"
-      pitch={`The Alma Consort takes on <span class="accent">concerts, recordings, private occasions, and ceremonies</span>. Tell us what you're planning.`}
+      pitch={`The Alma Consort takes on <span class="accent">concerts, recordings, and collaborations</span>. Tell us what you're planning.`}
     />
 
     <div class="service-grid">
@@ -42,19 +44,14 @@ const base = import.meta.env.BASE_URL;
         linkUrl={`${base}recording/`}
         linkText="Learn more →"
       />
-
-      <ServiceCard
-        title="Private & Corporate Events"
-        description="Private engagements get the same musical standard as our concerts. We tailor programmes to the occasion, drawing on classical, sacred, jazz, and popular repertoire."
-        linkUrl={`${base}contact/`}
-      />
-
-      <ServiceCard
-        title="Weddings & Ceremonies"
-        description="We sing at weddings, civil ceremonies, and other celebrations. The music ranges from intimate settings during the ceremony to fuller choral performances at receptions. We plan with couples to match the tone of the day."
-        linkUrl={`${base}contact/`}
-      />
     </div>
+
+    <EnquiryBand
+      title={`Weddings, funerals, and <span class="accent">private occasions</span>`}
+      body={`Our sister service, ${LCS_NAME}, provides singers for ceremonies, carol services, parties, and corporate events across London.`}
+      primaryHref={LCS_URL}
+      primaryLabel="Visit London Choral Service"
+    />
   </div>
 </BaseLayout>
 

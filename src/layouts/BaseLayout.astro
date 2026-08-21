@@ -4,7 +4,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import Breadcrumbs from '../components/Breadcrumbs.astro';
 import Newsletter from '../components/Newsletter.astro';
-import { SOCIAL_LINKS } from '../lib/constants';
+import { SOCIAL_LINKS, LCS_URL, LCS_NAME } from '../lib/constants';
 
 interface Props {
   title: string;
@@ -140,7 +140,13 @@ const webPageJsonLd = !isHome
           { "@type": "Person", "name": "Izzy Mohan", "jobTitle": "Director" }
         ],
         "knowsAbout": ["Choral Recording", "Concert Performance", "Renaissance Polyphony", "Contemporary Choral Music", "Studio Sessions"],
-        "sameAs": SOCIAL_LINKS.map((s) => s.href)
+        "sameAs": SOCIAL_LINKS.map((s) => s.href),
+        "subOrganization": {
+          "@type": "Organization",
+          "name": LCS_NAME,
+          "url": LCS_URL,
+          "description": "Choirs and singers for weddings, funerals, carol services, and private events in London."
+        }
       })} />
     )}
 

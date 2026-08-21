@@ -2,7 +2,9 @@
 
 > Alma Consort is a professional chamber choir based in London. We perform Renaissance polyphony, contemporary commissions, jazz arrangements, and popular repertoire, both on the concert platform and in the recording studio. The ensemble is directed by Luca Wetherall and Izzy Mohan.
 
-The Alma Consort runs studio recording sessions for composers, producers, record labels, and creative agencies, with audio and video production handled in-house. The ensemble also performs at concerts, weddings, ceremonies, and private events.
+The Alma Consort runs studio recording sessions for composers, producers, record labels, and creative agencies, with audio and video production handled in-house. The ensemble also performs concerts and takes on collaborative projects.
+
+Weddings, funerals, carol services, and private events are handled by our sister service, London Choral Service (https://londonchoralservice.com/).
 
 The Alma Scholars programme supports early-career singers with mentoring, performance experience, and free studio recordings for their portfolios.
 
@@ -11,12 +13,12 @@ The Alma Scholars programme supports early-career singers with mentoring, perfor
 - [Home](https://www.almaconsort.com/): Overview of the ensemble, upcoming events, and latest news.
 - [About](https://www.almaconsort.com/about/): The ensemble, its directors, and biographies of Luca Wetherall and Izzy Mohan.
 - [Recording](https://www.almaconsort.com/recording/): Choral recording in London, studio sessions, and in-house audio/video production.
-- [Work With Us](https://www.almaconsort.com/work-with-us/): Concert engagements, recording sessions, private and corporate events, weddings, and ceremonies.
+- [Work With Us](https://www.almaconsort.com/work-with-us/): Concert engagements and recording sessions.
 - [Alma Scholars](https://www.almaconsort.com/scholars/): Mentoring programme for young choral singers.
 - [Events](https://www.almaconsort.com/events/): Upcoming concerts and past events.
 - [News](https://www.almaconsort.com/blog/): Reflections on programming, recording, and choral life.
 - [Support](https://www.almaconsort.com/support/): Become a Friend, Partner, or Patron.
-- [Contact](https://www.almaconsort.com/contact/): Enquiries for bookings, recordings, and collaborations.
+- [Contact](https://www.almaconsort.com/contact/): Enquiries for concert bookings, recordings, and collaborations.
 
 ## Key facts
 
@@ -24,5 +26,6 @@ The Alma Scholars programme supports early-career singers with mentoring, perfor
 - Location: London, United Kingdom
 - Directors: Luca Wetherall, Izzy Mohan
 - Repertoire: Renaissance polyphony, Baroque, Classical, Romantic, contemporary commissions, jazz arrangements, popular music
-- Services: Concert performance, choral recording (studio and on-location), weddings, civil ceremonies, private and corporate events
+- Services: Concert performance, choral recording (studio and on-location)
+- Sister service: London Choral Service (https://londonchoralservice.com/) — weddings, funerals, carol services, private and corporate events
 - Mentoring: Alma Scholars programme for early-career singers

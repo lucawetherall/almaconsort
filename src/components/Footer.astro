@@ -1,5 +1,5 @@
 ---
-import { NAV_LINKS as navLinks, SOCIAL_LINKS as socialLinks } from '../lib/constants';
+import { NAV_LINKS as navLinks, SOCIAL_LINKS as socialLinks, LCS_URL, LCS_NAME } from '../lib/constants';
 
 const year = new Date().getFullYear();
 ---
@@ -12,6 +12,11 @@ const year = new Date().getFullYear();
         ))}
       </ul>
     </nav>
+
+    <p class="footer-sister">
+      Weddings, funerals &amp; private events —
+      <a href={LCS_URL} target="_blank" rel="noopener">{LCS_NAME}</a>
+    </p>
 
     <div class="footer-bottom">
       <div class="social-links">
@@ -67,6 +72,30 @@ const year = new Date().getFullYear();
   }
 
   nav a:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .footer-sister {
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin: 0 0 1rem;
+  }
+
+  .footer-sister a {
+    color: var(--color-accent);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition);
+  }
+
+  .footer-sister a:hover {
+    border-bottom-color: currentColor;
+  }
+
+  .footer-sister a:focus-visible {
     outline: 2px solid var(--color-accent);
     outline-offset: 2px;
     border-radius: 2px;
