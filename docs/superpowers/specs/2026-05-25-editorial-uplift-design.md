@@ -738,7 +738,7 @@ Three seed entries created from the choir's existing YouTube uploads.
 
 ### About — director photo
 
-The director portrait lives at `src/assets/directors/luca-wetherall.jpg`. The About page imports it via Astro's `astro:assets` when present and renders the BioPlate in photo state; falls back to no-photo state with the monogram when the import is not configured.
+The director portrait lives at `src/assets/directors/luca-wetherall.webp`. The About page imports it via Astro's `astro:assets` when present and renders the BioPlate in photo state; falls back to no-photo state with the monogram when the import is not configured.
 
 ### Photo asset organisation
 

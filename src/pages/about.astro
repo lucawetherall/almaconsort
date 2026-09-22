@@ -6,9 +6,7 @@ import SectionHead from '../components/SectionHead.astro';
 import BioPlate from '../components/BioPlate.astro';
 import ScholarsCallout from '../components/ScholarsCallout.astro';
 
-// Director portrait — uncomment the import and add photo={...} + photoAlt="..."
-// props to the BioPlate when the image file arrives at this path.
-// import lucaPhoto from '../assets/directors/luca-wetherall.jpg';
+import lucaPhoto from '../assets/directors/luca-wetherall.webp';
 ---
 <BaseLayout title="About the Alma Consort" description="A professional chamber choir of young London singers directed by Luca Wetherall. We perform classical, contemporary, jazz, and popular repertoire on the concert platform and in the recording studio.">
   <div class="container">
@@ -37,6 +35,8 @@ import ScholarsCallout from '../components/ScholarsCallout.astro';
           role="Director"
           roleTags={["Director", "Conductor", "Singer"]}
           monogramSubtitle="Conductor · Singer · Pianist"
+          photo={lucaPhoto}
+          photoAlt="Portrait of Luca Wetherall"
         >
           <p>Luca Wetherall is a conductor, singer, and pianist. He is Director of Music and Organist at St Mary's Acton and Choral Director at St John the Baptist, Holland Road.</p>
           <p>A Clarendon Scholar at the University of Oxford, his doctoral research focuses on popular music, and he tutors at the Faculty of Music. As a singer, he performs regularly with leading ensembles in London and elsewhere. He programmes with scholarly depth and draws balanced, expressive sound from choirs of any size.</p>
