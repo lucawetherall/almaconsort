@@ -11,7 +11,7 @@ interface Props {
   monogramSubtitle?: string;    // italic line beneath monogram in no-photo state
 }
 
-const { name, role, roleTags, photo, monogram, monogramSubtitle } = Astro.props;
+const { name, role, roleTags, photo, photoAlt, monogram, monogramSubtitle } = Astro.props;
 
 function deriveMonogram(fullName: string): string {
   const parts = fullName.trim().split(/\s+/);
@@ -28,7 +28,7 @@ const photoUrl = photo
 ---
 <article class="bio">
   {photoUrl ? (
-    <div class="bio-plate photo" style={`background-image: url(${photoUrl})`}>
+    <div class="bio-plate photo" style={`background-image: url(${photoUrl})`} role="img" aria-label={photoAlt ?? name}>
       <div class="bio-photo-role">{role}</div>
       <div class="bio-photo-name">{name}</div>
     </div>

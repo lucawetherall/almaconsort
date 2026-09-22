@@ -1,6 +1,6 @@
 # Website improvement roadmap
 
-Prioritized backlog from a full site audit (2026-07-08). Each item is written as an executable brief so an AI agent (or human) can pick it up cold. **Owner** items need a decision or content from Luca/Izzy; **Agent** items can be executed directly. Delete items when done; add new ones in the same format.
+Prioritized backlog from a full site audit (2026-07-08). Each item is written as an executable brief so an AI agent (or human) can pick it up cold. **Owner** items need a decision or content from Luca; **Agent** items can be executed directly. Delete items when done; add new ones in the same format.
 
 Already fixed in the audit PR (for context): dead components removed (BioCard/Divider/EventCard), 535 KB unused `logo-transparent.png` deleted, duplicate breadcrumb on event pages removed, annual Patron pricing labels corrected, theme-color/webmanifest mismatch aligned, nav + social links centralized in `src/lib/constants.ts`, `npm run check` added.
 
