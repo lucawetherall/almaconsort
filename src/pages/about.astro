@@ -6,12 +6,11 @@ import SectionHead from '../components/SectionHead.astro';
 import BioPlate from '../components/BioPlate.astro';
 import ScholarsCallout from '../components/ScholarsCallout.astro';
 
-// Director portraits — uncomment imports and add photo={...} + photoAlt="..."
-// props to the corresponding BioPlate when image files arrive at these paths.
+// Director portrait — uncomment the import and add photo={...} + photoAlt="..."
+// props to the BioPlate when the image file arrives at this path.
 // import lucaPhoto from '../assets/directors/luca-wetherall.jpg';
-// import izzyPhoto from '../assets/directors/izzy-mohan.jpg';
 ---
-<BaseLayout title="About the Alma Consort" description="A professional chamber choir of young London singers directed by Luca Wetherall and Izzy Mohan. We perform classical, contemporary, jazz, and popular repertoire on the concert platform and in the recording studio.">
+<BaseLayout title="About the Alma Consort" description="A professional chamber choir of young London singers directed by Luca Wetherall. We perform classical, contemporary, jazz, and popular repertoire on the concert platform and in the recording studio.">
   <div class="container">
     <TitleBlock
       title="About"
@@ -31,7 +30,7 @@ import ScholarsCallout from '../components/ScholarsCallout.astro';
     <OrnamentRule />
 
     <section class="directors">
-      <SectionHead title="Directors" />
+      <SectionHead title="Director" />
       <div class="bios-grid">
         <BioPlate
           name="Luca Wetherall"
@@ -41,16 +40,6 @@ import ScholarsCallout from '../components/ScholarsCallout.astro';
         >
           <p>Luca Wetherall is a conductor, singer, and pianist. He is Director of Music and Organist at St Mary's Acton and Choral Director at St John the Baptist, Holland Road.</p>
           <p>A Clarendon Scholar at the University of Oxford, his doctoral research focuses on popular music, and he tutors at the Faculty of Music. As a singer, he performs regularly with leading ensembles in London and elsewhere. He programmes with scholarly depth and draws balanced, expressive sound from choirs of any size.</p>
-        </BioPlate>
-
-        <BioPlate
-          name="Izzy Mohan"
-          role="Director"
-          roleTags={["Director", "Pianist", "Conductor"]}
-          monogramSubtitle="Pianist · Conductor · Singer"
-        >
-          <p>Izzy Mohan is a pianist, conductor, and singer. She is Director of Music at St Mary's Harrow-on-the-Hill, where she runs the choral and organ programme.</p>
-          <p>A graduate of the University of Oxford with a First Class degree, she holds a Master of Music from the Royal Academy of Music, where she was awarded the Ruth Harte Scholarship. She has performed at the Royal Festival Hall, the Austrian Cultural Forum, and the Oxford International Song Festival. She conducts with a pianist's ear for texture and colour.</p>
         </BioPlate>
       </div>
     </section>
@@ -66,12 +55,13 @@ import ScholarsCallout from '../components/ScholarsCallout.astro';
   .ensemble p { font-size: 1.1rem; line-height: 1.75; color: var(--color-text); }
 
   .directors { margin-bottom: 36px; }
-  .bios-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  /* Single director: plate beside the biography on wide screens, stacked below 768px. */
+  .bios-grid :global(.bio) {
+    grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
     gap: 40px;
+    align-items: start;
   }
   @media (max-width: 768px) {
-    .bios-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .bios-grid :global(.bio) { grid-template-columns: 1fr; gap: 16px; }
   }
 </style>

@@ -736,9 +736,9 @@ const featuredRecordings = defineCollection({
 
 Three seed entries created from the choir's existing YouTube uploads.
 
-### About — director photos
+### About — director photo
 
-Director portraits live at `src/assets/directors/luca-wetherall.jpg` and `src/assets/directors/izzy-mohan.jpg`. The About page imports them via Astro's `astro:assets` when present and renders the BioPlate in photo state; falls back to no-photo state with the monogram when the import is not configured.
+The director portrait lives at `src/assets/directors/luca-wetherall.jpg`. The About page imports it via Astro's `astro:assets` when present and renders the BioPlate in photo state; falls back to no-photo state with the monogram when the import is not configured.
 
 ### Photo asset organisation
 

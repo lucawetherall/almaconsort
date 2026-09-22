@@ -16,7 +16,7 @@ The Alma Scholars programme is designed to bridge this gap. Scholars rehearse an
 
 ## What Scholars receive
 
-Scholars benefit from regular rehearsals with the Consort, performance opportunities in concerts and recordings, and informal mentoring from the ensemble's directors and senior singers. The programme is deliberately flexible — we recognise that young musicians are often juggling studies, freelance work, and multiple commitments, and we aim to support rather than constrain.
+Scholars benefit from regular rehearsals with the Consort, performance opportunities in concerts and recordings, and informal mentoring from the ensemble's director and senior singers. The programme is deliberately flexible — we recognise that young musicians are often juggling studies, freelance work, and multiple commitments, and we aim to support rather than constrain.
 
 ## Looking ahead
 
