@@ -83,8 +83,8 @@ const heroVideoJsonLd = {
     <OrnamentRule />
 
     <!-- Upcoming Concerts -->
-    <section class="home-section">
-      <SectionHead title="Upcoming Concerts" link={{ href: `${base}events/`, label: 'View all events →' }} />
+    <section class="home-section" aria-labelledby="upcoming-heading">
+      <SectionHead title="Upcoming Concerts" id="upcoming-heading" link={{ href: `${base}events/`, label: 'View all events →' }} />
       {upcoming.length > 0 ? (
         <div class="tile-row">
           {upcoming.map((event) => (
