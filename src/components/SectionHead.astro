@@ -1,12 +1,13 @@
 ---
 interface Props {
   title: string;
+  id?: string;   // lets a parent <section aria-labelledby> point at the <h2>
   link?: { href: string; label: string; target?: string; rel?: string };
 }
-const { title, link } = Astro.props;
+const { title, id, link } = Astro.props;
 ---
 <header class="section-head">
-  <h2 set:html={title} />
+  <h2 id={id} set:html={title} />
   {link && (
     <a href={link.href} target={link.target} rel={link.rel}>{link.label}</a>
   )}
