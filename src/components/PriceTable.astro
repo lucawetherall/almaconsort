@@ -1,0 +1,98 @@
+---
+import { formatPrice, type PriceLine } from '../lib/composer-recording';
+
+interface Props {
+  caption: string;      // visually hidden; announced by screen readers
+  itemHeading: string;  // first column heading, e.g. "Package"
+  rows: PriceLine[];
+}
+const { caption, itemHeading, rows } = Astro.props;
+---
+<table class="price-table">
+  <caption class="visually-hidden">{caption}</caption>
+  <thead>
+    <tr>
+      <th scope="col">{itemHeading}</th>
+      <th scope="col" class="num">Standard</th>
+      <th scope="col" class="num emerging">Emerging</th>
+    </tr>
+  </thead>
+  <tbody>
+    {rows.map((row) => (
+      <tr>
+        <th scope="row">
+          <span class="label">{row.label}</span>
+          {row.detail && <span class="detail">{row.detail}</span>}
+        </th>
+        <td class="num">{formatPrice(row.standard)}</td>
+        <td class="num emerging">{formatPrice(row.emerging)}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<style>
+  .price-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 var(--space-5);
+  }
+  th, td {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--color-border);
+    text-align: left;
+    vertical-align: baseline;
+  }
+  thead th {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    /* Vertical only: a shorthand here would outrank .num's padding-left,
+       because Astro scopes both compounds of `thead th`. */
+    padding-top: 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--color-border-strong);
+  }
+  thead th.emerging { color: var(--color-claret); }
+  tbody th {
+    font-weight: normal;
+    padding-right: var(--space-6);
+  }
+  .label {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 1.1rem;
+    line-height: 1.35;
+    color: var(--color-heading);
+  }
+  .detail {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: var(--color-text-muted);
+    margin-top: 2px;
+  }
+  /* Price columns shrink to their content; the label column takes the rest
+     and wraps, so the table never overflows at 375px. */
+  .num {
+    width: 1%;
+    white-space: nowrap;
+    text-align: right;
+    padding-left: var(--space-6);
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-variant-numeric: tabular-nums;
+  }
+  thead th.num { font-family: var(--font-sans); font-size: 0.7rem; }
+  td.emerging { color: var(--color-claret); }
+
+  @media (max-width: 480px) {
+    .num { padding-left: var(--space-4); }
+    tbody th { padding-right: var(--space-2); }
+    thead th { letter-spacing: 0.12em; }
+  }
+</style>

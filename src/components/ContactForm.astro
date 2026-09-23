@@ -27,6 +27,7 @@ const successUrl = new URL('/contact/thanks/', Astro.site).href;
     <select id="enquiry-type" name="enquiry_type" class="input">
       <option value="General Enquiry">General Enquiry</option>
       <option value="Recording Project">Recording Project</option>
+      <option value="Composer Recording Day">Composer Recording Day</option>
       <option value="Event Engagement">Event Engagement</option>
       <option value="Concert Collaboration">Concert Collaboration</option>
       <option value="Alma Scholars">Alma Scholars</option>
@@ -41,6 +42,7 @@ const successUrl = new URL('/contact/thanks/', Astro.site).href;
   <div class="form-group">
     <label for="message">Message <span class="required-marker" aria-hidden="true">*</span></label>
     <textarea id="message" name="message" rows="6" class="input" required aria-required="true"></textarea>
+    <p class="field-hint" id="composer-hint" hidden>Tell us the piece's length and voicing, which package you're interested in, and whether you're applying for the Emerging rate.</p>
   </div>
 
   <button type="submit" class="btn-primary">Send message</button>
@@ -50,17 +52,35 @@ const successUrl = new URL('/contact/thanks/', Astro.site).href;
   document.addEventListener('DOMContentLoaded', function() {
     var select = document.getElementById('enquiry-type');
     var dateGroup = document.getElementById('date-group');
-    if (select && dateGroup) {
-      var toggle = function() {
+    var message = document.getElementById('message');
+    var composerHint = document.getElementById('composer-hint');
+    if (!select) return;
+
+    // The For Composers page links here as /contact/?type=composer
+    if (new URLSearchParams(window.location.search).get('type') === 'composer') {
+      select.value = 'Composer Recording Day';
+    }
+
+    var toggle = function() {
+      if (dateGroup) {
         if (select.value === 'Event Engagement') {
           dateGroup.removeAttribute('hidden');
         } else {
           dateGroup.setAttribute('hidden', '');
         }
-      };
-      select.addEventListener('change', toggle);
-      toggle();
-    }
+      }
+      if (composerHint && message) {
+        if (select.value === 'Composer Recording Day') {
+          composerHint.removeAttribute('hidden');
+          message.setAttribute('aria-describedby', 'composer-hint');
+        } else {
+          composerHint.setAttribute('hidden', '');
+          message.removeAttribute('aria-describedby');
+        }
+      }
+    };
+    select.addEventListener('change', toggle);
+    toggle();
   });
 </script>
 
@@ -78,6 +98,13 @@ const successUrl = new URL('/contact/thanks/', Astro.site).href;
 
   .form-group {
     margin-bottom: 1.25rem;
+  }
+
+  .field-hint {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    color: var(--color-text-muted);
+    margin: 0.4rem 0 0;
   }
 
   label {

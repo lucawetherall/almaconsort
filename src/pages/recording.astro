@@ -10,6 +10,7 @@ import recordingSession from '../assets/photos/recording-session.jpg';
 import recordingSetup from '../assets/photos/recording-setup.jpg';
 import { getCollection } from 'astro:content';
 import { YOUTUBE_CHANNEL_URL } from '../lib/constants';
+import { LOWEST_EMERGING, formatPrice } from '../lib/composer-recording';
 
 const recordings = (await getCollection('featuredRecordings'))
   .sort((a, b) => (a.data.order ?? 999) - (b.data.order ?? 999))
@@ -123,6 +124,13 @@ const base = import.meta.env.BASE_URL;
         <div class="step"><div class="step-no">iv</div><div><h3>Delivery</h3><p>Edited and mixed to your spec. Masters and video stems delivered within two to three weeks of the session.</p></div></div>
       </div>
     </section>
+
+    <aside class="composer-band" aria-labelledby="composer-band-heading">
+      <p class="eyebrow">For composers</p>
+      <h2 id="composer-band-heading">Composer Recording Days</h2>
+      <p>Have a new choral piece recorded and filmed by eight professional singers, from {formatPrice(LOWEST_EMERGING)} at the Emerging Composer rate.</p>
+      <a href={`${base}recording/composers/`}>Packages and prices →</a>
+    </aside>
 
     <EnquiryBand
       title={`Discuss a <span class="accent">session</span>`}
@@ -247,6 +255,44 @@ const base = import.meta.env.BASE_URL;
     line-height: 1.55;
     color: var(--color-text-muted);
     margin: 0;
+  }
+
+  .composer-band {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: 1.5rem 1.75rem;
+    margin: 0 0 var(--space-10);
+  }
+  .composer-band .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+    margin: 0 0 6px;
+  }
+  .composer-band h2 {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    color: var(--color-heading);
+    margin: 0 0 0.5rem;
+  }
+  .composer-band p:not(.eyebrow) {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 0.75rem;
+  }
+  .composer-band a {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    color: var(--color-claret);
   }
 
   @media (max-width: 768px) {

@@ -1,0 +1,287 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TitleBlock from '../../components/TitleBlock.astro';
+import SectionHead from '../../components/SectionHead.astro';
+import OrnamentRule from '../../components/OrnamentRule.astro';
+import EnquiryBand from '../../components/EnquiryBand.astro';
+import PriceTable from '../../components/PriceTable.astro';
+import {
+  PACKAGES,
+  ADD_ONS,
+  LOWEST_STANDARD,
+  formatPrice,
+} from '../../lib/composer-recording';
+
+const base = import.meta.env.BASE_URL;
+const pageUrl = new URL(`${base}recording/composers/`, Astro.site).href;
+---
+<BaseLayout
+  title="Record Your Choral Composition in London | Alma Consort"
+  description={`Have your choral piece recorded and filmed by eight professional singers in London. Audio and video packages from ${formatPrice(LOWEST_STANDARD)}, with a discounted rate for student and recently graduated composers.`}
+>
+  <script slot="head" type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Alma Consort — Composer Recording Day",
+    "description": "Professional recording and filming of new choral works for composers, sung by eight professional singers in London, with a discounted rate for emerging composers.",
+    "url": pageUrl,
+    "provider": {
+      "@type": "PerformingGroup",
+      "name": "Alma Consort",
+      "url": new URL(base, Astro.site).href
+    },
+    "areaServed": { "@type": "City", "name": "London" },
+    "serviceType": "Choral Recording",
+    "audience": { "@type": "Audience", "audienceType": "Composers" },
+    "offers": PACKAGES.map((p) => ({
+      "@type": "Offer",
+      "name": p.label,
+      "price": p.standard,
+      "priceCurrency": "GBP",
+      "url": pageUrl
+    }))
+  })} />
+
+  <div class="container">
+    <TitleBlock
+      title="For Composers"
+      pitch={`Hear your choral writing sung by <span class="accent">eight professional voices</span>, then recorded, filmed and mastered by our own team.`}
+    />
+
+    <section class="caps" aria-labelledby="how-heading">
+      <h2 id="how-heading" class="visually-hidden">How it works</h2>
+      <div class="cap">
+        <div class="lead-no">01 · Schedule</div>
+        <h3>Shared schedule</h3>
+        <p>We fit your piece into our existing recording days, so you share the cost of singers, venue and production team, and pay a fraction of what a private session would cost.</p>
+      </div>
+      <div class="cap">
+        <div class="lead-no">02 · Forces</div>
+        <h3>Professional voices</h3>
+        <p>Eight professional singers, a recording producer and a videographer, working from your score.</p>
+      </div>
+      <div class="cap">
+        <div class="lead-no">03 · Delivery</div>
+        <h3>A finished recording</h3>
+        <p>One piece of up to three minutes: rehearsed, recorded, edited and mastered, with video if you want it.</p>
+      </div>
+    </section>
+
+    <OrnamentRule />
+
+    <section class="block" aria-labelledby="packages-heading">
+      <SectionHead id="packages-heading" title="Packages" />
+      <p class="lede">We record, edit and master one piece of up to three minutes.</p>
+      <PriceTable
+        caption="Core packages, at standard and emerging composer rates"
+        itemHeading="Package"
+        rows={PACKAGES}
+      />
+      <p class="note">Every package includes rehearsal and recording time, a stereo master in WAV and MP3, and a licence to use the recording in your portfolio, in competition entries, and in funding or academic applications.</p>
+    </section>
+
+    <section class="emerging-panel" aria-labelledby="emerging-heading">
+      <h2 id="emerging-heading">Emerging Composer rate</h2>
+      <p>You qualify if you are enrolled on a degree course, or if you graduated within the past three years. Send us evidence with your enquiry. Places at this rate are limited on each recording day.</p>
+      <p>We ask two things in return: credit and tag us when you post the recording, and let us use a short excerpt in our own promotion.</p>
+    </section>
+
+    <section class="block" aria-labelledby="addons-heading">
+      <SectionHead id="addons-heading" title="Add-ons" />
+      <PriceTable
+        caption="Add-ons, at standard and emerging composer rates"
+        itemHeading="Add-on"
+        rows={ADD_ONS}
+      />
+      <p class="note">The last three cost the same on both tiers, because they use recording time on the day rather than post-production.</p>
+
+      <div class="feature">
+        <h3>The social media feature</h3>
+        <p>We sing choral and sacred repertoire, and our strongest posts have reached well beyond that audience. A feature puts your video on our channels with full composer credit and a link you choose.</p>
+        <p>We sell the placement. We cannot promise you a view count. We publish work that suits the channel, and we will tell you when you enquire whether we think yours does. If we change our minds after the recording, we return the fee.</p>
+      </div>
+    </section>
+
+    <OrnamentRule />
+
+    <section class="process" aria-labelledby="needs-heading">
+      <div>
+        <h2 id="needs-heading">What we need from you</h2>
+        <p class="lede">A clear score, in good time, written for the voices we have.</p>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="step-no">i</div><div><h3>Your score, four weeks ahead</h3><p>Send the score, and the parts if you have them, four weeks before the recording. We will confirm that your piece fits the time available, or tell you what would need to change.</p></div></div>
+        <div class="step"><div class="step-no">ii</div><div><h3>Eight voices</h3><p>Write for eight voices. Talk to us before you enquire if your piece calls for instruments, electronics or extended techniques.</p></div></div>
+        <div class="step"><div class="step-no">iii</div><div><h3>Forty-five minutes per piece</h3><p>That covers a well-notated three-minute work of moderate difficulty. Denser writing may need the second-take add-on or a longer slot, and we will say so when we read the score.</p></div></div>
+      </div>
+    </section>
+
+    <EnquiryBand
+      title={`Record your <span class="accent">piece</span>`}
+      body="Tell us about your piece: its length and voicing, the package you're interested in, and whether you're applying for the Emerging rate."
+      primaryHref={`${base}contact/?type=composer`}
+      primaryLabel="Enquire about a recording"
+    />
+  </div>
+</BaseLayout>
+
+<style>
+  .caps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 36px;
+  }
+  .cap .lead-no {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-claret);
+    margin-bottom: 6px;
+  }
+  .cap h3 {
+    font-family: var(--font-serif);
+    font-size: 1.35rem;
+    font-variant: small-caps;
+    letter-spacing: 0.06em;
+    font-weight: 500;
+    margin: 0 0 10px;
+    color: var(--color-heading);
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--color-claret-border);
+  }
+  .cap p {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .block { margin-bottom: var(--space-10); }
+  .block .lede {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0 0 var(--space-4);
+  }
+  .note {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: var(--color-text-muted);
+    margin: 0;
+    max-width: 62ch;
+  }
+
+  .emerging-panel {
+    background: var(--color-bg-white);
+    border: 1px solid var(--color-claret-border);
+    border-radius: var(--radius-md);
+    padding: 1.75rem 2rem;
+    margin: 0 0 var(--space-12);
+  }
+  .emerging-panel h2 {
+    font-family: var(--font-serif);
+    font-size: 1.5rem;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    color: var(--color-claret);
+    margin: 0 0 0.75rem;
+  }
+  .emerging-panel p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 0.75rem;
+    max-width: 62ch;
+  }
+  .emerging-panel p:last-child { margin-bottom: 0; }
+
+  .feature {
+    margin-top: var(--space-8);
+    max-width: 62ch;
+  }
+  .feature h3 {
+    font-family: var(--font-serif);
+    font-size: 1.2rem;
+    font-variant: small-caps;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+    color: var(--color-heading);
+    margin: 0 0 0.5rem;
+  }
+  .feature p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin: 0 0 0.75rem;
+  }
+
+  .process {
+    padding: 0 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    align-items: start;
+  }
+  .process h2 {
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    line-height: 1;
+    font-variant: small-caps;
+    letter-spacing: -0.005em;
+    font-weight: 500;
+    margin: 0 0 16px;
+    color: var(--color-heading);
+  }
+  .process .lede {
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 1.15rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+  .steps { display: grid; gap: 18px; }
+  .step {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: 18px;
+    padding: 14px 0;
+    border-top: 1px solid var(--color-border);
+  }
+  .step:first-child { border-top: none; padding-top: 0; }
+  .step-no {
+    font-family: var(--font-serif);
+    font-variant: small-caps;
+    font-size: 1.6rem;
+    color: var(--color-claret);
+    line-height: 1;
+    letter-spacing: 0.04em;
+  }
+  .step h3 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    font-weight: 500;
+    margin: 0 0 4px;
+    color: var(--color-heading);
+  }
+  .step p {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.55;
+    color: var(--color-text-muted);
+    margin: 0;
+  }
+
+  @media (max-width: 768px) {
+    .caps { grid-template-columns: 1fr; gap: 2rem; }
+    .process { grid-template-columns: 1fr; gap: 2rem; }
+    .emerging-panel { padding: 1.25rem 1.25rem; }
+    .step { grid-template-columns: 40px 1fr; gap: 12px; }
+  }
+</style>
