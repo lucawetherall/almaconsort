@@ -30,7 +30,7 @@ The **Alma Patrons** are our highest tier of support. Patrons underwrite our mos
 
 A Patron's contribution lets us hire orchestras, commission new music, produce studio recordings, and, above all, fund the **Alma Scholars** programme. A patron's gift can cover the full cost of mentoring and bursary for a young singer.
 
-In return, we offer a closer relationship with the choir's directors and musical experiences shaped around you.
+In return, we offer a closer relationship with the choir's director and musical experiences shaped around you.
 
 ---
 
@@ -42,14 +42,14 @@ We offer three levels:
 
 ### Associate Patron
 
-Four free tickets a year to any performance, and a free copy of any CD recording. You can suggest concert ideas to the directors. Your name appears in concert programmes and recording liner notes (optional).
+Four free tickets a year to any performance, and a free copy of any CD recording. You can suggest concert ideas to the director. Your name appears in concert programmes and recording liner notes (optional).
 
 ### Patron
 
-Everything in the Associate Patron tier, plus two one-hour music lessons a year with one of our directors, in London or online. Use the time for vocal coaching, piano lessons, or to talk through the scores we sing.
+Everything in the Associate Patron tier, plus two one-hour music lessons a year with our director, in London or online. Use the time for vocal coaching, piano lessons, or to talk through the scores we sing.
 
 ### Principal Patron
 
 Our most committed level. Principal Patrons have a voice in the choir's future direction.
 
-You receive a **private performance** by the choir at an event of your choosing — a dinner, a birthday, a corporate occasion — a curated 20-minute set. You also receive four one-hour music lessons a year with one of our directors, in London or online.
+You receive a **private performance** by the choir at an event of your choosing — a dinner, a birthday, a corporate occasion — a curated 20-minute set. You also receive four one-hour music lessons a year with our director, in London or online.

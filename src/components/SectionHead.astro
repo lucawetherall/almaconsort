@@ -1,7 +1,7 @@
 ---
 interface Props {
   title: string;
-  id?: string;   // lets a parent <section aria-labelledby> point at the <h2>
+  id?: string;                  // heading id, for the parent section's aria-labelledby
   link?: { href: string; label: string; target?: string; rel?: string };
 }
 const { title, id, link } = Astro.props;

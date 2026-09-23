@@ -182,7 +182,7 @@ Added to `global.css` as a utility class:
 - "The Ensemble" section (unchanged text)
 - Ornamental divider (replaces existing `<hr class="bio-divider">`)
 - "Directors" heading
-- Two `BioCard` components (Luca Wetherall, Izzy Mohan) — no images initially, using initials as placeholders
+- One `BioCard` component (Luca Wetherall) — no image initially, using initials as placeholders
 
 #### Scholars page
 

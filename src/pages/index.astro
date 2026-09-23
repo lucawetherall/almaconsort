@@ -67,7 +67,7 @@ const heroVideoJsonLd = {
         <a href={`${base}recording/`}>Recording</a> sits at the centre of what we do. We run studio sessions for composers, producers, and labels, and we produce our own releases. Our in-house team captures the audio and video.
       </p>
       <p>
-        <a href={`${base}about/`}>Luca Wetherall</a> and <a href={`${base}about/`}>Izzy Mohan</a> direct the ensemble. Browse our upcoming <a href={`${base}events/`}>events</a>, or <a href={`${base}contact/`}>write to us</a> about a project.
+        <a href={`${base}about/`}>Luca Wetherall</a> directs the ensemble. Browse our upcoming <a href={`${base}events/`}>events</a>, or <a href={`${base}contact/`}>write to us</a> about a project.
       </p>
     </div>
 
@@ -83,8 +83,8 @@ const heroVideoJsonLd = {
     <OrnamentRule />
 
     <!-- Upcoming Concerts -->
-    <section class="home-section">
-      <SectionHead title="Upcoming Concerts" link={{ href: `${base}events/`, label: 'View all events →' }} />
+    <section class="home-section" aria-labelledby="upcoming-heading">
+      <SectionHead title="Upcoming Concerts" id="upcoming-heading" link={{ href: `${base}events/`, label: 'View all events →' }} />
       {upcoming.length > 0 ? (
         <div class="tile-row">
           {upcoming.map((event) => (

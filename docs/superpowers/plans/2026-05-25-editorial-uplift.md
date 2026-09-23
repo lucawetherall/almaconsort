@@ -77,7 +77,7 @@ src/components/FeatureCard.astro     # Confirm no remaining refs, then deprecate
 
 ### New asset directories (no files created here yet — directories ready for future photos)
 ```
-src/assets/directors/                # luca-wetherall.jpg, izzy-mohan.jpg (when supplied)
+src/assets/directors/                # luca-wetherall.jpg (when supplied)
 src/assets/events/                   # {event-slug}.jpg (when supplied)
 ```
 
@@ -1911,7 +1911,7 @@ const heroVideoJsonLd = {
         <a href={`${base}recording/`}>Recording</a> sits at the centre of what we do. We run studio sessions for composers, producers, and labels, and we produce our own releases. Our in-house team captures the audio and video.
       </p>
       <p>
-        <a href={`${base}about/`}>Luca Wetherall</a> and <a href={`${base}about/`}>Izzy Mohan</a> direct the ensemble. Browse our upcoming <a href={`${base}events/`}>events</a>, or <a href={`${base}contact/`}>write to us</a> about a project.
+        <a href={`${base}about/`}>Luca Wetherall</a> directs the ensemble. Browse our upcoming <a href={`${base}events/`}>events</a>, or <a href={`${base}contact/`}>write to us</a> about a project.
       </p>
     </div>
 
@@ -3077,13 +3077,12 @@ import SectionHead from '../components/SectionHead.astro';
 import BioPlate from '../components/BioPlate.astro';
 import ScholarsCallout from '../components/ScholarsCallout.astro';
 
-// Optionally import director portraits — only if files exist.
-// If you don't have them yet, leave these imports commented out and the bio
-// plates will render their monogram fallback.
+// Optionally import the director portrait — only if the file exists.
+// If you don't have it yet, leave this import commented out and the bio
+// plate will render its monogram fallback.
 // import lucaPhoto from '../assets/directors/luca-wetherall.jpg';
-// import izzyPhoto from '../assets/directors/izzy-mohan.jpg';
 ---
-<BaseLayout title="About the Alma Consort" description="A professional chamber choir of young London singers directed by Luca Wetherall and Izzy Mohan. We perform classical, contemporary, jazz, and popular repertoire on the concert platform and in the recording studio.">
+<BaseLayout title="About the Alma Consort" description="A professional chamber choir of young London singers directed by Luca Wetherall. We perform classical, contemporary, jazz, and popular repertoire on the concert platform and in the recording studio.">
   <div class="container">
     <TitleBlock
       title="About"
@@ -3113,16 +3112,6 @@ import ScholarsCallout from '../components/ScholarsCallout.astro';
         >
           <p>Luca Wetherall is a conductor, singer, and pianist. He is Director of Music and Organist at St Mary's Acton and Choral Director at St John the Baptist, Holland Road.</p>
           <p>A Clarendon Scholar at the University of Oxford, his doctoral research focuses on popular music, and he tutors at the Faculty of Music. As a singer, he performs regularly with leading ensembles in London and elsewhere. He programmes with scholarly depth and draws balanced, expressive sound from choirs of any size.</p>
-        </BioPlate>
-
-        <BioPlate
-          name="Izzy Mohan"
-          role="Director"
-          roleTags={["Director", "Pianist", "Conductor"]}
-          monogramSubtitle="Pianist · Conductor · Singer"
-        >
-          <p>Izzy Mohan is a pianist, conductor, and singer. She is Director of Music at St Mary's Harrow-on-the-Hill, where she runs the choral and organ programme.</p>
-          <p>A graduate of the University of Oxford with a First Class degree, she holds a Master of Music from the Royal Academy of Music, where she was awarded the Ruth Harte Scholarship. She has performed at the Royal Festival Hall, the Austrian Cultural Forum, and the Oxford International Song Festival. She conducts with a pianist's ear for texture and colour.</p>
         </BioPlate>
       </div>
     </section>
@@ -3163,7 +3152,7 @@ import ScholarsCallout from '../components/ScholarsCallout.astro';
 </style>
 ```
 
-When director portraits become available, uncomment the imports at the top of the file and add `photo={lucaPhoto}` and `photo={izzyPhoto}` props to the respective `BioPlate` calls (plus `photoAlt` strings).
+When the director portrait becomes available, uncomment the import at the top of the file and add a `photo={lucaPhoto}` prop to the `BioPlate` call (plus a `photoAlt` string).
 
 - [ ] **Step 2: Build & visually verify**
 
@@ -3695,6 +3684,6 @@ If steps 1–7 surfaced fixes, commit them with descriptive messages. If everyth
 ## Final notes
 
 - **PR strategy.** All commits sit on a single branch (the worktree branch). The final PR description should reference the spec at `docs/superpowers/specs/2026-05-25-editorial-uplift-design.md` and the verification checklist in the spec.
-- **Director photos.** When director portrait files arrive at `src/assets/directors/luca-wetherall.jpg` and `src/assets/directors/izzy-mohan.jpg`, uncomment the imports in `src/pages/about.astro` and pass `photo={…}` + `photoAlt="…"` props to the BioPlate calls. No other change needed.
+- **Director photos.** When the director portrait arrives at `src/assets/directors/luca-wetherall.jpg`, uncomment the import in `src/pages/about.astro` and pass `photo={…}` + `photoAlt="…"` props to the BioPlate call. No other change needed.
 - **Adding new featured recordings.** Drop a new `.md` file into `src/content/featuredRecordings/` with the frontmatter shape from Task 21, give it an `order` value, and rebuild. The homepage shows the lowest three; the recording page shows the lowest six.
 - **If `astro check` is not installed**, install it: `npx astro add typescript` (or it ships as part of `astro` 5.x — `npx astro check` should work without installation).

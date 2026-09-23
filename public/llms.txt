@@ -1,6 +1,6 @@
 # Alma Consort
 
-> Alma Consort is a professional chamber choir based in London. We perform Renaissance polyphony, contemporary commissions, jazz arrangements, and popular repertoire, both on the concert platform and in the recording studio. The ensemble is directed by Luca Wetherall and Izzy Mohan.
+> Alma Consort is a professional chamber choir based in London. We perform Renaissance polyphony, contemporary commissions, jazz arrangements, and popular repertoire, both on the concert platform and in the recording studio. The ensemble is directed by Luca Wetherall.
 
 The Alma Consort runs studio recording sessions for composers, producers, record labels, and creative agencies, with audio and video production handled in-house. The ensemble also performs concerts and takes on collaborative projects.
 
@@ -11,7 +11,7 @@ The Alma Scholars programme supports early-career singers with mentoring, perfor
 ## Pages
 
 - [Home](https://www.almaconsort.com/): Overview of the ensemble, upcoming events, and latest news.
-- [About](https://www.almaconsort.com/about/): The ensemble, its directors, and biographies of Luca Wetherall and Izzy Mohan.
+- [About](https://www.almaconsort.com/about/): The ensemble and a biography of its director, Luca Wetherall.
 - [Recording](https://www.almaconsort.com/recording/): Choral recording in London, studio sessions, and in-house audio/video production.
 - [Composer Recording Day](https://www.almaconsort.com/recording/composers/): Recording and filming new choral works for composers, with published prices and a discounted Emerging Composer rate.
 - [Work With Us](https://www.almaconsort.com/work-with-us/): Concert engagements and recording sessions.
@@ -25,7 +25,7 @@ The Alma Scholars programme supports early-career singers with mentoring, perfor
 
 - Type: Professional chamber choir
 - Location: London, United Kingdom
-- Directors: Luca Wetherall, Izzy Mohan
+- Director: Luca Wetherall
 - Repertoire: Renaissance polyphony, Baroque, Classical, Romantic, contemporary commissions, jazz arrangements, popular music
 - Services: Concert performance, choral recording (studio and on-location)
 - Sister service: London Choral Service (https://londonchoralservice.com/) — weddings, funerals, carol services, private and corporate events

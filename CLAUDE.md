@@ -1,6 +1,6 @@
 # Alma Consort website
 
-Marketing site for Alma Consort, a professional chamber choir in London directed by Luca Wetherall and Izzy Mohan. Audiences: concert-goers, recording clients (composers/labels/agencies), event bookers, donors, and young singers applying to the Alma Scholars programme. Live at https://www.almaconsort.com.
+Marketing site for Alma Consort, a professional chamber choir in London directed by Luca Wetherall. Audiences: concert-goers, recording clients (composers/labels/agencies), event bookers, donors, and young singers applying to the Alma Scholars programme. Live at https://www.almaconsort.com.
 
 ## Commands
 
