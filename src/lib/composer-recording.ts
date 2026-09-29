@@ -18,24 +18,23 @@ export interface PriceLine {
 }
 
 export const PACKAGES: PriceLine[] = [
-  { label: 'Audio only', standard: 395, emerging: 275 },
-  { label: 'Audio and single camera', standard: 545, emerging: 375 },
-  { label: 'Audio and two cameras', standard: 695, emerging: 475 },
+  { label: 'Audio only', standard: 435, emerging: 305 },
+  { label: 'Audio and two cameras', standard: 765, emerging: 525 },
 ];
 
 export const ADD_ONS: PriceLine[] = [
-  { label: 'Scrolling score video', detail: 'Synchronised to the recording', standard: 150, emerging: 105 },
-  { label: 'Part-dominant mixes', detail: 'Four mixes, each bringing forward one part: soprano, alto, tenor, bass', standard: 120, emerging: 85 },
-  { label: 'Written feedback', detail: 'From the conductor and singers', standard: 95, emerging: 65 },
-  { label: 'Social media feature', detail: "On Alma Consort's channels", standard: 195, emerging: 135 },
-  { label: 'Commercial release licence', detail: 'Streaming, sale and sync', standard: 250, emerging: 175 },
-  { label: 'Rush delivery', detail: 'Seven days from recording', standard: 125, emerging: 95 },
-  { label: 'Each additional minute beyond 3:00', standard: 95, emerging: 95 },
-  { label: 'Second take', detail: 'Alternate tempo or interpretation', standard: 175, emerging: 175 },
+  { label: 'Scrolling score video', detail: 'Synchronised to the recording', standard: 165, emerging: 115 },
+  { label: 'Part-dominant mixes', detail: 'Four mixes, each bringing forward one part: soprano, alto, tenor, bass', standard: 130, emerging: 95 },
+  { label: 'Written feedback', detail: 'From the conductor and singers', standard: 105, emerging: 70 },
+  { label: 'Social media feature', detail: "On Alma Consort's channels", standard: 215, emerging: 150 },
+  { label: 'Commercial release licence', detail: 'Streaming, sale and sync', standard: 275, emerging: 195 },
+  { label: 'Rush delivery', detail: 'Seven days from recording', standard: 140, emerging: 105 },
+  { label: 'Each additional minute beyond 3:00', standard: 105, emerging: 105 },
+  { label: 'Second take', detail: 'Alternate tempo or interpretation', standard: 195, emerging: 195 },
   { label: 'Second piece on the same day', standard: -100, emerging: -100 },
 ];
 
-/** "£395", or "−£100" (U+2212 minus) for discounts. */
+/** "£435", or "−£100" (U+2212 minus) for discounts. */
 export const formatPrice = (n: number): string =>
   n < 0 ? `−£${Math.abs(n)}` : `£${n}`;
 
