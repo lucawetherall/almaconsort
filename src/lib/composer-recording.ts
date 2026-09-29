@@ -4,8 +4,8 @@
  * Read by the price tables on /recording/composers/, that page's JSON-LD,
  * and the "from £…" teaser on /recording/. Change prices here only.
  *
- * ADD_ONS order matters: the last three are the flat-rate items (same price
- * on both tiers), and the page's footnote says "the last three". Keep them
+ * ADD_ONS order matters: the last two are the flat-rate items (same price
+ * on both tiers), and the page's footnote says "the last two". Keep them
  * at the end, or update the footnote.
  */
 
@@ -30,7 +30,6 @@ export const ADD_ONS: PriceLine[] = [
   { label: 'Commercial release licence', detail: 'Streaming, sale and sync', standard: 275, emerging: 195 },
   { label: 'Rush delivery', detail: 'Seven days from recording', standard: 140, emerging: 105 },
   { label: 'Each additional minute beyond 3:00', standard: 105, emerging: 105 },
-  { label: 'Second take', detail: 'Alternate tempo or interpretation', standard: 195, emerging: 195 },
   { label: 'Second piece on the same day', standard: -100, emerging: -100 },
 ];
 
