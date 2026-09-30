@@ -23,7 +23,7 @@ export const PACKAGES: PriceLine[] = [
 ];
 
 export const ADD_ONS: PriceLine[] = [
-  { label: 'Scrolling score video', detail: 'Synchronised to the recording', standard: 165, emerging: 115 },
+  { label: 'Scrolling score video', detail: 'Synchronised to the recording', standard: 100, emerging: 75 },
   { label: 'Part-dominant mixes', detail: 'Four mixes, each bringing forward one part: soprano, alto, tenor, bass', standard: 130, emerging: 95 },
   { label: 'Written feedback', detail: 'From the conductor and singers', standard: 105, emerging: 70 },
   { label: 'Social media feature', detail: "On Alma Consort's channels", standard: 215, emerging: 150 },
